@@ -1,0 +1,304 @@
+/** CSS stylesheet for Calculadora-fetal
+--[1. Header]--
+--[2. Nav] --
+*/
+
+.container{
+  max-width: 100% !important;
+}
+/* 1.- Header */
+header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: #039bdc;
+  font-family: "Montserrat",sans-serif;
+  height: 250px;
+  overflow:hidden;
+}
+#logo-with-bg{
+  background-image: url(../public/images/fachada2.png); 
+  width: 100%;
+  background-size: cover;
+  background-repeat  : no-repeat; 
+  background-position: 70% 65%;
+}
+#logo-container{
+  width: 100%;
+  background-color: white;   
+  height: 160px;
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  justify-content: space-around;
+}
+#section-img-wrapper{
+  max-height: 250px;
+  min-width: 100px;
+  height: 100%;
+  width: 20%;
+  position: relative;
+}
+#section-img{
+  margin: 0 auto auto 0;
+  height: auto;
+  width: 100%;
+  max-width: 200px;
+}
+
+#language-wrapper{
+  min-width: 85px;
+  width: 20%;
+  height: 100%;
+  overflow: visible;
+}
+.dropdown{
+  height: 38px;
+  width: 63px;
+  margin: 0 0 auto auto;
+}
+
+
+@media only screen and (min-width: 1280px){
+
+  header h1{
+    font-size: 150%;
+  }
+
+}
+@media (min-width:768px) and (max-width: 1280px){
+  header h1{
+    font-size: 130%;
+    text-align: center;
+  }
+  #sub-header-container{
+    background-size: 150%; 
+  }
+
+  
+}
+@media (min-width:500px) and (max-width: 767px){
+  #section-img{
+    margin: 50% auto auto 0;
+  }
+  header h1{
+    font-size: 130%;
+    text-align: center;
+  }
+  #sub-header-container{
+    background-size: 150%; 
+  }
+  
+}
+@media only screen and (max-width: 499px){
+  header h1{
+    font-size: 130%;
+    text-align: center;
+  }
+  #sub-header-container{
+    background-size: 150%; 
+  }
+}
+
+/* 2.- Nav */
+nav{
+  display: flex;
+  flex-direction: column;
+  margin: 30px auto 30px auto;
+  max-width: 1620px !important;
+  width: 100%;
+  background-color: #fff;
+}
+nav .forms-container{
+  display: flex;
+  flex-direction: column;
+  margin: auto auto 30px auto;
+  width: 80%;
+  height: 200px;
+  background-color: #efefef;
+  border-radius: 10px;
+  border: solid 1px #bbb;
+  box-shadow: 2px 2px 4px #888;
+  margin-bottom: 25px;
+  align-items: center;
+  justify-content: space-around;
+
+}
+
+nav .forms-container .FUR-form{
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+  width: 90%;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 10px;
+}
+.react-datepicker-wrapper{
+  width: auto !important;
+}
+.react-datepicker-wrapper input{
+  width: 100%;
+  text-align: center;
+}
+.expected-birth{
+  font-size: 15px;
+  height: 30px;
+  width: 50%;
+  text-align: center;
+}
+nav .forms-container .weeks-form{
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+  width: 90%;
+  align-items: center;
+  justify-content: space-between;
+}
+.weeks-form div{
+  width: auto;
+  display: flex;
+  column-gap: 20px;
+  align-items: center;
+}
+nav .forms-container .submitButton{
+  height: 40px;
+  font-size: 14px;
+  background-color: #01A9DB;
+  box-shadow: 2px 2px 4px #666;
+  border-radius: 10px;
+  width:100px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  font-weight: 600;
+}
+nav .forms-container .submitButton:hover{
+  background-color: #01DFD7;
+ }
+nav #navBar{
+  margin: 0;
+  display: none;
+  flex-direction: row;
+  list-style: none;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0;
+  place-items: center;
+}
+nav #navBar button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 62px;
+  font-size: 14px;
+  background-color: #01A9DB;
+  box-shadow: 2px 2px 4px #666;
+  border-radius: 15px;
+  width: 16.3%;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  font-weight: 600;
+}
+nav #navBar button:hover{
+ background-color: #01DFD7;
+}
+@media screen and (max-width:768px) and (min-width: 600px){
+  nav ul button{
+    font-size: 70%;
+  }
+}
+@media screen and (max-width: 599px){
+  nav #navBar{
+    flex-wrap: wrap;
+    width: 80%;
+    margin: auto;
+    column-gap: 5%;
+    row-gap: 10px;
+  }
+  nav #navBar button{
+    width: 47.5%;
+  }
+}
+/* [3. Services Container]*/
+.service-container{
+  display: flex;
+  flex-direction: column;
+  width: 97.5%;
+  max-width: 1620px;
+  padding: 5%;
+  margin: auto;
+  height: auto;
+  background-color: #efefef;
+  border-radius: 10px;
+  border: solid 1px #bbb;
+  box-shadow: 2px 2px 4px #666;
+  margin-bottom: 25px;
+}
+.title-container{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #039bdc;
+}
+.weeksAndDays{
+    display: flex;
+    width: 30%;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.service-content{
+  height: auto;
+  display: flex;
+  flex-direction: row;
+}
+/* [4. Datation content]*/
+#datation-container{
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: space-between;
+  height: 100%;
+  row-gap: 20px;
+  width: auto;
+  margin: auto;
+  padding-top: 5%;
+  min-width: 500px;
+}
+#datation-container .datation-input{
+  display: flex;
+  flex-direction: row;
+  place-items: center;
+}
+#datation-container .datation-input span{
+  background-color: #ddd;
+  border: 1px solid #888;
+  border-radius: 3px;
+  padding: 2px;
+  min-width: 100px;
+  margin-left: 10px;
+}
+#datation-container .datation-input input{
+  min-width: 100px;
+}
+#datation-container .datation-input  button{
+  margin-left: 10px;
+  height: 40px;
+  padding: 1% 5%;
+  font-size: 14px;
+  background-color: #01A9DB;
+  box-shadow: 2px 2px 4px #666;
+  border-radius: 10px;
+  width:auto;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  font-weight: 600;
+}
+#datation-container .datation-input  button:hover{
+  background-color: #01DFD7;
+  color: #333;
+ }
