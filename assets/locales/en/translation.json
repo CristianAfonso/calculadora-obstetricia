@@ -1,0 +1,15 @@
+{
+    "welcome": "Welcome to React and react-i18next",
+    "service": "OBSTETRICS AND GYNECOLOGY SERVICE",
+    "datation": "Datation",
+    "biometric": "Biometric and Hemodynamic Studio",
+    "hemodinamic": "Hemodynamic Studio",
+    "bones": "Long bones",
+    "lancet": "Lancet",
+    "unicvsmulti": "Single vs Multiple",
+    "FUR": "FUR",
+    "days": "Days",
+    "weeks": "Weeks",
+    "FECO": "F.Eco",
+    "LCC_title": "titulo"
+}
