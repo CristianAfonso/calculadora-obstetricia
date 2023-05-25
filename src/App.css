@@ -114,7 +114,8 @@ nav .forms-container{
   flex-direction: column;
   margin: auto auto 30px auto;
   width: 80%;
-  height: 200px;
+  height: auto;
+  min-width: 200px;
   background-color: #efefef;
   border-radius: 10px;
   border: solid 1px #bbb;
@@ -122,7 +123,6 @@ nav .forms-container{
   margin-bottom: 25px;
   align-items: center;
   justify-content: space-around;
-
 }
 
 nav .forms-container .FUR-form{
@@ -218,7 +218,31 @@ nav #navBar button:hover{
     row-gap: 10px;
   }
   nav #navBar button{
-    width: 47.5%;
+    width: 100% !important;
+  }
+  nav .forms-container .FUR-form{
+    flex-direction: column;
+    row-gap: 10px;
+    padding-top: 50px;
+    justify-content: flex-end;
+    width: 75%;
+  }
+  nav .forms-container .FUR-form .react-datepicker-wrapper,
+  nav .forms-container .FUR-form input{
+    width: 90% !important;
+  }
+  nav .forms-container .FUR-form .react-datepicker-wrapper input{
+    width: 100% !important;
+  }
+  nav .forms-container .weeks-form{
+    flex-direction: column;
+    row-gap: 10px;
+    padding: 50px 0;  
+  }
+  nav .forms-container .weeks-form div{
+    width: 75% !important;
+    align-items: center;
+    justify-content: space-between;
   }
 }
 /* [3. Services Container]*/
