@@ -204,15 +204,19 @@ nav #navBar button{
 nav #navBar button:hover{
  background-color: #01DFD7;
 }
+@media screen and (max-width:900px) {
+  nav .forms-container .weeks-form div input{
+    width: 10%;
+    min-width: 60px;
+  }
+  
+}
 @media screen and (max-width:768px) and (min-width: 600px){
   nav ul button{
     font-size: 70%;
   }
 }
 @media screen and (max-width: 599px){
-  nav .forms-container form .expected-birth, nav .forms-container form button, nav .forms-container form div {
-  
-  }
   nav #navBar{
     flex-wrap: wrap;
     width: 80%;
