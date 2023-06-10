@@ -27,6 +27,7 @@ i18n
     },
     backend: {
       loadPath: '/assets/locales/{{lng}}/translation.json',
+      //loadPath: '/calculadora-obstetricia/assets/locales/{{lng}}/translation.json', // For GitHub-Pages
     }
   });
 
