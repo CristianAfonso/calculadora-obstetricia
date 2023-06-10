@@ -24,12 +24,12 @@ export default function Nav(props){
     };
     function handleWeeksChange(event) {
         if(0 <= event.target.value && event.target.value <= 44){
-            setWeeks(event.target.value);
+            setWeeks(parseInt(event.target.value));
         }
     }
     function handleDaysChange(event) {
         if(0 <= event.target.value && event.target.value <= 6){
-            setDays(event.target.value);
+            setDays(parseInt(event.target.value));
         }
     }
 
@@ -68,22 +68,14 @@ export default function Nav(props){
             document.getElementById('weeks').style.borderColor="red";
             document.getElementById('days').style.color="red";
             document.getElementById('days').style.borderColor="red";
-        }else if(!weeks){
-            document.getElementById('days').style.color="black";
-            document.getElementById('days').style.borderColor=null;
-            document.getElementById('weeks').style.color="red";
-            document.getElementById('weeks').style.borderColor="red";
-        }else if(!days){
-            document.getElementById('weeks').style.color="black";
-            document.getElementById('weeks').style.borderColor=null;
-            document.getElementById('days').style.color="red";
-            document.getElementById('days').style.borderColor="red";
         }else{
             document.getElementById('navBar').style.display="flex";
             document.getElementById('weeks').style.color="black";
             document.getElementById('weeks').style.borderColor=null;
             document.getElementById('days').style.color="black";
             document.getElementById('days').style.borderColor=null;
+            document.getElementById('days').value = days;
+            document.getElementById('weeks').value = weeks;
             calculateFURDate();
         }
     }

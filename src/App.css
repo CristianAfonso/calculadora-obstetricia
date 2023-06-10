@@ -114,8 +114,7 @@ nav .forms-container{
   flex-direction: column;
   margin: auto auto 30px auto;
   width: 80%;
-  height: auto;
-  min-width: 200px;
+  height: 200px;
   background-color: #efefef;
   border-radius: 10px;
   border: solid 1px #bbb;
@@ -123,6 +122,7 @@ nav .forms-container{
   margin-bottom: 25px;
   align-items: center;
   justify-content: space-around;
+
 }
 
 nav .forms-container .FUR-form{
@@ -135,7 +135,7 @@ nav .forms-container .FUR-form{
   column-gap: 10px;
 }
 .react-datepicker-wrapper{
-  width: auto !important;
+  width: auto;
 }
 .react-datepicker-wrapper input{
   width: 100%;
@@ -210,6 +210,9 @@ nav #navBar button:hover{
   }
 }
 @media screen and (max-width: 599px){
+  nav .forms-container form .expected-birth, nav .forms-container form button, nav .forms-container form div {
+  
+  }
   nav #navBar{
     flex-wrap: wrap;
     width: 80%;
@@ -218,31 +221,29 @@ nav #navBar button:hover{
     row-gap: 10px;
   }
   nav #navBar button{
-    width: 100% !important;
+    width: 47.5%;
   }
-  nav .forms-container .FUR-form{
-    flex-direction: column;
+  nav .forms-container{
+    row-gap: 25px;
+    height: auto !important;
+    padding: 25px;
+  }
+  nav .forms-container form{
+    flex-direction: column !important;
     row-gap: 10px;
-    padding-top: 50px;
-    justify-content: flex-end;
-    width: 75%;
+    
   }
-  nav .forms-container .FUR-form .react-datepicker-wrapper,
-  nav .forms-container .FUR-form input{
-    width: 90% !important;
-  }
-  nav .forms-container .FUR-form .react-datepicker-wrapper input{
-    width: 100% !important;
-  }
-  nav .forms-container .weeks-form{
-    flex-direction: column;
-    row-gap: 10px;
-    padding: 50px 0;  
-  }
+  nav .forms-container form .expected-birth, 
+  nav .forms-container form button,
   nav .forms-container .weeks-form div{
-    width: 75% !important;
-    align-items: center;
-    justify-content: space-between;
+    width: 100% !important;
+  }
+  nav .forms-container form div{
+    flex-direction: column;
+  }
+  nav .forms-container .weeks-form div input{
+    width: 36%;
+    min-width: 60px;
   }
 }
 /* [3. Services Container]*/
@@ -326,3 +327,23 @@ nav #navBar button:hover{
   background-color: #01DFD7;
   color: #333;
  }
+ #datation-container .datation-input .pair{
+  display: flex;
+}
+@media screen and (max-width: 822px){
+  #datation-container{
+    min-width: 200px;
+    row-gap: 50px;
+  }
+  #datation-container .datation-input{
+    flex-direction: column;
+    width: 100%;
+    row-gap: 25px;
+  }
+}
+@media screen and (max-width:464px){
+  .pair{
+    min-width: 200px;
+    width: 66%;
+  }
+}

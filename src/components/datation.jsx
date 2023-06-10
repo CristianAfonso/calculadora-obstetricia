@@ -30,33 +30,33 @@ export default function Datation(props){
     }
 
     function handleLCCChange(event) {
-        if(event.target.value >= 2 && event.target.value <= 121){
-            setLCCData(event.target.value);
-        }
+        setLCCData(event.target.value);
     }
     function handleDBPChange(event) {
-        if(event.target.value >= 31 && event.target.value <= 100){
-            setDBPData(event.target.value);
-        }
+        setDBPData(event.target.value);
     }
     function handleLFChange(event) {
-        if(event.target.value >= 17 && event.target.value <= 75){
-            setLFData(event.target.value);
-        }
+        setLFData(event.target.value);
     }
     function lccCalculate(){
-        calculateNewFur('LCC');
+        if(lccData >= 2 && lccData <= 121){
+            calculateNewFur('LCC');
+        }
     }
     function dbpCalculate(){
-        calculateNewFur('DBP');
+        if(dbpData >= 31 && dbpData <= 100){
+            calculateNewFur('DBP');
+        }
     }
     function lfCalculate(){
-        calculateNewFur('LF');
+        if(lfData >= 17 && lfData <= 75){
+            calculateNewFur('LF');
+        }
     }
     function calculateNewFur(method){
         switch(method){
             case 'LCC':
-                    updateFur(40.9041+(3.21585*Math.pow(lccData,0.5))+(0.348956*lccData));
+                    updateFur(40.9041+(3.21585*Math.pow(lccData,0.5))+(0.348956*lccData)); //CRL Ultrasound Obstet Gynecol 2014; 44: 641-648: https://obgyn.onlinelibrary.wiley.com/doi/pdf/10.1002/uog.13448
                 break;
             case 'DBP':
                     updateFur( 2 * dbpData + 44.2);
@@ -100,38 +100,50 @@ export default function Datation(props){
             <div className='service-content'>
                 <div id='datation-container'>
                     <div className="datation-input">
-                        <span title={t('LCC_help')}>{t('LCC_title')}:</span>
-                        <input 
-                            type='number'
-                            min={2} max={121}
-                            placeholder='mm'
-                            value={lccData}
-                            onChange={handleLCCChange}/>
+                        <div className="pair">
+                            <span title={t('LCC_help')}>{t('LCC_title')}:</span>
+                            <input 
+                                type='number'
+                                placeholder='mm'
+                                value={lccData}
+                                onChange={handleLCCChange}/>
+                        </div>
+                        <div className="pair">
                             <span className="last-fur-span">{lastFur && `${t('last_fur')}: ${lastFur.toLocaleDateString()}`}</span> 
                             <span className="new-fur-container">{displayedNewFur && `${t('new_fur')}: ${displayedNewFur.toLocaleDateString()}`}</span>
+                        </div>
                             <button onClick={lccCalculate}>{t('update_FUR')}</button>
                     </div>
                     <div className="datation-input">
-                        <span title={t('DBP_help')}>{t('DBP_title')}:</span>
-                        <input 
+                        <div className="pair">
+                            <span title={t('DBP_help')}>{t('DBP_title')}:</span>
+                            <input 
                             type='number'
-                            min={31} max={100}
                             placeholder='mm'
                             value={dbpData}
                             onChange={handleDBPChange}/>
-                            <span className="new-fur-container">{displayedNewFur && `${t('new_fur')}: ${displayedNewFur.toLocaleDateString()}`}</span>
+                            </div>
+                            <div className="pair">
+                                <span className="last-fur-span">{lastFur && `${t('last_fur')}: ${lastFur.toLocaleDateString()}`}</span> 
+                                <span className="new-fur-container">{displayedNewFur && `${t('new_fur')}: ${displayedNewFur.toLocaleDateString()}`}</span>
+                            </div>
                             <button onClick={dbpCalculate}>{t('update_FUR')}</button>
                         
                     </div>
                     <div className="datation-input">
-                        <span title={t('LF_help')}>{t('LF_title')}:</span>
-                        <input 
+                        <div className="pair">
+                            <span title={t('LF_help')}>{t('LF_title')}:</span>
+                            <input 
                             type='number'
-                            min={17} max={75}
                             placeholder='mm'
                             value={lfData}
                             onChange={handleLFChange}/>
+
+                        </div>
+                        <div className="pair">
+                            <span className="last-fur-span">{lastFur && `${t('last_fur')}: ${lastFur.toLocaleDateString()}`}</span> 
                             <span className="new-fur-container">{displayedNewFur && `${t('new_fur')}: ${displayedNewFur.toLocaleDateString()}`}</span>
+                        </div>
                             <button onClick={lfCalculate}>{t('update_FUR')}</button>
                         
                     </div>
