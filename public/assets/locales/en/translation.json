@@ -1,6 +1,7 @@
 {
     "welcome": "Welcome to React and react-i18next",
     "service": "OBSTETRICS AND GYNECOLOGY SERVICE",
+    "valid_date": "Select a valid date",
     "datation": "Datation",
     "biometric": "Biometric and Hemodynamic Studio",
     "hemodinamic": "Hemodynamic Studio",

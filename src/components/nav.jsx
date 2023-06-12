@@ -52,10 +52,18 @@ export default function Nav(props){
     function handleFURSubmit(event) {
         event.preventDefault();
         if(estimatedDueDate){
-            document.getElementById('navBar').style.display="flex";
-            document.getElementById('last-period-date').style.color="black";
-            document.getElementById('last-period-date').style.borderColor=null;
-            CalculateWeeksAndDays();
+            console.log(lastPeriodDate.getTime() + " | " +today.getTime());
+            if(lastPeriodDate.getTime() > today.getTime()){
+                document.getElementById('last-period-date').style.color="red";
+                document.getElementById('last-period-date').style.borderColor="red";
+                document.getElementById('last-period-date').value=t('valid_date');
+            }else{
+                document.getElementById('navBar').style.display="flex";
+                document.getElementById('last-period-date').style.color="black";
+                document.getElementById('last-period-date').style.borderColor=null;
+                CalculateWeeksAndDays();
+            }
+            
         }else{
             document.getElementById('last-period-date').style.color="red";
             document.getElementById('last-period-date').style.borderColor="red";
