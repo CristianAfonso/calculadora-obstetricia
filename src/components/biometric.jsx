@@ -1,9 +1,7 @@
 import React, {useState , useEffect} from 'react';
 import { useTranslation } from "react-i18next";
-
+import {displayBar, matchingGA, getZPercent, bpd_mean, cc_mean, ca_mean, lf_mean, bpd_sd, cc_sd, ca_sd, lf_sd} from "./functions";
 export default function Biometric(props){
-    const [weeks, setWeeks] = useState("");
-    const [days, setDays] = useState("");
     const [dbp, setDBP] = useState("");
     const [cc, setCC] = useState("");
     const [ca, setCA] = useState("");
@@ -25,6 +23,14 @@ export default function Biometric(props){
     const [LFpercentil, setLFpercentil] = useState("");
     const [LFweeks,     setLFWeeks] = useState("");
     const [LFdays,      setLFDays] = useState("");
+    const [hadlock2Weight, setHL2peso] = useState("");
+    const [hadlock2Age, setHL2Ageo] = useState("");
+    const [hadlock3Weight, setHL3peso] = useState("");
+    const [hadlock3Age, setHL3Age] = useState("");
+    const [customWeight, setCustomWeight] = useState("");
+    const [genre, setGenre] = useState("");
+    const [BioGregorioPercent, setGregPercent] =useState("");
+    const [BioClinicPercent, setClinicPercent] =useState("");
     const {t} = useTranslation();
 
     function handleDBPBiometricChange(event){
@@ -43,8 +49,16 @@ export default function Biometric(props){
         setLF(event.target.value);
         handleChange(event,'LF');
     }
+    function handleCustomWeightChange(event){
+        setCustomWeight(event.target.value);
+
+    }
+    function handleSelectGenre(event){
+        setGenre(event.target.value);
+
+    }
     function handleChange(event, from){
-        let matchingGAvalue = matchingGA(event.target.value,from);
+        let matchingGAvalue =   matchingGA(event.target.value,from);
         let matchingWeeks = Math.floor(matchingGAvalue/7);
         let zscore;
         let percentile;
@@ -52,200 +66,50 @@ export default function Biometric(props){
             case 'DBP':
                 setDBPWeeks( matchingWeeks);
                 setDBPDays(Math.round(((matchingGAvalue/7)-matchingWeeks)*7));
-                zscore = (event.target.value-bpd_mean(ga))/bpd_sd(ga);
+                zscore = (event.target.value-  bpd_mean(ga))/  bpd_sd(ga);
                 setDBPZscore(zscore.toFixed(2));
-                percentile = getZPercent(zscore).toFixed(0);
+                percentile =   getZPercent(zscore).toFixed(0);
                 setDBPpercentil(percentile);
-                displayBar(percentile, 'percentile-bar-dbp');
+                  displayBar(percentile, 'percentile-bar-dbp');
                 return;
             case 'CC':
-                setCCWeeks( matchingWeeks);
+                setCCWeeks(matchingWeeks);
                 setCCDays(Math.round(((matchingGAvalue/7)-matchingWeeks)*7));
-                zscore = (event.target.value-cc_mean(ga))/cc_sd(ga);
+                zscore = (event.target.value-  cc_mean(ga))/  cc_sd(ga);
                 setCCZscore(zscore.toFixed(2));
-                percentile = getZPercent(zscore).toFixed(0);
+                percentile =   getZPercent(zscore).toFixed(0);
                 setCCpercentil(percentile);
-                displayBar(percentile, 'percentile-bar-cc');
+                  displayBar(percentile, 'percentile-bar-cc');
                 return;
             case 'CA':
-                setCAWeeks( matchingWeeks);
+                setCAWeeks(matchingWeeks);
                 setCADays(Math.round(((matchingGAvalue/7)-matchingWeeks)*7));
-                zscore = (event.target.value-ca_mean(ga))/ca_sd(ga);
+                zscore = (event.target.value-  ca_mean(ga))/  ca_sd(ga);
                 setCAZscore(zscore.toFixed(2));
-                percentile = getZPercent(zscore).toFixed(0);
+                percentile =   getZPercent(zscore).toFixed(0);
                 setCApercentil(percentile);
-                displayBar(percentile, 'percentile-bar-ca');
+                  displayBar(percentile, 'percentile-bar-ca');
                 return;
             case 'LF':
-                setLFWeeks( matchingWeeks);
+                setLFWeeks(matchingWeeks);
                 setLFDays(Math.round(((matchingGAvalue/7)-matchingWeeks)*7));
-                zscore = (event.target.value-lf_mean(ga))/lf_sd(ga);
+                zscore = (event.target.value-  lf_mean(ga))/  lf_sd(ga);
                 setLFZscore(zscore.toFixed(2));
-                percentile = getZPercent(zscore).toFixed(0);
+                percentile =   getZPercent(zscore).toFixed(0);
                 setLFpercentil(percentile);
                 displayBar(percentile, 'percentile-bar-lf');
                 return;
-            
-        }
-        
-        
-    }
-    function displayBar(percentile, elementId){
-        if(percentile>0 && percentile < 100){
-            if(percentile > 10 && percentile < 90){
-                document.getElementById(elementId).style.backgroundImage = 'linear-gradient( #2bc2535e, #54f054b0)';
-            }else if(percentile <= 10 || percentile >= 90){
-                document.getElementById(elementId).style.backgroundImage = 'linear-gradient(#f1a165, #f36d0a)';
-            }
-            document.getElementById(elementId).style.width = percentile + "%";
-        }else{
-            document.getElementById(elementId).style.width = "100%";
-            document.getElementById(elementId).style.backgroundImage = 'linear-gradient(#f0a3a3, #f42323)';
+            default:
+                return;
         }
     }
-    function matchingGA(data,from){
-            let iterator;
-            switch(from){
-                case 'DBP':
-                    iterator = 800;
-                    break;
-                case 'CC':
-                    iterator = 800;
-                    break;
-                case 'CA':
-                    iterator = 450;
-                    break;
-                case 'LF':
-                    iterator = 450;
-                    break;
-            }
-            let media_anterior;
-            switch(from){
-                case 'DBP':
-                    media_anterior = bpd_mean(1);
-                    break;
-                case 'CC':
-                    media_anterior = cc_mean(1);
-                    break;
-                case 'CA':
-                    media_anterior = ca_mean(1);
-                    break;
-                case 'LF':
-                    media_anterior = lf_mean(1);
-                    break;
-            }
-            let ga;
-            for (let i = 7; i < iterator; i++) {
-                let media;
-                switch(from){
-                    case 'DBP':
-                        media = bpd_mean(i/7.0);
-                        break;
-                    case 'CC':
-                        media = cc_mean(i/7.0);
-                        break;
-                    case 'CA':
-                        media = ca_mean(i/7.0);
-                        break;
-                    case 'LF':
-                        media = lf_mean(i/7.0);
-                        break;
-                }
-                if (data < media) {
-                    if ((data - media_anterior) <= (data - media)) {
-                        ga = (i - 1);
-                        return ga;
-                    } else {
-                        ga = i;
-                        return ga;
-                    }
-                } else {
-                    switch(from){
-                        case 'DBP':
-                            media_anterior = bpd_mean(i/7.0);
-                            break;
-                        case 'CC':
-                            media_anterior = cc_mean(i/7.0);
-                            break;
-                        case 'CA':
-                            media_anterior = ca_mean(i/7.0);
-                            break;
-                        case 'LF':
-                            media_anterior = lf_mean(i/7.0);
-                            break;
-                    }
-                }
-            }
-    }
-    function getZPercent(z) {
-        //z == number of standard deviations from the mean
-    
-        //if z is greater than 6.5 standard deviations from the mean
-        //the number of significant digits will be outside of a reasonable
-        //range
-        if (z < -3.5)
-            return 0;
-        if (z > 3.5)
-            return 100;
-    
-        let factK = 1;
-        let sum = 0;
-        let term = 1;
-        let k = 0;
-        let loopStop = Math.exp(-23);
-        while (Math.abs(term) > loopStop) {
-            term = .3989422804 * Math.pow(-1, k) * Math.pow(z, k) / (2 * k + 1) / Math.pow(2, k) * Math.pow(z, k + 1) / factK;
-            sum += term;
-            k++;
-            factK *= k;
-    
-        }
-        sum += 0.5;
-    
-        return sum * 100;
-    }
-    function bpd_mean(ga) {
-        let mean = 5.60878 + 0.158369 * Math.pow(ga,2) - 0.00256379 * Math.pow(ga,3);
-        return mean;
-    }
-    
-    function bpd_sd(ga) {
-        let sd = Math.exp(0.101242 + 0.00150557 * Math.pow(ga,3) - 0.000771535 * Math.pow(ga,3) * Math.log(ga) + 0.0000999638 * Math.pow(ga,3) * (Math.log(ga) * Math.log(ga)));
-        return sd;
-    }
-    function cc_mean(ga) {
-        let mean = -28.2849 + 1.69267 * Math.pow(ga,2) - 0.397485 *Math.pow(ga,2)* Math.log(ga);
-        return mean;
-    }
-    
-    function cc_sd(ga) {
-        let sd = 1.98735 + 0.0136772 *  Math.pow(ga,3) - 0.00726264 * Math.pow(ga,3)* Math.log(ga) + 0.000976253 * ga * ga * ga * Math.pow((Math.log(ga)), 2);
-        return sd;
-    }
-    function ca_mean(ga) {
-        let mean = -81.3243 + 11.6772 * ga - 0.000561865 * Math.pow(ga,3);
-        return mean;
-    }
-    
-    function ca_sd(ga) {
-        let sd = -4.36302 + 0.121445 * Math.pow(ga,2) - 0.0130256 * Math.pow(ga,3) + 0.00282143 * Math.pow(ga,3) * Math.log(ga);
-        return sd;
-    }
-    
-    function lf_mean(ga) {
-        let mean = -39.9616 + 4.32298 * ga - 0.0380156 * Math.pow(ga,2);
-        return mean;
-    }
-    
-    function lf_sd(ga) {
-        let sd = Math.pow(Math.E, 0.605843 - 42.0014 * Math.pow(ga, -2) + 0.00000917972 * Math.pow(ga,3));
-        return sd;
+    function handleUpdate(){
+
     }
 
     
     useEffect(() =>{
         setGa((props.weeks)+props.days/7);
-        
         console.log(dbp);
     });
 
@@ -268,6 +132,7 @@ export default function Biometric(props){
                                         <input 
                                             type='number'
                                             placeholder='mm'
+                                            min={0}
                                             value={dbp}
                                             onChange={handleDBPBiometricChange}/>
                                     </div>
@@ -290,6 +155,7 @@ export default function Biometric(props){
                                         <input 
                                             type='number'
                                             placeholder='mm'
+                                            min={0}
                                             value={cc}
                                             onChange={handleCCBiometricChange}/>
                                     </div>
@@ -312,6 +178,7 @@ export default function Biometric(props){
                                     <input 
                                         type='number'
                                         placeholder='mm'
+                                        min={0}
                                         value={ca}
                                         onChange={handleCABiometricChange}/>
                                     </div>
@@ -334,6 +201,7 @@ export default function Biometric(props){
                                         <input 
                                             type='number'
                                             placeholder='mm'
+                                            min={0}
                                             value={lf}
                                             onChange={handleLFBiometricChange}/>
                                     </div>
@@ -350,7 +218,99 @@ export default function Biometric(props){
                                 </span>
                         </div>
                     </div>
-                    <div id='rigth-biometric'></div>
+                    <div id='rigth-biometric'>
+                        <table>
+                            <thead>
+                                <th>
+                                    Formula
+                                </th>
+                                <th>
+                                    Medidas
+                                </th>
+                                <th>
+                                    Peso
+                                </th>
+                                <th>
+                                    Edad
+                                </th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>
+                                        <button>Hadlock 2</button>
+                                    </th>
+                                    <th>
+                                        CC CA LF
+                                    </th>
+                                    <th>
+                                        {hadlock2Weight}
+                                    </th>
+                                    <th>
+                                        {hadlock2Age}
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th>
+                                     <button>Hadlock 3</button>
+                                    </th>
+                                    <th>
+                                        CC CA LF
+                                    </th>
+                                    <th>
+                                        {hadlock3Weight}
+                                    </th>
+                                    <th>
+                                        {hadlock3Age}
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th>
+                                     <button>{t('manual_weight')}</button>
+                                    </th>
+                                    <th colSpan={3}>
+                                        <span>
+                                            {t('weight')}
+                                            <input
+                                                style={{marginLeft: 5 + "px", maxWidth: 70 +'px', height: 39 + 'px'}}
+                                                type='number'
+                                                placeholder='g'
+                                                min={0}
+                                                value={customWeight||0}
+                                                onChange={handleCustomWeightChange}/>
+                                            <button className="genreSelector" onClick={handleSelectGenre} value="man">{t('man')}</button>
+                                            <button className="genreSelector" onClick={handleSelectGenre} value="woman">{t('woman')}</button>
+                                        </span>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th style={{textAlign:'center'}} colSpan={4}>
+                                        <tr style={{display:'block'}}>{t('own_formula_gregorio')}</tr>
+                                        <tr className='percentile-table-container'>
+                                            <span className='meter percentile-bar-container'>
+                                                <span className='percentile-bar-content' id='percentile-bar-bio-gregorio'>
+                                                    <p>p{BioGregorioPercent}</p>
+                                                </span>
+                                            </span>
+                                        </tr>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th style={{textAlign:'center'}} colSpan={4}>
+                                        <tr style={{display:'block'}}>{t('own_formula_clinic')}</tr>
+                                        <tr className='percentile-table-container'>
+                                            <span className='meter percentile-bar-container'>
+                                                <span className='percentile-bar-content' id='percentile-bar-bio-clinic'>
+                                                    <p>p{BioClinicPercent}</p>
+                                                </span>
+                                        </span>
+                                        </tr>
+                                    </th>
+                                </tr>
+                                
+                                    
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
