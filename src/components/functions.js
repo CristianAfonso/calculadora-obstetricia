@@ -146,3 +146,50 @@
         return sd;
     }
 
+    export const EFW_Hadlock2Weight = (ac, hc, fl) => {
+        const efw = hadlock2_mean(ac, hc, fl);
+        const ds = hadlock2_sd(efw);
+        return efw;
+    }
+    export const EFW_Hadlock2Age = (ac, hc, fl) => {
+        const Hadlock2GA = ((matchingGA(ac, "CA") + matchingGA(hc, "CC") + matchingGA(fl, "LF")) / 3);
+        return Hadlock2GA;
+    }
+    export const EFW_Hadlock3Weight = (ac, fl, bpd) => {
+        const efw = hadlock3(ac, fl, bpd);
+        return efw;
+    }
+    export const EFW_Hadlock3Age = (ac, fl, bpd) => {
+        const Hadlock3GA = ((matchingGA(ac, "CA") + matchingGA(fl, "LF") + matchingGA(bpd, "DBP")) / 3);
+        return Hadlock3GA;
+    }
+
+    const hadlock2_mean = (ac, hc, fl) => {
+        const efw = Math.pow(10, 1.326 - (0.00326 * ac / 10 * fl / 10) + (0.0107 * hc / 10) + (0.0438 * ac / 10) + (0.158 * fl / 10));
+        return efw;
+    }
+    
+    const hadlock2_sd= (efw) => {
+        if (efw < 1500) {
+            return 109.0;
+        } else if ((efw >= 1500) && (efw < 2000)) {
+            return 173.0;
+        } else if ((efw >= 2000) && (efw < 2500)) {
+            return 221.0;
+        } else if ((efw >= 2500) && (efw < 3000)) {
+            return 258.0;
+        } else if ((efw >= 3000) && (efw < 3500)) {
+            return 290.0;
+        } else if ((efw >= 3500) && (efw < 4000)) {
+            return 333.0;
+        } else if (efw >= 4000) {
+            return 382.0;
+        }
+    }
+    
+    
+    
+    export const hadlock3 = (ac, fl, bpd) => {
+        const efw = Math.pow(10, 1.335 - (0.0034 * ac / 10 * fl / 10) + (0.0316 * bpd / 10) + (0.0457 * ac / 10) + (0.1623 * fl / 10));
+        return efw;
+    }

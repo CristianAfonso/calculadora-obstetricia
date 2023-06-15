@@ -1,6 +1,6 @@
 import React, {useState , useEffect} from 'react';
 import { useTranslation } from "react-i18next";
-import {displayBar, matchingGA, getZPercent, bpd_mean, cc_mean, ca_mean, lf_mean, bpd_sd, cc_sd, ca_sd, lf_sd} from "./functions";
+import {displayBar, matchingGA, getZPercent, bpd_mean, cc_mean, ca_mean, lf_mean, bpd_sd, cc_sd, ca_sd, lf_sd, EFW_Hadlock2Weight,EFW_Hadlock2Age, EFW_Hadlock3Weight,EFW_Hadlock3Age} from "./functions";
 export default function Biometric(props){
     const [dbp, setDBP] = useState("");
     const [cc, setCC] = useState("");
@@ -23,10 +23,12 @@ export default function Biometric(props){
     const [LFpercentil, setLFpercentil] = useState("");
     const [LFweeks,     setLFWeeks] = useState("");
     const [LFdays,      setLFDays] = useState("");
-    const [hadlock2Weight, setHL2peso] = useState("");
-    const [hadlock2Age, setHL2Ageo] = useState("");
-    const [hadlock3Weight, setHL3peso] = useState("");
-    const [hadlock3Age, setHL3Age] = useState("");
+    const [hadlock2Weight, setHL2Weight] = useState("");
+    const [hadlock2Weeks, setHL2Weeks] = useState("");
+    const [hadlock2Days, setHL2Days] = useState("");
+    const [hadlock3Weight, setHL3Weight] = useState("");
+    const [hadlock3Weeks, setHL3Weeks] = useState("");
+    const [hadlock3Days, setHL3Days] = useState("");
     const [customWeight, setCustomWeight] = useState("");
     const [genre, setGenre] = useState("");
     const [BioGregorioPercent, setGregPercent] =useState("");
@@ -88,7 +90,7 @@ export default function Biometric(props){
                 setCAZscore(zscore.toFixed(2));
                 percentile =   getZPercent(zscore).toFixed(0);
                 setCApercentil(percentile);
-                  displayBar(percentile, 'percentile-bar-ca');
+                displayBar(percentile, 'percentile-bar-ca');
                 return;
             case 'LF':
                 setLFWeeks(matchingWeeks);
@@ -103,14 +105,31 @@ export default function Biometric(props){
                 return;
         }
     }
-    function handleUpdate(){
-
+    function handleHadlock2(){
+        if(cc && ca && lf){
+            setHL2Weight(EFW_Hadlock2Weight(ca,cc,lf).toFixed(2)+"gr");
+            const hdlock2age = EFW_Hadlock2Age(ca,cc,lf);
+            const hdlock2weeks =    Math.floor(hdlock2age/7);
+            setHL2Weeks(hdlock2weeks);
+            setHL2Days(Math.round(((hdlock2age/7)-hdlock2weeks)*7));
+        }else{
+            setHL2Weight('Introduce valores');
+        }
+    }    
+    function handleHadlock3(){
+        if(dbp && ca && lf){
+            setHL3Weight(EFW_Hadlock3Weight(ca,lf,dbp).toFixed(2)+"gr");
+            const hdlock3age = EFW_Hadlock3Age(ca,lf,dbp);
+            const hdlock3weeks =    Math.floor(hdlock3age/7);
+            setHL3Weeks(hdlock3weeks);
+            setHL3Days(Math.round(((hdlock3age/7)-hdlock3weeks)*7));
+        }else{
+            setHL3Weight('Introduce valores');
+        }
     }
-
     
     useEffect(() =>{
         setGa((props.weeks)+props.days/7);
-        console.log(dbp);
     });
 
     return(
@@ -139,7 +158,7 @@ export default function Biometric(props){
                                     <div className="scores">
                                         <span id="dbp-zscore">{DBPzscore}z</span>
                                         <span id="dbp-p">{DBPpercentil}p</span>
-                                        <span id="dbp-time">{DBPweeks || 0} w {DBPdays|| 0} d</span>
+                                        <span id="dbp-time">{DBPweeks || 0} {t('w')} {DBPdays|| 0} {t('d')}</span>
                                     </div>
                                 </div>
                                 <span className='meter percentile-bar-container'>
@@ -162,7 +181,7 @@ export default function Biometric(props){
                                     <div className="scores">
                                         <span id="cc-zscore">{CCzscore} z</span>
                                         <span id="cc-p">{CCpercentil} p</span>
-                                        <span id="cc-time">{CCweeks|| 0} w {CCdays|| 0} d</span>
+                                        <span id="cc-time">{CCweeks|| 0} {t('w')} {CCdays|| 0} {t('d')}</span>
                                     </div>
                                 </div>
                                 <span className='meter percentile-bar-container'>
@@ -185,7 +204,7 @@ export default function Biometric(props){
                                     <div className="scores">
                                         <span id="ca-zscore">{CAzscore} z</span>
                                         <span id="ca-p">{CApercentil} p</span>
-                                        <span id="ca-time">{CAweeks|| 0} w {CAdays|| 0} d</span>
+                                        <span id="ca-time">{CAweeks|| 0} {t('w')} {CAdays|| 0} {t('d')}</span>
                                     </div>
                                 </div>
                                 <span className='meter percentile-bar-container'>
@@ -208,7 +227,7 @@ export default function Biometric(props){
                                     <div className="scores">
                                         <span id="lf-zscore">{LFzscore} z</span>
                                         <span id="lf-p">{LFpercentil} p</span>
-                                        <span id="lf-time">{LFweeks || 0} w {LFdays || 0} d</span>
+                                        <span id="lf-time">{LFweeks || 0} {t('w')} {LFdays || 0} {t('d')}</span>
                                     </div>
                                 </div>
                                 <span className='meter percentile-bar-container'>
@@ -237,7 +256,7 @@ export default function Biometric(props){
                             <tbody>
                                 <tr>
                                     <th>
-                                        <button>Hadlock 2</button>
+                                        <button onClick={handleHadlock2}>Hadlock 2</button>
                                     </th>
                                     <th>
                                         CC CA LF
@@ -246,21 +265,21 @@ export default function Biometric(props){
                                         {hadlock2Weight}
                                     </th>
                                     <th>
-                                        {hadlock2Age}
+                                        {hadlock2Weeks} {t('w')} {hadlock2Days} {t('d')}
                                     </th>
                                 </tr>
                                 <tr>
                                     <th>
-                                     <button>Hadlock 3</button>
+                                     <button  onClick={handleHadlock3}>Hadlock 3</button>
                                     </th>
                                     <th>
-                                        CC CA LF
+                                        DBP CA LF
                                     </th>
                                     <th>
                                         {hadlock3Weight}
                                     </th>
                                     <th>
-                                        {hadlock3Age}
+                                        {hadlock3Weeks} {t('w')} {hadlock3Days} {t('d')}
                                     </th>
                                 </tr>
                                 <tr>

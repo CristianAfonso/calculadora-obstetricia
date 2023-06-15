@@ -7,7 +7,6 @@
   max-width: 100% !important;
 }
 button:not(.react-datepicker__navigation, #dropdownMenuButton, .dropdown-item ){
-  margin-left: 10px;
   height: 40px;
   padding: 1% 5%;
   font-size: 14px;
@@ -177,18 +176,6 @@ nav .forms-container .weeks-form{
   display: flex;
   column-gap: 20px;
   align-items: center;
-}
-nav .forms-container .submitButton{
-  height: 40px;
-  font-size: 14px;
-  background-color: #01A9DB;
-  box-shadow: 2px 2px 4px #666;
-  border-radius: 10px;
-  width:100px !important;
-  text-align: center;
-  text-decoration: none;
-  color: #fff;
-  font-weight: 600;
 }
 nav #navBar{
   margin: 0;
