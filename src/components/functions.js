@@ -187,9 +187,62 @@
         }
     }
     
-    
-    
     export const hadlock3 = (ac, fl, bpd) => {
         const efw = Math.pow(10, 1.335 - (0.0034 * ac / 10 * fl / 10) + (0.0316 * bpd / 10) + (0.0457 * ac / 10) + (0.1623 * fl / 10));
         return efw;
     }
+
+    export const hospitalGetWeight = (ga, genre, hospital) => {
+        //switch(hospital){
+         //   case "gregorio":
+                const eg = 0.00920217;
+                const eg2 = 0.00645354;
+                const eg3 = -0.00010245;
+                let genreValue = 0;
+                if(genre == "male"){
+                    genreValue = 0.03942451;
+                }
+                const constante = 3.9486685;
+           //     break;
+           // }
+            return constante + (eg * ga) + (eg2 * Math.pow(ga,2)) + (eg3 * Math.pow(ga,3)) + (genreValue);
+    }
+    export const hospitalGetZscore = (weight, referenceWeight, hospital) => {
+        //if hospital == gregorio
+        const mse = 0.12801644;
+        console.log(weight);
+        console.log(Math.log(weight));
+        console.log(referenceWeight);
+        return (( Math.log(weight) - referenceWeight ) / mse);
+    }
+	/*
+	* 
+	* 
+	* UNICOS
+	* eg = 0.00920217;
+	* eg2 = 0.00645354;
+	* eg3 = -0.00010245;
+	* sexo = 0.03942451;
+	* constante = 3.9486685;
+	* mse = 0.12801644;
+	* 
+	* 
+	* GEMELOS
+	* eg = -0.4602458;
+	* eg2 = 0.01879654;
+	* eg3 = -0.00020637;
+	* sexo = 0.04579971;
+	* constante = 9.6297115;
+	* mse = 0.1391164;
+	* 
+	* TRIPLES
+	* eg = 2.0200247;
+	* eg2 = -0.05827472;
+	* eg3 = 0.00058056;
+	* sexo = 0.11269155;
+	* constante = -16.676953;
+	* mse = 0.16071315;
+	* 
+	* */
+
+    

@@ -22,6 +22,9 @@ button:not(.react-datepicker__navigation, #dropdownMenuButton, .dropdown-item ){
 button:not(.react-datepicker__navigation, #dropdownMenuButton , .dropdown-item ):hover{
   background-color: #01DFD7;
  }
+ .focus{
+  background-color: #0187b9 !important;
+ }
 /* 1.- Header */
 header{
   display: flex;
@@ -505,7 +508,7 @@ nav #navBar button:hover{
 #rigth-biometric table tbody th{
   border-bottom: solid 1px #01A9DB;
 }
-#rigth-biometric table span{
+#rigth-biometric table span:not(.percentile-bar-container, .percentile-bar-content){
   display: flex;
   flex-direction: row;
   justify-content: center;

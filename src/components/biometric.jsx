@@ -1,6 +1,6 @@
 import React, {useState , useEffect} from 'react';
 import { useTranslation } from "react-i18next";
-import {displayBar, matchingGA, getZPercent, bpd_mean, cc_mean, ca_mean, lf_mean, bpd_sd, cc_sd, ca_sd, lf_sd, EFW_Hadlock2Weight,EFW_Hadlock2Age, EFW_Hadlock3Weight,EFW_Hadlock3Age} from "./functions";
+import {displayBar, matchingGA, getZPercent, bpd_mean, cc_mean, ca_mean, lf_mean, bpd_sd, cc_sd, ca_sd, lf_sd, EFW_Hadlock2Weight,EFW_Hadlock2Age, EFW_Hadlock3Weight,EFW_Hadlock3Age, hospitalGetWeight, hospitalGetZscore} from "./functions";
 export default function Biometric(props){
     const [dbp, setDBP] = useState("");
     const [cc, setCC] = useState("");
@@ -30,9 +30,10 @@ export default function Biometric(props){
     const [hadlock3Weeks, setHL3Weeks] = useState("");
     const [hadlock3Days, setHL3Days] = useState("");
     const [customWeight, setCustomWeight] = useState("");
+    const [gregorioCustomPercentile, setGregorioCustomPercentile] = useState("");
+    const [gregorioCustomWeight, setGregorioCustomWeight] = useState("");
+    const [gregorioCustomZscore, setGregorioCustomZscore] = useState("");
     const [genre, setGenre] = useState("");
-    const [BioGregorioPercent, setGregPercent] =useState("");
-    const [BioClinicPercent, setClinicPercent] =useState("");
     const {t} = useTranslation();
 
     function handleDBPBiometricChange(event){
@@ -53,11 +54,16 @@ export default function Biometric(props){
     }
     function handleCustomWeightChange(event){
         setCustomWeight(event.target.value);
-
     }
     function handleSelectGenre(event){
         setGenre(event.target.value);
-
+        if(event.target.value == t('male')){
+            document.getElementById("female-selector").className = 'genreSelector';
+            document.getElementById("male-selector").className = 'genreSelector focus';
+        }else if(event.target.value == t('female')){
+            document.getElementById("male-selector").className = 'genreSelector';
+            document.getElementById("female-selector").className = 'genreSelector focus';
+        }
     }
     function handleChange(event, from){
         let matchingGAvalue =   matchingGA(event.target.value,from);
@@ -113,7 +119,7 @@ export default function Biometric(props){
             setHL2Weeks(hdlock2weeks);
             setHL2Days(Math.round(((hdlock2age/7)-hdlock2weeks)*7));
         }else{
-            setHL2Weight('Introduce valores');
+            setHL2Weight(t('not_values'));
         }
     }    
     function handleHadlock3(){
@@ -124,12 +130,34 @@ export default function Biometric(props){
             setHL3Weeks(hdlock3weeks);
             setHL3Days(Math.round(((hdlock3age/7)-hdlock3weeks)*7));
         }else{
-            setHL3Weight('Introduce valores');
+            setHL3Weight(t('not_values'));
         }
     }
-    
+    function handleManualWeight(){
+        const gregorioReferenceWeight = hospitalGetWeight(ga, genre, "gregorio");
+        const gregorioCalculatedZscore = hospitalGetZscore(customWeight, gregorioReferenceWeight,"gregorio");
+        const gregorioPercent = getZPercent(gregorioCalculatedZscore);
+        setGregorioCustomWeight(Math.exp(gregorioReferenceWeight).toFixed(2));
+        setGregorioCustomZscore(gregorioCalculatedZscore.toFixed(2));
+        setGregorioCustomPercentile(gregorioPercent.toFixed(0));
+        displayBar(gregorioPercent.toFixed(0), 'percentile-bar-bio-gregorio');
+    }
+/*
+
+			var gregorio2 = new Gregorio2_zs(peso, $scope.ga, $scope.radioSexo);
+			$scope.percentilReferenciaV2 = gregorio2.percentil;
+			$scope.zscoreReferenciaV2 = gregorio2.zscore;
+			$scope.zscoreReferenciaAbsV2 = Math.abs(gregorio2.zscore);
+			$scope.pesoReferenciaV2 = gregorio2.media_esperada;
+			$scope.typeRefV2 = getProgressbarType(gregorio2.percentil);
+            function Gregorio2_zs(peso, ga, sexo){
+
+            
+	
+*/
     useEffect(() =>{
         setGa((props.weeks)+props.days/7);
+        handleManualWeight();
     });
 
     return(
@@ -284,7 +312,7 @@ export default function Biometric(props){
                                 </tr>
                                 <tr>
                                     <th>
-                                     <button>{t('manual_weight')}</button>
+                                     <button onClick={handleManualWeight}>{t('manual_weight')}</button>
                                     </th>
                                     <th colSpan={3}>
                                         <span>
@@ -294,20 +322,21 @@ export default function Biometric(props){
                                                 type='number'
                                                 placeholder='g'
                                                 min={0}
-                                                value={customWeight||0}
+                                                value={customWeight}
                                                 onChange={handleCustomWeightChange}/>
-                                            <button className="genreSelector" onClick={handleSelectGenre} value="man">{t('man')}</button>
-                                            <button className="genreSelector" onClick={handleSelectGenre} value="woman">{t('woman')}</button>
+                                            <button className="genreSelector" id="male-selector" onClick={handleSelectGenre} value="male">{t('male')}</button>
+                                            <button className="genreSelector" id="female-selector" onClick={handleSelectGenre} value="female">{t('female')}</button>
                                         </span>
                                     </th>
                                 </tr>
                                 <tr>
-                                    <th style={{textAlign:'center'}} colSpan={4}>
-                                        <tr style={{display:'block'}}>{t('own_formula_gregorio')}</tr>
+                                    <th colSpan={4}>
+                                        <tr style={{display:'block', textAlign:'center'}}>{t('own_formula_gregorio')}:</tr>
+                                        <tr style={{display:'block', textAlign:'center'}}>(p{gregorioCustomPercentile}) ({gregorioCustomWeight}g) ({gregorioCustomZscore}z)</tr>
                                         <tr className='percentile-table-container'>
                                             <span className='meter percentile-bar-container'>
                                                 <span className='percentile-bar-content' id='percentile-bar-bio-gregorio'>
-                                                    <p>p{BioGregorioPercent}</p>
+                                                    <p>p{gregorioCustomPercentile}</p>
                                                 </span>
                                             </span>
                                         </tr>
@@ -319,7 +348,7 @@ export default function Biometric(props){
                                         <tr className='percentile-table-container'>
                                             <span className='meter percentile-bar-container'>
                                                 <span className='percentile-bar-content' id='percentile-bar-bio-clinic'>
-                                                    <p>p{BioClinicPercent}</p>
+                                                    <p>p{}</p>
                                                 </span>
                                         </span>
                                         </tr>
