@@ -273,3 +273,66 @@ export const hospitalGetZscore = (weight, referenceWeight, hospital) => {
 * 
 * */
 
+/*
+    Hemodinamic
+    */
+const ua_mean = (ga) => {
+    const mean = (3.55219 - (0.13558 * ga)) + (0.00174 * Math.pow(ga,2));
+    return mean;
+}
+    
+const ua_sd = (ga) => {
+    const sd = 0.299; //????????????
+    return sd;
+}
+
+const mca_mean = (ga) => {
+	const mean = -2.7317 + (0.3335 * ga) - (0.0058 * ga * ga);
+	return mean;
+}
+
+const mca_sd = (ga) => {
+	const sd = -0.88005 + (0.08182 * ga) - (0.00133 * ga * ga);
+	return sd;
+}
+const cpr_mean = (ga)  => {
+	const mean = -4.0636 + (0.383 * ga) - (0.0059 * ga * ga);
+	return mean;
+}
+
+const cpr_sd = (ga)  => {
+	const sd = -0.9664 + (0.09027 * ga) - (0.0014 * ga * ga);
+	return sd;
+}
+export const getUAZscore = (ga, ua) => {
+    const uaMean    = ua_mean(ga);
+    const uaSD      = ua_sd(ga);
+    const uaZscore  = ((ua - uaMean)/uaSD);
+    return uaZscore;
+}
+export const getMCAZscore = (ga, mca) => {
+    const mcaMean    = mca_mean(ga);
+    const mcaSD      = mca_sd(ga);
+    const mcaZscore  = ((mca - mcaMean)/mcaSD);
+    return mcaZscore;
+}
+export const getCPRZscore = (mca, ua, ga) => {
+    const cpr = mca/ua;
+    const cprMean    = cpr_mean(ga);
+    const cprSD      = cpr_sd(ga);
+    const cprZscore  = ((cpr - cprMean)/cprSD);
+    return cprZscore;
+
+}
+export const getUAZscore_GregorioFormula = (ga, ua) => {
+    const mean = 1.74 - (ga * 0.0238731473944725);
+	const sd = 0.25825;
+	const zscore = (ua - mean) / sd;
+    return zscore;
+}
+export const getMCAZscore_GregorioFormula = (ga, mca) => {
+    const mean = -0.885496 + (ga * 0.209341) - (0.003686 * Math.pow(ga,2));
+	const sd = 0.7217442 - (0.0080618 * ga);
+	const zscore = (mca - mean) / sd;
+    return zscore;
+}

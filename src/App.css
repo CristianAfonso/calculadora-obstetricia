@@ -528,3 +528,30 @@ nav #navBar button:hover{
 .genreSelector:focus{
   background-color: #0187b9 !important;
 }
+
+/** Hemodinamic styles **/
+#hemodinamic-studio{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding: 50px 0px;
+  place-items: center;
+}
+#left-hemodinamic{
+  width: 50%;
+}
+#right-hemodinamic{
+    padding-left: 5%;
+    height: 100%;
+    width: 50%;
+  }
+.read-only-number{
+  -webkit-appearance: none;
+  margin: 0;
+  -moz-appearance: textfield;
+
+}
+.single-hemodinamic-displayer p{
+  margin-bottom: 0;
+  
+}

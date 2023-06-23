@@ -45,13 +45,15 @@ export default function Biometric(props) {
                     <p>{t('days')}: {props.days}</p>
                 </div>
             </div>
+            <h2>{t('Biometric_title')}</h2>
             <div className='service-content'>
                 <div id='biometric-container'>
                     <BiometricDataInput cc={setCC} dbp={setDBP} lf={setLF} ca={setCA} weeks={weeks} days={days} />
                     <BiometricFormulaDisplay cc={cc} dbp={dbp} lf={lf} ca={ca} weeks={weeks} days={days} />
                 </div>
             </div>
-                <HemodinamicStudio></HemodinamicStudio>
+            <h2>{t('Hemodinamic_title')}</h2>
+            <HemodinamicStudio weeks={weeks} days={days}/>
         </div>
     );
 }
