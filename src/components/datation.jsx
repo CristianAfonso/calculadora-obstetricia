@@ -8,9 +8,9 @@ export default function Datation(props){
     const [days, setDays] = useState(props.days);
     const [newWeeks, setNewWeeks] = useState("");
     const [newDays, setNewDays] = useState("");
-    const [lccData, setLCCData] =   useState("");
-    const [dbpData, setDBPData] =   useState("");
-    const [lfData, setLFData] =   useState("");
+    const [lccData, setLCCData] =   useState(props.lcc);
+    const [dbpData, setDBPData] =   useState(props.dbp);
+    const [lfData, setLFData] =   useState(props.lf);
     const [ecoDate, SetEcoDate] = useState(props.ecoDate);
     const [today] = useState(new Date());
     const [lastFur, setLastFur] = useState(subDays(today, weeks*7 + days));
@@ -31,12 +31,15 @@ export default function Datation(props){
 
     function handleLCCChange(event) {
         setLCCData(event.target.value);
+        props.setLCC(event.target.value);
     }
     function handleDBPChange(event) {
         setDBPData(event.target.value);
+        props.setDBP(event.target.value);
     }
     function handleLFChange(event) {
         setLFData(event.target.value);
+        props.setLF(event.target.value);
     }
     function lccCalculate(){
         if(lccData >= 2 && lccData <= 121){

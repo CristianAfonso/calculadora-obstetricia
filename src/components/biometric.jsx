@@ -10,7 +10,10 @@ export default function Biometric(props) {
     const [lf, setLF] = useState("");
     const [weeks, setWeeks] = useState(props.weeks);
     const [days, setDays] = useState(props.days);
-    const [ga, setGa] = useState((props.weeks) + props.days / 7);
+    const [ua, setUA] = useState(props.ua);
+    const [mca, setMCA] = useState(props.mca);
+    const [arterialRatio, setArterialRatio] = useState("");
+
     /*
     const [handler, setHandler] = useState("");
     const [hadlock2Weight, setHL2Weight] = useState("");
@@ -31,7 +34,17 @@ export default function Biometric(props) {
     const { t } = useTranslation();
 
     useEffect(() => {
-        setGa((props.weeks) + props.days / 7);
+        if(ua){
+            props.setUA(ua);
+        }else{
+            setUA(props.ua);
+        }
+        if(mca){
+            props.setMCA(mca)
+        }else{
+            setMCA(props.mca);
+        }
+        setArterialRatio((props.mca/props.ua).toFixed(2))
         setWeeks(props.weeks);
         setDays(props.days);
     });
@@ -53,7 +66,7 @@ export default function Biometric(props) {
                 </div>
             </div>
             <h2>{t('Hemodinamic_title')}</h2>
-            <HemodinamicStudio weeks={weeks} days={days}/>
+            <HemodinamicStudio  setMCA={setMCA} setUA={setUA} weeks={weeks} days={days} ua={ua} mca={mca}/>
         </div>
     );
 }

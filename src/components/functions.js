@@ -1,4 +1,4 @@
-
+import { useTranslation } from "react-i18next";
 export const displayBar = (percentile, elementId) => {
     if (percentile > 0 && percentile < 100) {
         if (percentile > 10 && percentile < 90) {
@@ -11,6 +11,22 @@ export const displayBar = (percentile, elementId) => {
         document.getElementById(elementId).style.width = "100%";
         document.getElementById(elementId).style.backgroundImage = 'linear-gradient(#e33922, #e30f00)';
     }
+}
+export const displayMoMBar = (mom, elementId) => {
+    if (mom > 1.6) {
+        document.getElementById(elementId).style.backgroundImage = 'linear-gradient(#e33922, #e30f00)';
+        document.getElementById(elementId).style.width = "100%";
+    } else if (mom > 1.5) {
+        document.getElementById(elementId).style.backgroundImage = 'linear-gradient(#d97321, #d98600)';
+        document.getElementById(elementId).style.width = parseFloat((mom/1.6)*100) + "%";
+    } else if (mom > 1.3) {
+        document.getElementById(elementId).style.backgroundImage = 'linear-gradient(#d9cf21, #d98600)';
+        document.getElementById(elementId).style.width = parseFloat((mom/1.6)*100) + "%";
+    }else{
+        document.getElementById(elementId).style.backgroundImage = 'linear-gradient( #00960a, #00bd0d)';
+        document.getElementById(elementId).style.width = parseFloat((mom/1.6)*100) + "%";
+    }
+    
 }
 export const matchingGA = (data, from) => {
     let iterator;
@@ -304,6 +320,35 @@ const cpr_sd = (ga)  => {
 	const sd = -0.9664 + (0.09027 * ga) - (0.0014 * ga * ga);
 	return sd;
 }
+const avpi_mean = (ga) => {
+	const mean = 1.39 - (0.012 * ga) + (0.0000198 * ga * ga);
+	return mean;
+}
+const avpi_sd = (ga) => {
+	const sd = 0.272 - (0.000259 * ga);
+	return sd;
+}
+
+const vdpi_mean = (ga) => {
+	const mean = 0.903 + (-0.0116 * ga);
+	return mean;
+}
+
+const vdpi_sd = (ga) => {
+	const sd = 0.1483;
+	return sd;
+}
+
+const aipi_mean = (ga) => {
+	const mean = 2.2562 + (0.0154 * ga);
+	return mean;
+}
+
+const aipi_sd = (ga) => {
+	const sd = 0.014199 + (0.011635 * ga);
+	return sd;
+}
+
 export const getUAZscore = (ga, ua) => {
     const uaMean    = ua_mean(ga);
     const uaSD      = ua_sd(ga);
@@ -334,5 +379,33 @@ export const getMCAZscore_GregorioFormula = (ga, mca) => {
     const mean = -0.885496 + (ga * 0.209341) - (0.003686 * Math.pow(ga,2));
 	const sd = 0.7217442 - (0.0080618 * ga);
 	const zscore = (mca - mean) / sd;
+    return zscore;
+}
+
+export const mcaExpectedSpeed = (ga)  => {
+    const expectedSpeed = Math.exp(2.31 + (0.046 * ga));
+    return expectedSpeed;
+}
+export const mcaMOM = (mcaSV, acmEV)  => {
+    return (mcaSV/acmEV);
+}
+export const getUAMeanZscore = (ga, mean) => {
+    const uaExpected = avpi_mean(ga * 7);
+    const uaSd = avpi_sd(ga* 7);
+    const uaZscore = ((Math.log(mean)) - uaExpected) / uaSd;
+    return uaZscore;
+}
+
+export const getDVZscore = (ga, dv) => {
+	const mean = vdpi_mean(ga);
+	const sd = vdpi_sd(ga);
+	const zscore = (dv - mean) / sd;
+    return zscore;
+}
+
+export const getAIZscore = (ga, ai) => {
+    const mean = aipi_mean(ga);
+	const sd = aipi_sd(ga);
+	const zscore = (ai - mean) / sd; 
     return zscore;
 }

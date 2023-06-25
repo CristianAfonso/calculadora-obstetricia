@@ -1,32 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from "react-i18next";
-import {getUAZscore, getMCAZscore, getCPRZscore, getUAZscore_GregorioFormula,getMCAZscore_GregorioFormula,displayBar, getZPercent } from "../functions.js";
+import { getUAZscore, getMCAZscore, getCPRZscore, getUAZscore_GregorioFormula, getMCAZscore_GregorioFormula, displayBar, getZPercent } from "../functions.js";
 export default function HemodinamicStudio(props) {
     const [ga, setGa] = useState((props.weeks) + props.days / 7);
-    const [ua, setUA] = useState("");
-    const [uaZscore, setUAZscore] = useState("");
-    const [uaPercent, setUAPercent] = useState("");
-    const [mca, setMCA] = useState("");
-    const [mcaZscore, setMCAZscore] = useState("");
-    const [mcaPercent, setMCAPercent] = useState("");
-    const [ratio, setRatio] = useState("");
-    const [ratioZscore, setRatioZscore] = useState("");
-    const [ratioPercent, setRatioPercent] = useState("");
-    const [clinicUAZscore,      setClinicUAZscore] = useState("");
-    const [clinicUAPercent,     setClinicUAPercent] = useState("");
-    const [clinicMCAZscore,     setClinicMCAZscore] = useState("");
-    const [clinicMCAPercent,    setClinicMCAPercent] = useState("");
-    const [gregorioUAZscore,    setGregorioUAZscore] = useState("");
-    const [gregorioUAPercent,   setGregorioUAPercent] = useState("");
-    const [gregorioMCAZscore,   setGregorioMCAZscore] = useState("");
-    const [gregorioMCAPercent,  setGregorioMCAPercent] = useState("");
+    const [ua, setUA] = useState(props.ua);
+    const [uaZscore, setUAZscore] = useState(getUAZscore(ga, ua).toFixed(2));
+    const [uaPercent, setUAPercent] = useState(getZPercent(uaZscore).toFixed(0));
+    const [mca, setMCA] = useState(props.mca);
+    const [mcaZscore, setMCAZscore] = useState(getMCAZscore(ga, mca).toFixed(2));
+    const [mcaPercent, setMCAPercent] = useState(getZPercent(getMCAZscore(ga, mca)).toFixed(0));
+    const [ratio, setRatio] = useState((mca / ga).toFixed(2));
+    const [ratioZscore, setRatioZscore] = useState(getCPRZscore(mca, ua, ga).toFixed(2));
+    const [ratioPercent, setRatioPercent] = useState(getZPercent(getCPRZscore(mca, ua, ga)).toFixed(0));
+    const [gregorioUAZscore, setGregorioUAZscore] = useState("");
+    const [gregorioUAPercent, setGregorioUAPercent] = useState("");
+    const [gregorioMCAZscore, setGregorioMCAZscore] = useState("");
+    const [gregorioMCAPercent, setGregorioMCAPercent] = useState("");
     const [gregorioRatioZscore, setGregorioRatioZscore] = useState("");
-    const [gregorioRatioPercent,setGregorioRatioPercent] = useState("");
+    const [gregorioRatioPercent, setGregorioRatioPercent] = useState("");
     const { t } = useTranslation();
 
-    function handleUAChange (event){
+    function handleUAChange(event) {
         setUA(event.target.value);
-        if(mca){
+        if (mca) {
             handleRatio(event.target.value, mca);
         }
         const uaZscoreChange = getUAZscore(ga, event.target.value);
@@ -34,33 +30,29 @@ export default function HemodinamicStudio(props) {
         setUAZscore(uaZscoreChange.toFixed(2));
         setUAPercent(uaPercentChange.toFixed(0));
     }
-    function handleMCAChange (event){
+    function handleMCAChange(event) {
         setMCA(event.target.value);
-        if(ua){
+        if (ua) {
             handleRatio(ua, event.target.value);
         }
-        const mcaZscoreChange   = getMCAZscore(ga, event.target.value);
-        const mcaPercentChange  = getZPercent(mcaZscoreChange);
+        const mcaZscoreChange = getMCAZscore(ga, event.target.value);
+        const mcaPercentChange = getZPercent(mcaZscoreChange);
         setMCAZscore(mcaZscoreChange.toFixed(2));
         setMCAPercent(mcaPercentChange.toFixed(0));
     }
-    function handleRatio(ua, mca){
-        const ratioZscoreChange     = getCPRZscore(mca, ua, ga);
-        const ratioPercentChange    = getZPercent(ratioZscoreChange);
-        setRatio((mca/ua).toFixed(2));
+    function handleRatio(ua, mca) {
+        const ratioZscoreChange = getCPRZscore(mca, ua, ga);
+        const ratioPercentChange = getZPercent(ratioZscoreChange);
+        setRatio((mca / ua).toFixed(2));
         setRatioZscore(ratioZscoreChange.toFixed(2));
         setRatioPercent(ratioPercentChange.toFixed(0));
     }
-    function handleBars(){
-        if(ua && mca){
-            const gregorioUAZ =  getUAZscore_GregorioFormula(ga,ua).toFixed(2);
-            const gregorioUAP =  getZPercent(gregorioUAZ).toFixed(0);
-            const gregorioMCAZ =  getMCAZscore_GregorioFormula(ga,mca).toFixed(2);
-            const gregorioMCAP =  getZPercent(gregorioMCAZ).toFixed(0);
-            setClinicUAZscore(uaZscore);
-            setClinicUAPercent(uaPercent);
-            setClinicMCAZscore(mcaZscore);
-            setClinicMCAPercent(mcaPercent);
+    function handleBars() {
+        if (ua && mca) {
+            const gregorioUAZ = getUAZscore_GregorioFormula(ga, ua).toFixed(2);
+            const gregorioUAP = getZPercent(gregorioUAZ).toFixed(0);
+            const gregorioMCAZ = getMCAZscore_GregorioFormula(ga, mca).toFixed(2);
+            const gregorioMCAP = getZPercent(gregorioMCAZ).toFixed(0);
             setGregorioUAZscore(gregorioUAZ);
             setGregorioUAPercent(gregorioUAP);
             setGregorioMCAZscore(gregorioMCAZ);
@@ -72,17 +64,17 @@ export default function HemodinamicStudio(props) {
             displayBar(gregorioUAP, 'percentile-bar-hemo-gregorio-ua');
             displayBar(gregorioMCAP, 'percentile-bar-hemo-gregorio-mca');
             displayBar(ratioPercent, 'percentile-bar-hemo-clinic-ratio');
-        }else if(mca){
-            const gregorioMCAZ =  getMCAZscore_GregorioFormula(ga,mca).toFixed(2);
-            const gregorioMCAP =  getZPercent(gregorioMCAZ).toFixed(0);
+        } else if (mca) {
+            const gregorioMCAZ = getMCAZscore_GregorioFormula(ga, mca).toFixed(2);
+            const gregorioMCAP = getZPercent(gregorioMCAZ).toFixed(0);
             setGregorioMCAZscore(gregorioMCAZ);
             setGregorioMCAPercent(gregorioMCAP);
             displayBar(gregorioMCAP, 'percentile-bar-hemo-gregorio-mca');
             displayBar(mcaPercent, 'percentile-bar-hemo-clinic-mca');
 
-        }else if(ua){
-            const gregorioUAZ =  getUAZscore_GregorioFormula(ga,ua).toFixed(2);
-            const gregorioUAP =  getZPercent(gregorioUAZ).toFixed(0);
+        } else if (ua) {
+            const gregorioUAZ = getUAZscore_GregorioFormula(ga, ua).toFixed(2);
+            const gregorioUAP = getZPercent(gregorioUAZ).toFixed(0);
             setGregorioUAZscore(gregorioUAZ);
             setGregorioUAPercent(gregorioUAP);
             displayBar(uaPercent, 'percentile-bar-hemo-clinic-ua');
@@ -91,6 +83,16 @@ export default function HemodinamicStudio(props) {
     }
     useEffect(() => {
         setGa((props.weeks) + props.days / 7);
+        if(ua){
+            props.setUA(ua);
+        }else{
+            setUA(props.ua);
+        }
+        if(mca){
+            props.setMCA(mca)
+        }else{
+            setMCA(props.mca);
+        }
         handleBars();
     })
 
@@ -108,10 +110,10 @@ export default function HemodinamicStudio(props) {
                                 step={0.1}
                                 value={ua}
                                 onChange={handleUAChange} />
-                                <div className="scores">
-                                    <span id="ua-zscore">{uaZscore}z</span>
-                                    <span id="ua-p">{uaPercent}p</span>
-                                </div>
+                            <div className="scores">
+                                <span id="ua-zscore">{uaZscore}z</span>
+                                <span id="ua-p">{uaPercent}p</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -126,10 +128,10 @@ export default function HemodinamicStudio(props) {
                                 step={0.1}
                                 value={mca}
                                 onChange={handleMCAChange} />
-                                <div className="scores">
-                                    <span id="mca-zscore">{mcaZscore} z</span>
-                                    <span id="mca-p">{mcaPercent} p</span>
-                                </div>
+                            <div className="scores">
+                                <span id="mca-zscore">{mcaZscore} z</span>
+                                <span id="mca-p">{mcaPercent} p</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -141,18 +143,18 @@ export default function HemodinamicStudio(props) {
                                 className='read-only-number'
                                 type='number'
                                 readOnly
-                                value={ratio}/>
-                                <div className="scores">
-                                    <span id="ca-zscore">{ratioZscore} z</span>
-                                    <span id="ca-p">{ratioPercent} p</span>
-                                </div>
+                                value={ratio === 0 ? null : ratio} />
+                            <div className="scores">
+                                <span id="ca-zscore">{ratio === 0 ? null : ratioZscore} z</span>
+                                <span id="ca-p">{ratio === 0 ? null : ratioPercent} p</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div id="right-hemodinamic">
                 <div class="single-hemodinamic-displayer">
-                    <p style={{ fontStyle: 'italic',display: 'block', textAlign: 'left' }}>{t('own_formula_clinic_ua')}: (p{uaPercent}) ({uaZscore}z)</p>
+                    <p style={{ fontStyle: 'italic', display: 'block', textAlign: 'left' }}>{t('own_formula_clinic_ua')}: (p{uaPercent}) ({uaZscore}z)</p>
                     <div className='percentile-table-container'>
                         <span className='meter percentile-bar-container'>
                             <span className='percentile-bar-content' id='percentile-bar-hemo-clinic-ua'>
@@ -162,7 +164,7 @@ export default function HemodinamicStudio(props) {
                     </div>
                 </div>
                 <div class="single-hemodinamic-displayer">
-                    <p style={{ fontStyle: 'italic',display: 'block', textAlign: 'left' }}>{t('own_formula_gregorio_ua')}: (p{gregorioUAPercent}) ({gregorioUAZscore}z)</p>
+                    <p style={{ fontStyle: 'italic', display: 'block', textAlign: 'left' }}>{t('own_formula_gregorio_ua')}: (p{gregorioUAPercent}) ({gregorioUAZscore}z)</p>
                     <div className='percentile-table-container'>
                         <span className='meter percentile-bar-container'>
                             <span className='percentile-bar-content' id='percentile-bar-hemo-gregorio-ua'>
@@ -172,7 +174,7 @@ export default function HemodinamicStudio(props) {
                     </div>
                 </div>
                 <div class="single-hemodinamic-displayer">
-                    <p style={{ fontStyle: 'italic',display: 'block', textAlign: 'left' }}>{t('own_formula_clinic_mca')}: (p{mcaPercent}) ({mcaZscore}z)</p>
+                    <p style={{ fontStyle: 'italic', display: 'block', textAlign: 'left' }}>{t('own_formula_clinic_mca')}: (p{mcaPercent}) ({mcaZscore}z)</p>
                     <div className='percentile-table-container'>
                         <span className='meter percentile-bar-container'>
                             <span className='percentile-bar-content' id='percentile-bar-hemo-clinic-mca'>
@@ -182,7 +184,7 @@ export default function HemodinamicStudio(props) {
                     </div>
                 </div>
                 <div class="single-hemodinamic-displayer">
-                    <p style={{ fontStyle: 'italic',display: 'block', textAlign: 'left' }}>{t('own_formula_gregorio_mca')}: (p{gregorioMCAPercent}) ({gregorioMCAZscore}z)</p>
+                    <p style={{ fontStyle: 'italic', display: 'block', textAlign: 'left' }}>{t('own_formula_gregorio_mca')}: (p{gregorioMCAPercent}) ({gregorioMCAZscore}z)</p>
                     <div className='percentile-table-container'>
                         <span className='meter percentile-bar-container'>
                             <span className='percentile-bar-content' id='percentile-bar-hemo-gregorio-mca'>
@@ -192,7 +194,7 @@ export default function HemodinamicStudio(props) {
                     </div>
                 </div>
                 <div class="single-hemodinamic-displayer">
-                    <p style={{ fontStyle: 'italic',display: 'block', textAlign: 'left' }}>{t('own_formula_gregorio_ratio')}: (p{gregorioRatioPercent}) ({gregorioRatioZscore}z)</p>
+                    <p style={{ fontStyle: 'italic', display: 'block', textAlign: 'left' }}>{t('own_formula_gregorio_ratio')}: (p{gregorioRatioPercent}) ({gregorioRatioZscore}z)</p>
                     <div className='percentile-table-container'>
                         <span className='meter percentile-bar-container'>
                             <span className='percentile-bar-content' id='percentile-bar-hemo-clinic-ratio'>

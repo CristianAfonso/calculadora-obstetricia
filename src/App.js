@@ -21,6 +21,11 @@ function App() {
   const [days, setDays] = useState("");
   const [newWeeks, setNewWeeks] = useState("");
   const [newDays, setNewDays] = useState("");
+  const [mca, setMCA] = useState("");
+  const [ua, setUA] = useState("");
+  const [lcc, setLCCData] =   useState("");
+  const [dbp, setDBPData] =   useState("");
+  const [lf, setLFData] =   useState("");
   let GetTime = (timeWeeks, timeDays) => {
     setWeeks(timeWeeks);
     setDays(timeDays);
@@ -54,9 +59,14 @@ function App() {
         stopUpdateFUR={stopUpdateFUR} stopUpdateWeeksandDays={stopUpdateWeeksandDays}
         lastPeriodDateUpdated={lastPeriodDate} weeks={weeks} days={days}
         newPeriodDate={newPeriodDate} newWeeks={newWeeks} newDays={newDays}></Nav>
-      {actualComponent == "datation" && <Datation updateNewPeriod={setNewPeriodDate} GiveNewTime={GetNewTime} ecoDate={lastEcoDate} lastPeriodDate={lastPeriodDate} weeks={weeks} days={days} />}
-      {actualComponent == "biometric" && <Biometric weeks={weeks} days={days} />}
-      {actualComponent == "hemodinamic" && <Hemodinamic weeks={weeks} days={days} />}
+      {actualComponent == "datation" && <Datation updateNewPeriod={setNewPeriodDate} 
+        GiveNewTime={GetNewTime} ecoDate={lastEcoDate} lastPeriodDate={lastPeriodDate} 
+        setDBP={setDBPData} setLF={setLFData} setLCC={setLCCData} weeks={weeks} days={days} 
+        lcc={lcc} dbp={dbp} lf={lf}/>}
+      {actualComponent == "biometric" && <Biometric weeks={weeks} days={days} 
+        setMCA={setMCA} setUA={setUA} ua={ua} mca={mca}/>}
+      {actualComponent == "hemodinamic" && <Hemodinamic weeks={weeks} days={days} 
+        setMCA={setMCA} setUA={setUA} ua={ua} mca={mca}/>}
       {actualComponent == "bones" && <Bones weeks={weeks} days={days} />}
       {actualComponent == "lancet" && <Lancet weeks={weeks} days={days} />}
       {actualComponent == "unicvsmulti" && <Unicvsmulti weeks={weeks} days={days} />}

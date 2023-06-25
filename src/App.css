@@ -25,6 +25,11 @@ button:not(.react-datepicker__navigation, #dropdownMenuButton , .dropdown-item )
  .focus{
   background-color: #0187b9 !important;
  }
+ .read-only-number{
+   -webkit-appearance: none;
+   margin: 0;
+   -moz-appearance: textfield;
+ }
 /* 1.- Header */
 header{
   display: flex;
@@ -380,7 +385,7 @@ nav #navBar button:hover{
 }
 
 
-/*Biometric container*/
+/* 5.- Biometric container*/
 #biometric-container{
   width: 100%;
   display: flex;
@@ -529,7 +534,7 @@ nav #navBar button:hover{
   background-color: #0187b9 !important;
 }
 
-/** Hemodinamic styles **/
+/** 6.- Hemodinamic styles **/
 #hemodinamic-studio{
   display: flex;
   flex-direction: row;
@@ -538,20 +543,38 @@ nav #navBar button:hover{
   place-items: center;
 }
 #left-hemodinamic{
-  width: 50%;
+  width: 33%;
+  padding-right: 5%;
+}
+#center-hemodinamic{
+  padding-left: 2.5%;
+  padding-right: 2.5%;
+  width: 33%;
+
 }
 #right-hemodinamic{
-    padding-left: 5%;
-    height: 100%;
-    width: 50%;
-  }
-.read-only-number{
-  -webkit-appearance: none;
-  margin: 0;
-  -moz-appearance: textfield;
-
+  padding-left: 5%;
+  height: 100%;
+  width: 33%;
 }
 .single-hemodinamic-displayer p{
   margin-bottom: 0;
-  
+}
+.hemodinamic-single{
+  width: 100%;
+}
+#hemodinamic-studio .percentile-table-container{
+  padding-top: 0 !important;
+  padding-bottom: 10px;
+}
+.input span p{
+  margin: 15% auto;
+}
+.double-input{
+  display: flex;
+  flex-direction: column;
+}
+.double-input div{
+  display: flex;
+  flex-direction: row;
 }
