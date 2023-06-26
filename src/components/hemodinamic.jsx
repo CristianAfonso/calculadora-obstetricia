@@ -40,7 +40,6 @@ export default function Hemodinamic(props) {
                     <SystolicComponent ga={ga} />
                     <DuctusIsthmusComponent ga={ga} />
                 </div>
-
             </div>
         </div>
     );

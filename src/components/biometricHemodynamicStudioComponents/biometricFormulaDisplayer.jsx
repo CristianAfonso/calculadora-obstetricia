@@ -109,6 +109,12 @@ export default function BiometricFormulaDisplayer(props) {
     }
     useEffect(() => {
         setGa((props.weeks) + props.days / 7);
+        if(customWeight){
+            props.setCustomWeight(customWeight);
+        }else{
+            setCustomWeight(props.customWeight);
+            handleManualWeight();
+        }
         showSelectedHandler();
         setDBP(props.dbp);
         setCC(props.cc);

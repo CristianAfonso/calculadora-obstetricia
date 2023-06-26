@@ -21,6 +21,7 @@ function App() {
   const [days, setDays] = useState("");
   const [newWeeks, setNewWeeks] = useState("");
   const [newDays, setNewDays] = useState("");
+  const [weight, setWeight] = useState("");
   const [mca, setMCA] = useState("");
   const [ua, setUA] = useState("");
   const [lcc, setLCCData] =   useState("");
@@ -48,7 +49,8 @@ function App() {
     setNewPeriodDate("");
   }
   useEffect(() => {
-
+    setWeeks(weeks);
+    setDays(days);
   })
   return (
 
@@ -64,11 +66,11 @@ function App() {
         setDBP={setDBPData} setLF={setLFData} setLCC={setLCCData} weeks={weeks} days={days} 
         lcc={lcc} dbp={dbp} lf={lf}/>}
       {actualComponent == "biometric" && <Biometric weeks={weeks} days={days} 
-        setMCA={setMCA} setUA={setUA} ua={ua} mca={mca}/>}
+        setMCA={setMCA} setUA={setUA} ua={ua} mca={mca} weight={weight} setWeight={setWeight}/>}
       {actualComponent == "hemodinamic" && <Hemodinamic weeks={weeks} days={days} 
         setMCA={setMCA} setUA={setUA} ua={ua} mca={mca}/>}
       {actualComponent == "bones" && <Bones weeks={weeks} days={days} />}
-      {actualComponent == "lancet" && <Lancet weeks={weeks} days={days} />}
+      {actualComponent == "lancet" && <Lancet weeks={weeks} days={days} weight={weight} setWeight={setWeight}/>}
       {actualComponent == "unicvsmulti" && <Unicvsmulti weeks={weeks} days={days} />}
     </div>
   );

@@ -147,7 +147,7 @@ export const cc_mean = (ga) => {
 }
 
 export const cc_sd = (ga) => {
-    let sd = 1.98735 + 0.0136772 * Math.pow(ga, 3) - 0.00726264 * Math.pow(ga, 3) * Math.log(ga) + 0.000976253 * ga * ga * ga * Math.pow((Math.log(ga)), 2);
+    let sd = 1.98735 + 0.0136772 * Math.pow(ga, 3) - 0.00726264 * Math.pow(ga, 3) * Math.log(ga) + 0.000976253 * Math.pow(ga,3) * Math.pow((Math.log(ga)), 2);
     return sd;
 }
 export const ca_mean = (ga) => {
@@ -303,25 +303,25 @@ const ua_sd = (ga) => {
 }
 
 const mca_mean = (ga) => {
-	const mean = -2.7317 + (0.3335 * ga) - (0.0058 * ga * ga);
+	const mean = -2.7317 + (0.3335 * ga) - (0.0058 * Math.pow(ga,2));
 	return mean;
 }
 
 const mca_sd = (ga) => {
-	const sd = -0.88005 + (0.08182 * ga) - (0.00133 * ga * ga);
+	const sd = -0.88005 + (0.08182 * ga) - (0.00133 * Math.pow(ga,2));
 	return sd;
 }
 const cpr_mean = (ga)  => {
-	const mean = -4.0636 + (0.383 * ga) - (0.0059 * ga * ga);
+	const mean = -4.0636 + (0.383 * ga) - (0.0059 * Math.pow(ga,2));
 	return mean;
 }
 
 const cpr_sd = (ga)  => {
-	const sd = -0.9664 + (0.09027 * ga) - (0.0014 * ga * ga);
+	const sd = -0.9664 + (0.09027 * ga) - (0.0014 * Math.pow(ga,2));
 	return sd;
 }
 const avpi_mean = (ga) => {
-	const mean = 1.39 - (0.012 * ga) + (0.0000198 * ga * ga);
+	const mean = 1.39 - (0.012 * ga) + (0.0000198 * Math.pow(ga,2));
 	return mean;
 }
 const avpi_sd = (ga) => {
@@ -407,5 +407,119 @@ export const getAIZscore = (ga, ai) => {
     const mean = aipi_mean(ga);
 	const sd = aipi_sd(ga);
 	const zscore = (ai - mean) / sd; 
+    return zscore;
+}
+
+// BONES 
+const hum_mean = (ga)  => {
+	const mean = (11.459 * ga - 2.2362 * ga * Math.log(ga) - 63.704);
+	return mean;
+}
+
+const hum_sd = (ga)  => {
+	const sd = (0.040292 * ga + 1.3464);
+	return sd;
+}
+
+const cub_mean = (ga)  => {
+	const mean = (11120 / (Math.pow(ga,2))) - (2146.3 / ga) + 108.94;
+	return mean;
+}
+
+const cub_sd = (ga)  => {
+	const sd = 0.049218 * ga + 1.2021;
+	return sd;
+}
+
+const rad_mean = (ga)  => {
+	const mean = (7983 / (Math.pow(ga,2))) - (1698.6 / ga) + 91.634;
+	return mean;
+}
+
+const rad_sd = (ga)  => {
+	const sd = 0.046386 * ga + 1.1933;
+	return sd;
+}
+
+const fem_mean = (ga)  => {
+	const mean = 3.4162 * ga - 0.0004791 * Math.pow(ga,3) - 32.425;
+	return mean;
+}
+
+const fem_sd = (ga)  => {
+	const sd = 0.058328 * ga + 1.0605;
+	return sd;
+}
+
+const fib_mean = (ga) => {
+	const mean = (13697 / (Math.pow(ga,2))) - (2458.0 / ga) + 116.51;
+	return mean;
+}
+
+const fib_sd = (ga) => {
+	const sd = 0.053841 * ga + 1.0451;
+	return sd;
+}
+const tib_mean = (ga) => {
+	const mean = (14451 / (Math.pow(ga,2))) - (2553.2 / ga) + 120.05;
+	return mean;
+}
+
+const tib_sd = (ga) => {
+	const sd = 0.049978 * ga + 1.1102;
+	return sd;
+}
+
+
+const foot_mean = (ga) => {
+	const mean = 0.36909 * Math.pow(ga,2) - 0.084175 * Math.pow(ga,2) * Math.log(ga) - 14.158;
+	return mean;
+}
+
+const foot_sd = (ga) => {
+	const sd = 0.10865 * ga + 0.27971;
+	return sd;
+}
+export const getHumerusZscore = (ga, humerusValue) => {
+    const mean = hum_mean(ga);
+	const sd = hum_sd(ga);
+	const zscore = (humerusValue - mean) / sd;
+    return zscore;
+}
+export const getUlnaZscore = (ga, ulnaValue) => {
+    const mean = cub_mean(ga);
+	const sd = cub_sd(ga);
+	const zscore = (ulnaValue - mean) / sd;
+    return zscore;
+}
+export const getRadiusZscore = (ga, radiusValue) => {
+    const mean = rad_mean(ga);
+	const sd = rad_sd(ga);
+	const zscore = (radiusValue - mean) / sd;
+    return zscore;
+}
+
+export const getFemurZscore = (ga, femurValue) => {
+    const mean = fem_mean(ga);
+	const sd = fem_sd(ga);
+	const zscore = (femurValue - mean) / sd;
+    return zscore;
+}
+export const getTibiaZscore = (ga, tibiaValue) => {
+    const mean = tib_mean(ga);
+	const sd = tib_sd(ga);
+	const zscore = (tibiaValue - mean) / sd;
+    return zscore;
+}
+export const getFibulaZscore = (ga, fibulaValue) => {
+    const mean = fib_mean(ga);
+	const sd = fib_sd(ga);
+	const zscore = (fibulaValue - mean) / sd;
+    return zscore;
+}
+export const getFootZscore = (ga, footValue) => {
+    const mean = foot_mean(ga);
+	const sd = foot_sd(ga);
+	const zscore = (footValue - mean) / sd;
     return zscore;
 }

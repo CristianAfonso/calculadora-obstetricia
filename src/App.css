@@ -578,3 +578,22 @@ nav #navBar button:hover{
   display: flex;
   flex-direction: row;
 }
+
+/**
+* BONES
+*/
+#bones-studio{
+  padding-top: 5%;
+  display: flex;
+  flex-direction: row;
+  place-items: center;
+}
+#leg-bones{
+width: 50%;
+padding-left: 5%;
+border-left: 1px solid #bbb;
+}
+#hand-bones{
+width: 50%;
+padding-right: 5%;
+}

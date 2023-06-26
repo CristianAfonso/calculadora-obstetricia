@@ -13,6 +13,7 @@ export default function Biometric(props) {
     const [ua, setUA] = useState(props.ua);
     const [mca, setMCA] = useState(props.mca);
     const [arterialRatio, setArterialRatio] = useState("");
+    const [customWeight, setCustomWeight] = useState("");
 
     /*
     const [handler, setHandler] = useState("");
@@ -22,7 +23,6 @@ export default function Biometric(props) {
     const [hadlock3Weight, setHL3Weight] = useState("");
     const [hadlock3Weeks, setHL3Weeks] = useState("");
     const [hadlock3Days, setHL3Days] = useState("");
-    const [customWeight, setCustomWeight] = useState("");
     const [gregorioCustomPercentile, setGregorioCustomPercentile] = useState("");
     const [gregorioCustomWeight, setGregorioCustomWeight] = useState("");
     const [gregorioCustomZscore, setGregorioCustomZscore] = useState("");
@@ -34,17 +34,22 @@ export default function Biometric(props) {
     const { t } = useTranslation();
 
     useEffect(() => {
-        if(ua){
+        if (ua) {
             props.setUA(ua);
-        }else{
+        } else {
             setUA(props.ua);
         }
-        if(mca){
+        if (mca) {
             props.setMCA(mca)
-        }else{
+        } else {
             setMCA(props.mca);
         }
-        setArterialRatio((props.mca/props.ua).toFixed(2))
+        if(customWeight){
+            props.setWeight(customWeight);
+        }else{
+            setCustomWeight(props.weight);
+        }
+        setArterialRatio((props.mca / props.ua).toFixed(2))
         setWeeks(props.weeks);
         setDays(props.days);
     });
@@ -61,12 +66,15 @@ export default function Biometric(props) {
             <h2>{t('Biometric_title')}</h2>
             <div className='service-content'>
                 <div id='biometric-container'>
-                    <BiometricDataInput cc={setCC} dbp={setDBP} lf={setLF} ca={setCA} weeks={weeks} days={days} />
-                    <BiometricFormulaDisplay cc={cc} dbp={dbp} lf={lf} ca={ca} weeks={weeks} days={days} />
+                    <BiometricDataInput cc={setCC} dbp={setDBP} lf={setLF} 
+                    ca={setCA} weeks={weeks} days={days} />
+                    <BiometricFormulaDisplay cc={cc} dbp={dbp} lf={lf} ca={ca} 
+                    setCustomWeight={setCustomWeight} customWeight={customWeight}
+                    weeks={weeks} days={days} />
                 </div>
             </div>
             <h2>{t('Hemodinamic_title')}</h2>
-            <HemodinamicStudio  setMCA={setMCA} setUA={setUA} weeks={weeks} days={days} ua={ua} mca={mca}/>
+            <HemodinamicStudio setMCA={setMCA} setUA={setUA} weeks={weeks} days={days} ua={ua} mca={mca} />
         </div>
     );
 }

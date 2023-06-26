@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from "react-i18next";
+import HandBones from './bonesComponents/handBonesComponent';
+import LegBones from './bonesComponents/legBonesComponent';
+export default function Bones(props) {
+    const [ga, setGa] = useState((props.weeks) + props.days / 7);
+    const { t } = useTranslation();
 
-export default function Bones(props){
-    const {t} = useTranslation();
-    return(
+    useEffect(() =>{
+        setGa((props.weeks) + props.days / 7);
+    })
+    return (
         <div className="service-container">
             <div className='title-container'>
                 <h3>{t('bones')}</h3>
@@ -12,8 +18,9 @@ export default function Bones(props){
                     <p>{t('days')}: {props.days}</p>
                 </div>
             </div>
-            <div className='service-content'>
-                
+            <div id="bones-studio">
+                <HandBones ga={ga} />
+                <LegBones ga={ga} />
             </div>
         </div>
     );
