@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/calculadora-obstetricia/static/css/main.a00ce900.css",
-    "main.js": "/calculadora-obstetricia/static/js/main.75d29313.js",
+    "main.css": "/calculadora-obstetricia/static/css/main.6408c2e3.css",
+    "main.js": "/calculadora-obstetricia/static/js/main.2f5eecb4.js",
     "static/js/787.864fe9aa.chunk.js": "/calculadora-obstetricia/static/js/787.864fe9aa.chunk.js",
     "static/media/fachada2.png": "/calculadora-obstetricia/static/media/fachada2.9de7d301d96779d71e21.png",
     "static/media/do.svg": "/calculadora-obstetricia/static/media/do.3ecb625b75ec64be4376.svg",
@@ -272,12 +272,12 @@
     "static/media/pl.svg": "/calculadora-obstetricia/static/media/pl.cd835d05865e496ff6b8.svg",
     "static/media/de.svg": "/calculadora-obstetricia/static/media/de.6435bf24d148ca7248e7.svg",
     "static/media/bd.svg": "/calculadora-obstetricia/static/media/bd.0ad8c443ef4d47ea0497.svg",
-    "main.a00ce900.css.map": "/calculadora-obstetricia/static/css/main.a00ce900.css.map",
-    "main.75d29313.js.map": "/calculadora-obstetricia/static/js/main.75d29313.js.map",
+    "main.6408c2e3.css.map": "/calculadora-obstetricia/static/css/main.6408c2e3.css.map",
+    "main.2f5eecb4.js.map": "/calculadora-obstetricia/static/js/main.2f5eecb4.js.map",
     "787.864fe9aa.chunk.js.map": "/calculadora-obstetricia/static/js/787.864fe9aa.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.a00ce900.css",
-    "static/js/main.75d29313.js"
+    "static/css/main.6408c2e3.css",
+    "static/js/main.2f5eecb4.js"
   ]
 }
