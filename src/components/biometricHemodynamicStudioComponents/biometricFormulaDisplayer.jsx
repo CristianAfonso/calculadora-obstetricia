@@ -21,7 +21,7 @@ export default function BiometricFormulaDisplayer(props) {
     const [clinicCustomPercentile, setClinicCustomPercentile] = useState("");
     const [clinicCustomWeight, setClinicCustomWeight] = useState("");
     const [clinicCustomZscore, setClinicCustomZscore] = useState("");
-    const [genre, setGenre] = useState("male");
+    const [genre, setGenre] = useState(props.genre);
     const { t } = useTranslation();
 
     function handleCustomWeightChange(event) {
@@ -30,6 +30,7 @@ export default function BiometricFormulaDisplayer(props) {
     }
     function handleSelectGenre(event) {
         setGenre(event.target.value);
+        props.setGenre(event.target.value);
         if (event.target.value === t('male')) {
             document.getElementById("female-selector").className = 'genreSelector';
             document.getElementById("male-selector").className = 'genreSelector focus';

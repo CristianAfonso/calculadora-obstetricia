@@ -1,4 +1,3 @@
-import { useTranslation } from "react-i18next";
 export const displayBar = (percentile, elementId) => {
     if (percentile > 0 && percentile < 100) {
         if (percentile > 10 && percentile < 90) {
@@ -169,10 +168,15 @@ export const lf_sd = (ga) => {
     let sd = Math.pow(Math.E, 0.605843 - 42.0014 * Math.pow(ga, -2) + 0.00000917972 * Math.pow(ga, 3));
     return sd;
 }
-
+const calculateHadlock = (ga) => {
+	return Math.exp(0.578 + (0.332 * ga) - (0.00354* Math.pow(ga,2)));
+}
+const expectedHadlock = () => {
+    return calculateHadlock(40.5);
+}
 export const EFW_Hadlock2Weight = (ac, hc, fl) => {
     const efw = hadlock2_mean(ac, hc, fl);
-    const ds = hadlock2_sd(efw);
+    //const ds = hadlock2_sd(efw);
     return efw;
 }
 export const EFW_Hadlock2Age = (ac, hc, fl) => {
@@ -192,7 +196,7 @@ const hadlock2_mean = (ac, hc, fl) => {
     const efw = Math.pow(10, 1.326 - (0.00326 * ac / 10 * fl / 10) + (0.0107 * hc / 10) + (0.0438 * ac / 10) + (0.158 * fl / 10));
     return efw;
 }
-
+/*
 const hadlock2_sd = (efw) => {
     if (efw < 1500) {
         return 109.0;
@@ -210,7 +214,7 @@ const hadlock2_sd = (efw) => {
         return 382.0;
     }
 }
-
+*/
 export const hadlock3 = (ac, fl, bpd) => {
     const efw = Math.pow(10, 1.335 - (0.0034 * ac / 10 * fl / 10) + (0.0316 * bpd / 10) + (0.0457 * ac / 10) + (0.1623 * fl / 10));
     return efw;
@@ -221,30 +225,113 @@ export const hospitalGetWeight = (ga, genre, hospital) => {
         genre = 'male';
     }
     let genreValue = 0;
+    let expectedWeight = 0;
     switch (hospital) {
         case "gregorio":
-            const eg = 0.00920217;
-            const eg2 = 0.00645354;
-            const eg3 = -0.00010245;
+            const eg = 0.00920217;        //Estandarizar
+            const eg2 = 0.00645354;        //Estandarizar
+            const eg3 = -0.00010245;        //Estandarizar
             if (genre === "male") {
-                genreValue = 0.03942451;
+                genreValue = 0.03942451;        //Estandarizar
             }
-            const constant = 3.9486685;
-            return constant + (eg * ga) + (eg2 * Math.pow(ga, 2)) + (eg3 * Math.pow(ga, 3)) + (genreValue);
+            const constant = 3.9486685;        //Estandarizar
+            expectedWeight =  constant + (eg * ga) + (eg2 * Math.pow(ga, 2)) + (eg3 * Math.pow(ga, 3)) + (genreValue);
+            break;
+        case "gregorio2":
+            if (genre === "male") {
+                genreValue  = 3440.23;        //Estandarizar
+            }else{
+                genreValue  = 3308.16;        //Estandarizar
+            }
+            expectedWeight = (calculateHadlock(ga)*(genreValue/expectedHadlock()));
+            break;
+        case "fuenlabrada":
+            if (genre === "male") {
+                genreValue  = 3394.11;        //Estandarizar
+            }else{
+                genreValue  = 3271.64;        //Estandarizar
+            }
+            expectedWeight = (calculateHadlock(ga)*(genreValue/expectedHadlock()));
+            break;
+        case "talavera":
+            if (genre === "male") {
+                genreValue  = 3480.33;        //Estandarizar
+            }else{
+                genreValue  = 3326.044;        //Estandarizar
+            }
+            expectedWeight = (calculateHadlock(ga)*(genreValue/expectedHadlock()));
+            break;
+        case "alcazar":
+            if (genre === "male") {
+                genreValue  = 3411.61;        //Estandarizar
+            }else{
+                genreValue = 2365.1;      //Estandarizar
+            }
+            expectedWeight = (calculateHadlock(ga)*(genreValue/expectedHadlock()));
+            break;
         case "clinic":
             if (genre === 'male') {
-                genreValue = Math.round(3431.640);
+                genreValue = Math.round(3431.640);        //Estandarizar
             } else {
-                genreValue = Math.round(3431.640 - 103.056);
+                genreValue = Math.round(3431.640 - 103.056);        //Estandarizar
             }
-            const mean_weight = genreValue * (2.991 - (ga * 0.3185) + (Math.pow(ga, 2) * 0.01094) - (Math.pow(ga, 3) * 0.0001055));
-            return mean_weight;
+            expectedWeight = genreValue * (2.991 - (ga * 0.3185) + (Math.pow(ga, 2) * 0.01094) - (Math.pow(ga, 3) * 0.0001055));
+            break;
         default:
-            return 2;
+            return 0;
     }
+    return expectedWeight;
 }
+const hospitalAuxSD = (expectedWeight, genre, hospital) => {
+    let genreValue = 0;
+    let genreMean = 0;
+    let sd = 0;
+    switch (hospital) {
+        case "gregorio2":
+            if (genre === "male") {
+                genreValue  = 394.7;        //Estandarizar
+                genreMean   = 3440.23;        //Estandarizar
+            }else{
+                genreValue  = 381.5;        //Estandarizar
+                genreMean = 3308.16;        //Estandarizar
+            }
+            break;
+        case "fuenlabrada":
+            if (genre === "male") {
+                genreValue  = 390.38;        //Estandarizar
+                genreMean   = 3394.11;        //Estandarizar
+            }else{
+                genreValue  = 378.25;        //Estandarizar
+                genreMean = 3271.64;        //Estandarizar
+            }
+            break;
+        case "talavera":
+            if (genre === "male") {
+                genreValue  = 395.4;        //Estandarizar
+                genreMean   = 3480.33;        //Estandarizar
+            }else{
+                genreValue  =  415.98;        //Estandarizar
+                genreMean = 3326.044;        //Estandarizar
+            }
+            break;
+        case "alcazar":
+            if (genre === "male") {
+                genreValue  = 378.325;        //Estandarizar
+                genreMean   = 3411.61;        //Estandarizar
+            }else{
+                genreValue  = 377.65;        //Estandarizar
+                genreMean = 2365.1;        //Estandarizar
+            }
+            break;
+        default:
+            return null;
 
-export const hospitalGetZscore = (weight, referenceWeight, hospital) => {
+            
+    }
+    sd = expectedWeight * (genreValue/genreMean);
+    return sd;
+}
+export const hospitalGetZscore = (weight, referenceWeight, hospital, genre) => {
     switch (hospital) {
         case "gregorio":
             const mse = 0.12801644;
@@ -256,7 +343,8 @@ export const hospitalGetZscore = (weight, referenceWeight, hospital) => {
             const zScore = (error - referenceWeight) / standardDeviation;
             return zScore;
         default:
-            return 0;
+            const zscore = (weight - referenceWeight)/hospitalAuxSD(referenceWeight, genre, hospital);
+            return zscore;
     }
 }
 	/*
@@ -523,3 +611,6 @@ export const getFootZscore = (ga, footValue) => {
 	const zscore = (footValue - mean) / sd;
     return zscore;
 }
+
+// Lancet
+

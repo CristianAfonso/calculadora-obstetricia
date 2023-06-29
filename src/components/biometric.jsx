@@ -14,6 +14,7 @@ export default function Biometric(props) {
     const [mca, setMCA] = useState(props.mca);
     const [arterialRatio, setArterialRatio] = useState("");
     const [customWeight, setCustomWeight] = useState("");
+    const [genre, setGenre] = useState(props.genre);
 
     /*
     const [handler, setHandler] = useState("");
@@ -29,7 +30,6 @@ export default function Biometric(props) {
     const [clinicCustomPercentile, setClinicCustomPercentile] = useState("");
     const [clinicCustomWeight, setClinicCustomWeight] = useState("");
     const [clinicCustomZscore, setClinicCustomZscore] = useState("");
-    const [genre, setGenre] = useState("male");
     */
     const { t } = useTranslation();
 
@@ -49,6 +49,7 @@ export default function Biometric(props) {
         }else{
             setCustomWeight(props.weight);
         }
+        setGenre(props.genre);
         setArterialRatio((props.mca / props.ua).toFixed(2))
         setWeeks(props.weeks);
         setDays(props.days);
@@ -70,7 +71,7 @@ export default function Biometric(props) {
                     ca={setCA} weeks={weeks} days={days} />
                     <BiometricFormulaDisplay cc={cc} dbp={dbp} lf={lf} ca={ca} 
                     setCustomWeight={setCustomWeight} customWeight={customWeight}
-                    weeks={weeks} days={days} />
+                    weeks={weeks} days={days} genre={genre} setGenre={props.setGenre}/>
                 </div>
             </div>
             <h2>{t('Hemodinamic_title')}</h2>

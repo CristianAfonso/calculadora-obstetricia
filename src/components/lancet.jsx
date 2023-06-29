@@ -1,22 +1,38 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from "react-i18next";
-import { displayBar, getZPercent, EFW_Hadlock2Weight, EFW_Hadlock2Age, EFW_Hadlock3Weight, EFW_Hadlock3Age, hospitalGetWeight, hospitalGetZscore } from "./functions";
+import { displayBar, getZPercent, hospitalGetWeight, hospitalGetZscore } from "./functions";
 export default function Lancet(props) {
     const [ga, setGa] = useState((props.weeks) + props.days / 7);
     const [weight, setWeight] = useState("");
     const [gregorioCustomPercentile, setGregorioCustomPercentile] = useState("");
-    const [gregorioWeight, setGregorioWeight] = useState("");
+    const [gregorioWeight, setGregorioCustomWeight] = useState("");
     const [gregorioCustomZscore, setGregorioCustomZscore] = useState("");
     const [clinicCustomPercentile, setClinicCustomPercentile] = useState("");
     const [clinicWeight, setClinicWeight] = useState("");
     const [clinicCustomZscore, setClinicCustomZscore] = useState("");
-    const [genre, setGenre] = useState("male");
+    const [lancetGregorioPercentile, setGregorioPercentile] = useState("");
+    const [lancetGregorioWeight, setGregorioWeight] = useState("");
+    const [lancetGregorioZscore, setGregorioZscore] = useState("");
+    const [talaveraPercentile, setTalaveraPercentile] = useState("");
+    const [talaveraWeight, setTalaveraWeight] = useState("");
+    const [talaveraZscore, setTalaveraZscore] = useState("");
+    const [fuenlabradaPercentile, setFuenlabradaPercentile] = useState("");
+    const [fuenlabradaWeight, setFuenlabradaWeight] = useState("");
+    const [fuenlabradaZscore, setFuenlabradaZscore] = useState("");
+    const [alcazarPercentile, setAlcazarPercentile] = useState("");
+    const [alcazarWeight, setAlcazarWeight] = useState("");
+    const [alcazarZscore, setAlcazarZscore] = useState("");
+    const [genre, setGenre] = useState("");
     const { t } = useTranslation();
 
     function handleweightChange(event) {
         setWeight(event.target.value);
         handleGregorioChanges(event.target.value);
         handleClinicChanges(event.target.value);
+        handleGregorioLancetChanges(event.target.value);
+        handleTalaveraLancetChanges(event.target.value);
+        handleAlcazarLancetChanges(event.target.value);
+        handleFuenlabradaLancetChanges(event.target.value);
     }
     function handleSelectGenre(event) {
         setGenre(event.target.value);
@@ -32,7 +48,7 @@ export default function Lancet(props) {
         const gregorioReferenceWeight = hospitalGetWeight(ga, genre, "gregorio");
         const gregorioCalculatedZscore = hospitalGetZscore(weight, gregorioReferenceWeight, "gregorio");
         const gregorioPercent = getZPercent(gregorioCalculatedZscore);
-        setGregorioWeight(Math.exp(gregorioReferenceWeight).toFixed(2));
+        setGregorioCustomWeight(Math.exp(gregorioReferenceWeight).toFixed(2));
         setGregorioCustomZscore(gregorioCalculatedZscore.toFixed(2));
         setGregorioCustomPercentile(gregorioPercent.toFixed(0));
         displayBar(gregorioPercent.toFixed(0), 'percentile-bar-bio-gregorio');
@@ -46,14 +62,65 @@ export default function Lancet(props) {
         setClinicCustomPercentile(clinicPercent.toFixed(0));
         displayBar(clinicPercent.toFixed(0), 'percentile-bar-bio-clinic');
     }
+    function handleGregorioLancetChanges(weight) {
+        const gregorioReferenceWeight = hospitalGetWeight(ga, genre, "gregorio2");
+        const gregorioCalculatedZscore = hospitalGetZscore(weight, gregorioReferenceWeight, "gregorio2",genre);
+        const gregorioPercent = getZPercent(gregorioCalculatedZscore);
+        setGregorioWeight(gregorioReferenceWeight.toFixed(2));
+        setGregorioZscore(gregorioCalculatedZscore.toFixed(2));
+        setGregorioPercentile(gregorioPercent.toFixed(0));
+        displayBar(gregorioPercent.toFixed(0), 'percentile-bar-bio-gregorio-lancet');
+    }
+    function handleTalaveraLancetChanges(weight) {
+        const referenceWeight = hospitalGetWeight(ga, genre, "talavera");
+        const calculatedZscore = hospitalGetZscore(weight, referenceWeight, "talavera",genre);
+        const percent = getZPercent(calculatedZscore);
+        setTalaveraWeight(referenceWeight.toFixed(2));
+        setTalaveraZscore(calculatedZscore.toFixed(2));
+        setTalaveraPercentile(percent.toFixed(0));
+        displayBar(percent.toFixed(0), 'percentile-bar-bio-talavera-lancet');
+    }
+    function handleFuenlabradaLancetChanges(weight) {
+        const referenceWeight = hospitalGetWeight(ga, genre, "fuenlabrada");
+        const calculatedZscore = hospitalGetZscore(weight, referenceWeight, "fuenlabrada",genre);
+        const percent = getZPercent(calculatedZscore);
+        setFuenlabradaWeight(referenceWeight.toFixed(2));
+        setFuenlabradaZscore(calculatedZscore.toFixed(2));
+        setFuenlabradaPercentile(percent.toFixed(0));
+        displayBar(percent.toFixed(0), 'percentile-bar-bio-fuenlabrada-lancet');
+    }
+    function handleAlcazarLancetChanges(weight) {
+        const referenceWeight = hospitalGetWeight(ga, genre, "alcazar");
+        const calculatedZscore = hospitalGetZscore(weight, referenceWeight, "alcazar",genre);
+        const percent = getZPercent(calculatedZscore);
+        setAlcazarWeight(referenceWeight.toFixed(2));
+        setAlcazarZscore(calculatedZscore.toFixed(2));
+        setAlcazarPercentile(percent.toFixed(0));
+        displayBar(percent.toFixed(0), 'percentile-bar-bio-alcazar-lancet');
+    }
     useEffect(() => {
         setGa((props.weeks) + props.days / 7);
+        if (!genre) {
+            setGenre(props.genre);
+        } else {
+            props.setGenre(genre);
+        }
         if (weight) {
             props.setWeight(weight);
+            handleGregorioChanges(weight);
+            handleClinicChanges(weight);
+            handleGregorioLancetChanges(weight);
+            handleTalaveraLancetChanges(weight);
+            handleAlcazarLancetChanges(weight);
+            handleFuenlabradaLancetChanges(weight);
         } else {
             setWeight(props.weight);
             handleGregorioChanges(props.weight);
             handleClinicChanges(props.weight);
+            handleGregorioLancetChanges(props.weight);
+            handleTalaveraLancetChanges(props.weight);
+            handleAlcazarLancetChanges(props.weight);
+            handleFuenlabradaLancetChanges(props.weight);
         }
     });
 
@@ -67,7 +134,7 @@ export default function Lancet(props) {
                 </div>
             </div>
             <div className='service-content'>
-                <div className=''>
+                <div className='left-lancet'>
                     <span>
                         {t('weight')}
                         <input
@@ -80,23 +147,57 @@ export default function Lancet(props) {
                         <button className="genreSelector" id="male-selector" onClick={handleSelectGenre} value="male">{t('male')}</button>
                         <button className="genreSelector" id="female-selector" onClick={handleSelectGenre} value="female">{t('female')}</button>
                     </span>
-                    <tr className='percentile-table-container'>
+                    <div className='percentile-table-container'>
+                        <p style={{ fontStyle: 'italic' }}>{t('own_formula_gregorio')} (p{gregorioCustomPercentile}) ({gregorioWeight}g) ({gregorioCustomZscore}z)</p>
                         <span className='meter percentile-bar-container'>
                             <span className='percentile-bar-content' id='percentile-bar-bio-gregorio'>
                                 <p>p{gregorioCustomPercentile}</p>
                             </span>
                         </span>
-                    </tr>
-                    <tr className='percentile-table-container'>
+                    </div>
+                    <div className='percentile-table-container'>
+                        <p style={{ fontStyle: 'italic' }}>{t('own_formula_clinic')} (p{clinicCustomPercentile}) ({clinicWeight}g) ({clinicCustomZscore}z)</p>
                         <span className='meter percentile-bar-container'>
                             <span className='percentile-bar-content' id='percentile-bar-bio-clinic'>
                                 <p>p{clinicCustomPercentile}</p>
                             </span>
                         </span>
-                    </tr>
+                    </div>
+                    <div className='percentile-table-container'>
+                        <p style={{ fontStyle: 'italic', fontWeight: 'bold' }}>Lancet Gregorio Marañón (p{lancetGregorioPercentile}) ({lancetGregorioWeight}g) ({lancetGregorioZscore}z)</p>
+                        <span className='meter percentile-bar-container'>
+                            <span className='percentile-bar-content' id='percentile-bar-bio-gregorio-lancet'>
+                                <p>p{lancetGregorioPercentile}</p>
+                            </span>
+                        </span>
+                    </div>
+                    <div className='percentile-table-container'>
+                        <p style={{ fontStyle: 'italic', fontWeight: 'bold' }}>Lancet Talavera (p{talaveraPercentile}) ({talaveraWeight}g) ({talaveraZscore}z)</p>
+                        <span className='meter percentile-bar-container'>
+                            <span className='percentile-bar-content' id='percentile-bar-bio-talavera-lancet'>
+                                <p>p{talaveraPercentile}</p>
+                            </span>
+                        </span>
+                    </div>
+                    <div className='percentile-table-container'>
+                        <p style={{ fontStyle: 'italic', fontWeight: 'bold' }}>Lancet Fuenlabrada (p{fuenlabradaPercentile}) ({fuenlabradaWeight}g) ({fuenlabradaZscore}z)</p>
+                        <span className='meter percentile-bar-container'>
+                            <span className='percentile-bar-content' id='percentile-bar-bio-fuenlabrada-lancet'>
+                                <p>p{fuenlabradaPercentile}</p>
+                            </span>
+                        </span>
+                    </div>
+                    <div className='percentile-table-container'>
+                        <p style={{ fontStyle: 'italic', color: 'red', fontWeight: 'bold' }}>ERROR DE VALOR PESO PARA NIÑA Lancet Alcázar de San Juan (p{alcazarPercentile}) ({alcazarWeight}g) ({alcazarZscore}z)</p>
+                        <span className='meter percentile-bar-container'>
+                            <span className='percentile-bar-content' id='percentile-bar-bio-alcazar-lancet'>
+                                <p>p{alcazarPercentile}</p>
+                            </span>
+                        </span>
+                    </div>
 
                 </div>
             </div>
         </div>
     );
-    }
+}

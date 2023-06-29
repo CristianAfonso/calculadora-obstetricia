@@ -17,6 +17,7 @@ function App() {
   const [lastPeriodDate, setLastPeriodDate] = useState(new Date());
   const [newPeriodDate, setNewPeriodDate] = useState("");
   const [lastEcoDate, setLastEcoDate] = useState(new Date());
+  const [genre, setGenre] = useState("male");
   const [weeks, setWeeks] = useState("");
   const [days, setDays] = useState("");
   const [newWeeks, setNewWeeks] = useState("");
@@ -66,11 +67,13 @@ function App() {
         setDBP={setDBPData} setLF={setLFData} setLCC={setLCCData} weeks={weeks} days={days} 
         lcc={lcc} dbp={dbp} lf={lf}/>}
       {actualComponent == "biometric" && <Biometric weeks={weeks} days={days} 
-        setMCA={setMCA} setUA={setUA} ua={ua} mca={mca} weight={weight} setWeight={setWeight}/>}
+        setMCA={setMCA} setUA={setUA} ua={ua} mca={mca} weight={weight} 
+        genre={genre} setGenre={setGenre} setWeight={setWeight}/>}
       {actualComponent == "hemodinamic" && <Hemodinamic weeks={weeks} days={days} 
         setMCA={setMCA} setUA={setUA} ua={ua} mca={mca}/>}
       {actualComponent == "bones" && <Bones weeks={weeks} days={days} />}
-      {actualComponent == "lancet" && <Lancet weeks={weeks} days={days} weight={weight} setWeight={setWeight}/>}
+      {actualComponent == "lancet" && <Lancet weeks={weeks} days={days} weight={weight} 
+        genre={genre} setGenre={setGenre} setWeight={setWeight}/>}
       {actualComponent == "unicvsmulti" && <Unicvsmulti weeks={weeks} days={days} />}
     </div>
   );
