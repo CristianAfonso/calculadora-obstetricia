@@ -1,34 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from "react-i18next";
-import { getZPercent, getDVZscore, getAIZscore, displayBar} from "../functions.js";
+import { getZPercent, getDVZscore, getAIZscore, displayBar } from "../functions.js";
 export default function DuctusIsthmusComponent(props) {
     const [ga, setGa] = useState(props.ga);
     const [ductusVenosus, setDuctusVenosus] = useState("");
     const [aorticIsthmus, setAorticIsthmus] = useState("");
-    const [ductusVenosusZscore,     setDuctusVenosusZscore] = useState("");
-    const [ductusVenosusPercent,    setDuctusVenosusPercent] = useState("");
-    const [aorticIsthmusZscore,  setAorticIsthmusZscore] = useState("");
+    const [ductusVenosusZscore, setDuctusVenosusZscore] = useState("");
+    const [ductusVenosusPercent, setDuctusVenosusPercent] = useState("");
+    const [aorticIsthmusZscore, setAorticIsthmusZscore] = useState("");
     const [aorticIsthmusPercent, setAorticIsthmusPercent] = useState("");
     const { t } = useTranslation();
-    
-    function handleDuctusVenosus(event){
+
+    function handleDuctusVenosus(event) {
         const dvZscore = getDVZscore(ga, event.target.value);
         const dvPercent = getZPercent(dvZscore);
         setDuctusVenosus(event.target.value);
         setDuctusVenosusZscore(dvZscore.toFixed(2));
         setDuctusVenosusPercent(dvPercent.toFixed(0));
-        displayBar(dvPercent ,'percentile-bar-hemo-dv');
+        displayBar(dvPercent, 'percentile-bar-hemo-dv');
     }
-    function handleAorticIsthmus(event){
+    function handleAorticIsthmus(event) {
         const aiZscore = getAIZscore(ga, event.target.value);
         const aiPercent = getZPercent(aiZscore);
         setAorticIsthmus(event.target.value);
         setAorticIsthmusZscore(aiZscore.toFixed(2));
         setAorticIsthmusPercent(aiPercent.toFixed(0));
-        displayBar(aiPercent ,'percentile-bar-hemo-ai');
+        displayBar(aiPercent, 'percentile-bar-hemo-ai');
     }
 
-    useEffect(() =>{
+    useEffect(() => {
         setGa(props.ga);
     })
 

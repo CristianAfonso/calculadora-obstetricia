@@ -83,14 +83,14 @@ export default function HemodinamicStudio(props) {
     }
     useEffect(() => {
         setGa((props.weeks) + props.days / 7);
-        if(ua){
+        if (ua) {
             props.setUA(ua);
-        }else{
+        } else {
             setUA(props.ua);
         }
-        if(mca){
+        if (mca) {
             props.setMCA(mca)
-        }else{
+        } else {
             setMCA(props.mca);
         }
         handleBars();

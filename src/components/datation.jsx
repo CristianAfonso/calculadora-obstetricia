@@ -1,30 +1,30 @@
-import React, { useState , useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from "react-i18next";
 import { set, subDays, subWeeks } from "date-fns";
 import moment from 'moment';
 
-export default function Datation(props){
+export default function Datation(props) {
     const [weeks, setWeeks] = useState(props.weeks);
     const [days, setDays] = useState(props.days);
     const [newWeeks, setNewWeeks] = useState("");
     const [newDays, setNewDays] = useState("");
-    const [lccData, setLCCData] =   useState(props.lcc);
-    const [dbpData, setDBPData] =   useState(props.dbp);
-    const [lfData, setLFData] =   useState(props.lf);
-    const [ecoDate, SetEcoDate] = useState(props.ecoDate);
+    const [lccData, setLCCData] = useState(props.lcc);
+    const [dbpData, setDBPData] = useState(props.dbp);
+    const [lfData, setLFData] = useState(props.lf);
+    const [ecoDate] = useState(props.ecoDate);
     const [today] = useState(new Date());
-    const [lastFur, setLastFur] = useState(subDays(today, weeks*7 + days));
+    const [lastFur, setLastFur] = useState(subDays(today, weeks * 7 + days));
     const [displayedNewFur, setDisplayedNewFur] = useState(lastFur);
     const [newFur, setNewFur] = useState("");
-    const {t} = useTranslation();
-    function updateFur(calculatedDays){
-        const newDate = subDays(ecoDate,calculatedDays);
+    const { t } = useTranslation();
+    function updateFur(calculatedDays) {
+        const newDate = subDays(ecoDate, calculatedDays);
         const totalDays = moment(ecoDate).diff(newDate, 'days');
         const totalWeeks = moment(ecoDate).diff(newDate, 'weeks');
         setNewFur(newDate);
         setNewDays(totalDays % 7);
         setNewWeeks(totalWeeks);
-        if(lastFur != displayedNewFur){
+        if (lastFur != displayedNewFur) {
             setLastFur(displayedNewFur);
         }
     }
@@ -41,58 +41,58 @@ export default function Datation(props){
         setLFData(event.target.value);
         props.setLF(event.target.value);
     }
-    function lccCalculate(){
-        if(lccData >= 2 && lccData <= 121){
+    function lccCalculate() {
+        if (lccData >= 2 && lccData <= 121) {
             calculateNewFur('LCC');
         }
     }
-    function dbpCalculate(){
-        if(dbpData >= 31 && dbpData <= 100){
+    function dbpCalculate() {
+        if (dbpData >= 31 && dbpData <= 100) {
             calculateNewFur('DBP');
         }
     }
-    function lfCalculate(){
-        if(lfData >= 17 && lfData <= 75){
+    function lfCalculate() {
+        if (lfData >= 17 && lfData <= 75) {
             calculateNewFur('LF');
         }
     }
-    function calculateNewFur(method){
-        switch(method){
+    function calculateNewFur(method) {
+        switch (method) {
             case 'LCC':
-                    updateFur(40.9041+(3.21585*Math.pow(lccData,0.5))+(0.348956*lccData)); //CRL Ultrasound Obstet Gynecol 2014; 44: 641-648: https://obgyn.onlinelibrary.wiley.com/doi/pdf/10.1002/uog.13448
+                updateFur(40.9041 + (3.21585 * Math.pow(lccData, 0.5)) + (0.348956 * lccData)); //CRL Ultrasound Obstet Gynecol 2014; 44: 641-648: https://obgyn.onlinelibrary.wiley.com/doi/pdf/10.1002/uog.13448
                 break;
             case 'DBP':
-                    updateFur( 2 * dbpData + 44.2);
+                updateFur(2 * dbpData + 44.2);
                 break;
             case 'LF':
-                    updateFur(7*(5.2876 + (0.1584 * lccData) - (0.0007 * Math.pow(lccData, 2))));
+                updateFur(7 * (5.2876 + (0.1584 * lfData) - (0.0007 * Math.pow(lfData, 2))));
                 break;
         }
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         setDays(props.days);
         setWeeks(props.weeks);
-        if(newFur){
+        if (newFur) {
             props.updateNewPeriod(newFur);
             setDisplayedNewFur(newFur);
             setNewFur("");
         }
-        if(newDays && newWeeks){
+        if (newDays && newWeeks) {
             props.GiveNewTime(newWeeks, newDays);
             setNewDays("");
             setNewWeeks("");
-        }else if(newDays){
-            props.GiveNewTime(0, newDays);
+        } else if (newDays) {
+            props.GiveNewTime(weeks, newDays);
             setNewDays("");
 
-        }else if(newWeeks){
-            props.GiveNewTime(newWeeks, 0);
+        } else if (newWeeks) {
+            props.GiveNewTime(newWeeks, days);
             setNewWeeks("");
         }
     });
-    return(
-    <div className="service-container">
+    return (
+        <div className="service-container">
             <div className='title-container'>
                 <h3>{t('datation')}</h3>
                 <div className='weeksAndDays'>
@@ -105,50 +105,56 @@ export default function Datation(props){
                     <div className="datation-input">
                         <div className="pair">
                             <span title={t('LCC_help')}>{t('LCC_title')}:</span>
-                            <input 
+                            <input
                                 type='number'
                                 placeholder='mm'
+                                min={2}
+                                max={121}
                                 value={lccData}
-                                onChange={handleLCCChange}/>
+                                onChange={handleLCCChange} />
                         </div>
                         <div className="pair">
-                            <span className="last-fur-span">{lastFur && `${t('last_fur')}: ${lastFur.toLocaleDateString()}`}</span> 
+                            <span className="last-fur-span">{lastFur && `${t('last_fur')}: ${lastFur.toLocaleDateString()}`}</span>
                             <span className="new-fur-container">{displayedNewFur && `${t('new_fur')}: ${displayedNewFur.toLocaleDateString()}`}</span>
                         </div>
-                            <button onClick={lccCalculate}>{t('update_FUR')}</button>
+                        <button onClick={lccCalculate}>{t('update_FUR')}</button>
                     </div>
                     <div className="datation-input">
                         <div className="pair">
                             <span title={t('DBP_help')}>{t('DBP_title')}:</span>
-                            <input 
-                            type='number'
-                            placeholder='mm'
-                            value={dbpData}
-                            onChange={handleDBPChange}/>
-                            </div>
-                            <div className="pair">
-                                <span className="last-fur-span">{lastFur && `${t('last_fur')}: ${lastFur.toLocaleDateString()}`}</span> 
-                                <span className="new-fur-container">{displayedNewFur && `${t('new_fur')}: ${displayedNewFur.toLocaleDateString()}`}</span>
-                            </div>
-                            <button onClick={dbpCalculate}>{t('update_FUR')}</button>
-                        
+                            <input
+                                type='number'
+                                placeholder='mm'
+                                min={31}
+                                max={100}
+                                value={dbpData}
+                                onChange={handleDBPChange} />
+                        </div>
+                        <div className="pair">
+                            <span className="last-fur-span">{lastFur && `${t('last_fur')}: ${lastFur.toLocaleDateString()}`}</span>
+                            <span className="new-fur-container">{displayedNewFur && `${t('new_fur')}: ${displayedNewFur.toLocaleDateString()}`}</span>
+                        </div>
+                        <button onClick={dbpCalculate}>{t('update_FUR')}</button>
+
                     </div>
                     <div className="datation-input">
                         <div className="pair">
                             <span title={t('LF_help')}>{t('LF_title')}:</span>
-                            <input 
-                            type='number'
-                            placeholder='mm'
-                            value={lfData}
-                            onChange={handleLFChange}/>
+                            <input
+                                type='number'
+                                placeholder='mm'
+                                min={17}
+                                max={75}
+                                value={lfData}
+                                onChange={handleLFChange} />
 
                         </div>
                         <div className="pair">
-                            <span className="last-fur-span">{lastFur && `${t('last_fur')}: ${lastFur.toLocaleDateString()}`}</span> 
+                            <span className="last-fur-span">{lastFur && `${t('last_fur')}: ${lastFur.toLocaleDateString()}`}</span>
                             <span className="new-fur-container">{displayedNewFur && `${t('new_fur')}: ${displayedNewFur.toLocaleDateString()}`}</span>
                         </div>
-                            <button onClick={lfCalculate}>{t('update_FUR')}</button>
-                        
+                        <button onClick={lfCalculate}>{t('update_FUR')}</button>
+
                     </div>
                 </div>
             </div>

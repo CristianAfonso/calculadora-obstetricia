@@ -35,28 +35,28 @@ export default function SystolicComponent(props) {
                 break;
         }
     }
-    function handleUALeftChange(event){
+    function handleUALeftChange(event) {
         setUALeft(parseFloat(event.target.value));
-        if(uterine_arteryRight){
-            handleUAmeanChange(event.target.value,uterine_arteryRight);
+        if (uterine_arteryRight) {
+            handleUAmeanChange(event.target.value, uterine_arteryRight);
         }
     }
-    function handleUARightChange(event){
+    function handleUARightChange(event) {
         setUARight(parseFloat(event.target.value));
-        if(uterine_arteryLeft){
+        if (uterine_arteryLeft) {
             handleUAmeanChange(uterine_arteryLeft, event.target.value);
         }
     }
-    function handleUAmeanChange(left, right){
-        const uaMean = ((parseFloat(left)+parseFloat(right))/2).toFixed(2);
+    function handleUAmeanChange(left, right) {
+        const uaMean = ((parseFloat(left) + parseFloat(right)) / 2).toFixed(2);
         const uaZscore = getUAMeanZscore(ga, uaMean).toFixed(2);
         const uaPercent = getZPercent(uaZscore).toFixed(0);
         setUterineMean(uaMean);
         setUterineMeanZscore(uaZscore);
         setUterineMeanPercent(uaPercent);
-        displayBar(uaPercent,'percentile-bar-hemo-clinic-uterine_media' );
+        displayBar(uaPercent, 'percentile-bar-hemo-clinic-uterine_media');
     }
-    useEffect(() =>{
+    useEffect(() => {
         setGa(props.ga);
     })
     return (

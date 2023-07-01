@@ -44,9 +44,9 @@ export default function Biometric(props) {
         } else {
             setMCA(props.mca);
         }
-        if(customWeight){
+        if (customWeight) {
             props.setWeight(customWeight);
-        }else{
+        } else {
             setCustomWeight(props.weight);
         }
         setGenre(props.genre);
@@ -67,11 +67,11 @@ export default function Biometric(props) {
             <h2>{t('Biometric_title')}</h2>
             <div className='service-content'>
                 <div id='biometric-container'>
-                    <BiometricDataInput cc={setCC} dbp={setDBP} lf={setLF} 
-                    ca={setCA} weeks={weeks} days={days} />
-                    <BiometricFormulaDisplay cc={cc} dbp={dbp} lf={lf} ca={ca} 
-                    setCustomWeight={setCustomWeight} customWeight={customWeight}
-                    weeks={weeks} days={days} genre={genre} setGenre={props.setGenre}/>
+                    <BiometricDataInput cc={setCC} dbp={setDBP} lf={setLF}
+                        ca={setCA} weeks={weeks} days={days} />
+                    <BiometricFormulaDisplay cc={cc} dbp={dbp} lf={lf} ca={ca}
+                        setCustomWeight={setCustomWeight} customWeight={customWeight}
+                        weeks={weeks} days={days} genre={genre} setGenre={props.setGenre} />
                 </div>
             </div>
             <h2>{t('Hemodinamic_title')}</h2>

@@ -22,7 +22,7 @@ export default function Hemodinamic(props) {
             setMCA(props.mca);
         }
         if (props.mca && props.ua) {
-            setRatio(props.mca/props.ua);
+            setRatio(props.mca / props.ua);
         }
     })
     return (
@@ -36,7 +36,7 @@ export default function Hemodinamic(props) {
             </div>
             <div className='service-content'>
                 <div id="hemodinamic-studio">
-                    <ArterialComponent setMCA={setMCA} setUA={setUA} ga={ga} ua={ua} mca={mca}/>
+                    <ArterialComponent setMCA={setMCA} setUA={setUA} ga={ga} ua={ua} mca={mca} />
                     <SystolicComponent ga={ga} />
                     <DuctusIsthmusComponent ga={ga} />
                 </div>

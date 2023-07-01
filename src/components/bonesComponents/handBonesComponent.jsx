@@ -3,15 +3,15 @@ import { useTranslation } from "react-i18next";
 import { getHumerusZscore, getUlnaZscore, getRadiusZscore, displayBar, getZPercent } from "../functions.js";
 export default function HandBones(props) {
     const [ga, setGa] = useState(props.ga);
-    const [humerusValue,    setHumerusValue] = useState("");
-    const [humerusZscore,   setHumerusZscore] = useState("");
-    const [humerusPercent,  setHumerusPercent] = useState("");
-    const [ulnaValue,   setUlnaValue] = useState("");
-    const [ulnaZscore,  setUlnaZscore] = useState("");
+    const [humerusValue, setHumerusValue] = useState("");
+    const [humerusZscore, setHumerusZscore] = useState("");
+    const [humerusPercent, setHumerusPercent] = useState("");
+    const [ulnaValue, setUlnaValue] = useState("");
+    const [ulnaZscore, setUlnaZscore] = useState("");
     const [ulnaPercent, setUlnaPercent] = useState("");
-    const [radiusValue,     setRadiusValue] = useState("");
-    const [radiusZscore,    setRadiusZscore] = useState("");
-    const [radiusPercent,   setRadiusPercent] = useState("");
+    const [radiusValue, setRadiusValue] = useState("");
+    const [radiusZscore, setRadiusZscore] = useState("");
+    const [radiusPercent, setRadiusPercent] = useState("");
     const { t } = useTranslation();
 
     function handleHumerusChange(event) {

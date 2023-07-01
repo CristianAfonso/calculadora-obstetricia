@@ -1,9 +1,15 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from "react-i18next";
 import i18next from 'i18next';
-function Header(){
-    const {t} = useTranslation()
+function Header() {
+    const { t } = useTranslation()
     const languages = [
+        {
+            code: 'ar',
+            name: 'العربية',
+            dir: 'rtl',
+            country_code: 'sa',
+        },
         {
             code: 'en',
             name: 'English',
@@ -25,7 +31,7 @@ function Header(){
             country_code: 'pt'
         },
     ]
-    const GlobeIcon =({width = 24, height = 24}) => (
+    const GlobeIcon = ({ width = 24, height = 24 }) => (
         <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} fill="currentColor" className="bi bi-globe" viewBox="0 0 16 16">
             <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm7.5-6.923c-.67.204-1.335.82-1.887 1.855A7.97 7.97 0 0 0 5.145 4H7.5V1.077zM4.09 4a9.267 9.267 
             0 0 1 .64-1.539 6.7 6.7 0 0 1 .597-.933A7.025 7.025 0 0 0 2.255 4H4.09zm-.582 3.5c.03-.877.138-1.718.312-2.5H1.674a6.958 6.958 0 0 0-.656 
@@ -39,26 +45,26 @@ function Header(){
         </svg>
     )
 
-    return(
+    return (
         <header>
             <div id="section-img-wrapper">
-                <img id="section-img" className="img-fluid" src="./images/seccion.jpg"/>
+                <img id="section-img" className="img-fluid" src="./images/seccion.jpg" />
             </div>
             <div id="logo-with-bg">
                 <div id="logo-container">
-                    <img id="logo-gregorio" className="img-fluid" src="./images/HGUGM.png"/>
+                    <img id="logo-gregorio" className="img-fluid" src="./images/HGUGM.png" />
                     <h1>{t('service')}</h1>
                 </div>
             </div>
-            <div id="language-wrapper"> 
+            <div id="language-wrapper">
                 <div className="dropdown" >
                     <button className="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                         <GlobeIcon />
                     </button>
                     <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    {languages.map(({code, name, country_code}) =>(
-                        <li key={code}>
-                            <button className="dropdown-item" onClick={() => i18next.changeLanguage(code)}>
+                        {languages.map(({ code, name, country_code }) => (
+                            <li key={code}>
+                                <button className="dropdown-item" onClick={() => i18next.changeLanguage(code)}>
                                     <span className={`flag-icon flag-icon-${country_code} mx-2`}></span>
                                     {name}
                                 </button>

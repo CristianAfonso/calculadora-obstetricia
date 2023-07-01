@@ -25,9 +25,9 @@ function App() {
   const [weight, setWeight] = useState("");
   const [mca, setMCA] = useState("");
   const [ua, setUA] = useState("");
-  const [lcc, setLCCData] =   useState("");
-  const [dbp, setDBPData] =   useState("");
-  const [lf, setLFData] =   useState("");
+  const [lcc, setLCCData] = useState("");
+  const [dbp, setDBPData] = useState("");
+  const [lf, setLFData] = useState("");
   let GetTime = (timeWeeks, timeDays) => {
     setWeeks(timeWeeks);
     setDays(timeDays);
@@ -41,6 +41,8 @@ function App() {
   let GetNewTime = (timeWeeks, timeDays) => {
     setNewWeeks(timeWeeks);
     setNewDays(timeDays);
+    setWeeks(timeWeeks);
+    setDays(timeDays);
   }
   function stopUpdateWeeksandDays() {
     setNewWeeks("");
@@ -62,18 +64,18 @@ function App() {
         stopUpdateFUR={stopUpdateFUR} stopUpdateWeeksandDays={stopUpdateWeeksandDays}
         lastPeriodDateUpdated={lastPeriodDate} weeks={weeks} days={days}
         newPeriodDate={newPeriodDate} newWeeks={newWeeks} newDays={newDays}></Nav>
-      {actualComponent == "datation" && <Datation updateNewPeriod={setNewPeriodDate} 
-        GiveNewTime={GetNewTime} ecoDate={lastEcoDate} lastPeriodDate={lastPeriodDate} 
-        setDBP={setDBPData} setLF={setLFData} setLCC={setLCCData} weeks={weeks} days={days} 
-        lcc={lcc} dbp={dbp} lf={lf}/>}
-      {actualComponent == "biometric" && <Biometric weeks={weeks} days={days} 
-        setMCA={setMCA} setUA={setUA} ua={ua} mca={mca} weight={weight} 
-        genre={genre} setGenre={setGenre} setWeight={setWeight}/>}
-      {actualComponent == "hemodinamic" && <Hemodinamic weeks={weeks} days={days} 
-        setMCA={setMCA} setUA={setUA} ua={ua} mca={mca}/>}
+      {actualComponent == "datation" && <Datation updateNewPeriod={setNewPeriodDate}
+        GiveNewTime={GetNewTime} ecoDate={lastEcoDate} lastPeriodDate={lastPeriodDate}
+        setDBP={setDBPData} setLF={setLFData} setLCC={setLCCData} weeks={weeks} days={days}
+        lcc={lcc} dbp={dbp} lf={lf} />}
+      {actualComponent == "biometric" && <Biometric weeks={weeks} days={days}
+        setMCA={setMCA} setUA={setUA} ua={ua} mca={mca} weight={weight}
+        genre={genre} setGenre={setGenre} setWeight={setWeight} />}
+      {actualComponent == "hemodinamic" && <Hemodinamic weeks={weeks} days={days}
+        setMCA={setMCA} setUA={setUA} ua={ua} mca={mca} />}
       {actualComponent == "bones" && <Bones weeks={weeks} days={days} />}
-      {actualComponent == "lancet" && <Lancet weeks={weeks} days={days} weight={weight} 
-        genre={genre} setGenre={setGenre} setWeight={setWeight}/>}
+      {actualComponent == "lancet" && <Lancet weeks={weeks} days={days} weight={weight}
+        genre={genre} setGenre={setGenre} setWeight={setWeight} />}
       {actualComponent == "unicvsmulti" && <Unicvsmulti weeks={weeks} days={days} />}
     </div>
   );

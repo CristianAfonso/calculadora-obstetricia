@@ -2,6 +2,8 @@ export const displayBar = (percentile, elementId) => {
     if (percentile > 0 && percentile < 100) {
         if (percentile > 10 && percentile < 90) {
             document.getElementById(elementId).style.backgroundImage = 'linear-gradient( #00960a, #00bd0d)';
+        } else if (percentile <= 5 || percentile >= 95) {
+            document.getElementById(elementId).style.backgroundImage = 'linear-gradient(#e33922, #e30f00)';
         } else if (percentile <= 10 || percentile >= 90) {
             document.getElementById(elementId).style.backgroundImage = 'linear-gradient(#d97321, #d98600)';
         }
@@ -17,15 +19,15 @@ export const displayMoMBar = (mom, elementId) => {
         document.getElementById(elementId).style.width = "100%";
     } else if (mom > 1.5) {
         document.getElementById(elementId).style.backgroundImage = 'linear-gradient(#d97321, #d98600)';
-        document.getElementById(elementId).style.width = parseFloat((mom/1.6)*100) + "%";
+        document.getElementById(elementId).style.width = parseFloat((mom / 1.6) * 100) + "%";
     } else if (mom > 1.3) {
         document.getElementById(elementId).style.backgroundImage = 'linear-gradient(#d9cf21, #d98600)';
-        document.getElementById(elementId).style.width = parseFloat((mom/1.6)*100) + "%";
-    }else{
+        document.getElementById(elementId).style.width = parseFloat((mom / 1.6) * 100) + "%";
+    } else {
         document.getElementById(elementId).style.backgroundImage = 'linear-gradient( #00960a, #00bd0d)';
-        document.getElementById(elementId).style.width = parseFloat((mom/1.6)*100) + "%";
+        document.getElementById(elementId).style.width = parseFloat((mom / 1.6) * 100) + "%";
     }
-    
+
 }
 export const matchingGA = (data, from) => {
     let iterator;
@@ -146,7 +148,7 @@ export const cc_mean = (ga) => {
 }
 
 export const cc_sd = (ga) => {
-    let sd = 1.98735 + 0.0136772 * Math.pow(ga, 3) - 0.00726264 * Math.pow(ga, 3) * Math.log(ga) + 0.000976253 * Math.pow(ga,3) * Math.pow((Math.log(ga)), 2);
+    let sd = 1.98735 + 0.0136772 * Math.pow(ga, 3) - 0.00726264 * Math.pow(ga, 3) * Math.log(ga) + 0.000976253 * Math.pow(ga, 3) * Math.pow((Math.log(ga)), 2);
     return sd;
 }
 export const ca_mean = (ga) => {
@@ -169,7 +171,7 @@ export const lf_sd = (ga) => {
     return sd;
 }
 const calculateHadlock = (ga) => {
-	return Math.exp(0.578 + (0.332 * ga) - (0.00354* Math.pow(ga,2)));
+    return Math.exp(0.578 + (0.332 * ga) - (0.00354 * Math.pow(ga, 2)));
 }
 const expectedHadlock = () => {
     return calculateHadlock(40.5);
@@ -235,39 +237,39 @@ export const hospitalGetWeight = (ga, genre, hospital) => {
                 genreValue = 0.03942451;        //Estandarizar
             }
             const constant = 3.9486685;        //Estandarizar
-            expectedWeight =  constant + (eg * ga) + (eg2 * Math.pow(ga, 2)) + (eg3 * Math.pow(ga, 3)) + (genreValue);
+            expectedWeight = constant + (eg * ga) + (eg2 * Math.pow(ga, 2)) + (eg3 * Math.pow(ga, 3)) + (genreValue);
             break;
         case "gregorio2":
             if (genre === "male") {
-                genreValue  = 3440.23;        //Estandarizar
-            }else{
-                genreValue  = 3308.16;        //Estandarizar
+                genreValue = 3440.23;        //Estandarizar
+            } else {
+                genreValue = 3308.16;        //Estandarizar
             }
-            expectedWeight = (calculateHadlock(ga)*(genreValue/expectedHadlock()));
+            expectedWeight = (calculateHadlock(ga) * (genreValue / expectedHadlock()));
             break;
         case "fuenlabrada":
             if (genre === "male") {
-                genreValue  = 3394.11;        //Estandarizar
-            }else{
-                genreValue  = 3271.64;        //Estandarizar
+                genreValue = 3394.11;        //Estandarizar
+            } else {
+                genreValue = 3271.64;        //Estandarizar
             }
-            expectedWeight = (calculateHadlock(ga)*(genreValue/expectedHadlock()));
+            expectedWeight = (calculateHadlock(ga) * (genreValue / expectedHadlock()));
             break;
         case "talavera":
             if (genre === "male") {
-                genreValue  = 3480.33;        //Estandarizar
-            }else{
-                genreValue  = 3326.044;        //Estandarizar
+                genreValue = 3480.33;        //Estandarizar
+            } else {
+                genreValue = 3326.044;        //Estandarizar
             }
-            expectedWeight = (calculateHadlock(ga)*(genreValue/expectedHadlock()));
+            expectedWeight = (calculateHadlock(ga) * (genreValue / expectedHadlock()));
             break;
         case "alcazar":
             if (genre === "male") {
-                genreValue  = 3411.61;        //Estandarizar
-            }else{
+                genreValue = 3411.61;        //Estandarizar
+            } else {
                 genreValue = 2365.1;      //Estandarizar
             }
-            expectedWeight = (calculateHadlock(ga)*(genreValue/expectedHadlock()));
+            expectedWeight = (calculateHadlock(ga) * (genreValue / expectedHadlock()));
             break;
         case "clinic":
             if (genre === 'male') {
@@ -289,46 +291,37 @@ const hospitalAuxSD = (expectedWeight, genre, hospital) => {
     switch (hospital) {
         case "gregorio2":
             if (genre === "male") {
-                genreValue  = 394.7;        //Estandarizar
-                genreMean   = 3440.23;        //Estandarizar
-            }else{
-                genreValue  = 381.5;        //Estandarizar
+                genreValue = 394.7;        //Estandarizar
+                genreMean = 3440.23;        //Estandarizar
+            } else {
+                genreValue = 381.5;        //Estandarizar
                 genreMean = 3308.16;        //Estandarizar
             }
             break;
         case "fuenlabrada":
             if (genre === "male") {
-                genreValue  = 390.38;        //Estandarizar
-                genreMean   = 3394.11;        //Estandarizar
-            }else{
-                genreValue  = 378.25;        //Estandarizar
+                genreValue = 390.38;        //Estandarizar
+                genreMean = 3394.11;        //Estandarizar
+            } else {
+                genreValue = 378.25;        //Estandarizar
                 genreMean = 3271.64;        //Estandarizar
             }
             break;
         case "talavera":
             if (genre === "male") {
-                genreValue  = 395.4;        //Estandarizar
-                genreMean   = 3480.33;        //Estandarizar
-            }else{
-                genreValue  =  415.98;        //Estandarizar
+                genreValue = 395.4;        //Estandarizar
+                genreMean = 3480.33;        //Estandarizar
+            } else {
+                genreValue = 415.98;        //Estandarizar
                 genreMean = 3326.044;        //Estandarizar
-            }
-            break;
-        case "alcazar":
-            if (genre === "male") {
-                genreValue  = 378.325;        //Estandarizar
-                genreMean   = 3411.61;        //Estandarizar
-            }else{
-                genreValue  = 377.65;        //Estandarizar
-                genreMean = 2365.1;        //Estandarizar
             }
             break;
         default:
             return null;
 
-            
+
     }
-    sd = expectedWeight * (genreValue/genreMean);
+    sd = expectedWeight * (genreValue / genreMean);
     return sd;
 }
 export const hospitalGetZscore = (weight, referenceWeight, hospital, genre) => {
@@ -343,11 +336,11 @@ export const hospitalGetZscore = (weight, referenceWeight, hospital, genre) => {
             const zScore = (error - referenceWeight) / standardDeviation;
             return zScore;
         default:
-            const zscore = (weight - referenceWeight)/hospitalAuxSD(referenceWeight, genre, hospital);
+            const zscore = (weight - referenceWeight) / hospitalAuxSD(referenceWeight, genre, hospital);
             return zscore;
     }
 }
-	/*
+/*
 * 
 * 
 * UNICOS
@@ -381,234 +374,234 @@ export const hospitalGetZscore = (weight, referenceWeight, hospital, genre) => {
     Hemodinamic
     */
 const ua_mean = (ga) => {
-    const mean = (3.55219 - (0.13558 * ga)) + (0.00174 * Math.pow(ga,2));
+    const mean = (3.55219 - (0.13558 * ga)) + (0.00174 * Math.pow(ga, 2));
     return mean;
 }
-    
+
 const ua_sd = (ga) => {
     const sd = 0.299; //????????????
     return sd;
 }
 
 const mca_mean = (ga) => {
-	const mean = -2.7317 + (0.3335 * ga) - (0.0058 * Math.pow(ga,2));
-	return mean;
+    const mean = -2.7317 + (0.3335 * ga) - (0.0058 * Math.pow(ga, 2));
+    return mean;
 }
 
 const mca_sd = (ga) => {
-	const sd = -0.88005 + (0.08182 * ga) - (0.00133 * Math.pow(ga,2));
-	return sd;
+    const sd = -0.88005 + (0.08182 * ga) - (0.00133 * Math.pow(ga, 2));
+    return sd;
 }
-const cpr_mean = (ga)  => {
-	const mean = -4.0636 + (0.383 * ga) - (0.0059 * Math.pow(ga,2));
-	return mean;
+const cpr_mean = (ga) => {
+    const mean = -4.0636 + (0.383 * ga) - (0.0059 * Math.pow(ga, 2));
+    return mean;
 }
 
-const cpr_sd = (ga)  => {
-	const sd = -0.9664 + (0.09027 * ga) - (0.0014 * Math.pow(ga,2));
-	return sd;
+const cpr_sd = (ga) => {
+    const sd = -0.9664 + (0.09027 * ga) - (0.0014 * Math.pow(ga, 2));
+    return sd;
 }
 const avpi_mean = (ga) => {
-	const mean = 1.39 - (0.012 * ga) + (0.0000198 * Math.pow(ga,2));
-	return mean;
+    const mean = 1.39 - (0.012 * ga) + (0.0000198 * Math.pow(ga, 2));
+    return mean;
 }
 const avpi_sd = (ga) => {
-	const sd = 0.272 - (0.000259 * ga);
-	return sd;
+    const sd = 0.272 - (0.000259 * ga);
+    return sd;
 }
 
 const vdpi_mean = (ga) => {
-	const mean = 0.903 + (-0.0116 * ga);
-	return mean;
+    const mean = 0.903 + (-0.0116 * ga);
+    return mean;
 }
 
 const vdpi_sd = (ga) => {
-	const sd = 0.1483;
-	return sd;
+    const sd = 0.1483;
+    return sd;
 }
 
 const aipi_mean = (ga) => {
-	const mean = 2.2562 + (0.0154 * ga);
-	return mean;
+    const mean = 2.2562 + (0.0154 * ga);
+    return mean;
 }
 
 const aipi_sd = (ga) => {
-	const sd = 0.014199 + (0.011635 * ga);
-	return sd;
+    const sd = 0.014199 + (0.011635 * ga);
+    return sd;
 }
 
 export const getUAZscore = (ga, ua) => {
-    const uaMean    = ua_mean(ga);
-    const uaSD      = ua_sd(ga);
-    const uaZscore  = ((ua - uaMean)/uaSD);
+    const uaMean = ua_mean(ga);
+    const uaSD = ua_sd(ga);
+    const uaZscore = ((ua - uaMean) / uaSD);
     return uaZscore;
 }
 export const getMCAZscore = (ga, mca) => {
-    const mcaMean    = mca_mean(ga);
-    const mcaSD      = mca_sd(ga);
-    const mcaZscore  = ((mca - mcaMean)/mcaSD);
+    const mcaMean = mca_mean(ga);
+    const mcaSD = mca_sd(ga);
+    const mcaZscore = ((mca - mcaMean) / mcaSD);
     return mcaZscore;
 }
 export const getCPRZscore = (mca, ua, ga) => {
-    const cpr = mca/ua;
-    const cprMean    = cpr_mean(ga);
-    const cprSD      = cpr_sd(ga);
-    const cprZscore  = ((cpr - cprMean)/cprSD);
+    const cpr = mca / ua;
+    const cprMean = cpr_mean(ga);
+    const cprSD = cpr_sd(ga);
+    const cprZscore = ((cpr - cprMean) / cprSD);
     return cprZscore;
 
 }
 export const getUAZscore_GregorioFormula = (ga, ua) => {
     const mean = 1.74 - (ga * 0.0238731473944725);
-	const sd = 0.25825;
-	const zscore = (ua - mean) / sd;
+    const sd = 0.25825;
+    const zscore = (ua - mean) / sd;
     return zscore;
 }
 export const getMCAZscore_GregorioFormula = (ga, mca) => {
-    const mean = -0.885496 + (ga * 0.209341) - (0.003686 * Math.pow(ga,2));
-	const sd = 0.7217442 - (0.0080618 * ga);
-	const zscore = (mca - mean) / sd;
+    const mean = -0.885496 + (ga * 0.209341) - (0.003686 * Math.pow(ga, 2));
+    const sd = 0.7217442 - (0.0080618 * ga);
+    const zscore = (mca - mean) / sd;
     return zscore;
 }
 
-export const mcaExpectedSpeed = (ga)  => {
+export const mcaExpectedSpeed = (ga) => {
     const expectedSpeed = Math.exp(2.31 + (0.046 * ga));
     return expectedSpeed;
 }
-export const mcaMOM = (mcaSV, acmEV)  => {
-    return (mcaSV/acmEV);
+export const mcaMOM = (mcaSV, acmEV) => {
+    return (mcaSV / acmEV);
 }
 export const getUAMeanZscore = (ga, mean) => {
     const uaExpected = avpi_mean(ga * 7);
-    const uaSd = avpi_sd(ga* 7);
+    const uaSd = avpi_sd(ga * 7);
     const uaZscore = ((Math.log(mean)) - uaExpected) / uaSd;
     return uaZscore;
 }
 
 export const getDVZscore = (ga, dv) => {
-	const mean = vdpi_mean(ga);
-	const sd = vdpi_sd(ga);
-	const zscore = (dv - mean) / sd;
+    const mean = vdpi_mean(ga);
+    const sd = vdpi_sd(ga);
+    const zscore = (dv - mean) / sd;
     return zscore;
 }
 
 export const getAIZscore = (ga, ai) => {
     const mean = aipi_mean(ga);
-	const sd = aipi_sd(ga);
-	const zscore = (ai - mean) / sd; 
+    const sd = aipi_sd(ga);
+    const zscore = (ai - mean) / sd;
     return zscore;
 }
 
 // BONES 
-const hum_mean = (ga)  => {
-	const mean = (11.459 * ga - 2.2362 * ga * Math.log(ga) - 63.704);
-	return mean;
+const hum_mean = (ga) => {
+    const mean = (11.459 * ga - 2.2362 * ga * Math.log(ga) - 63.704);
+    return mean;
 }
 
-const hum_sd = (ga)  => {
-	const sd = (0.040292 * ga + 1.3464);
-	return sd;
+const hum_sd = (ga) => {
+    const sd = (0.040292 * ga + 1.3464);
+    return sd;
 }
 
-const cub_mean = (ga)  => {
-	const mean = (11120 / (Math.pow(ga,2))) - (2146.3 / ga) + 108.94;
-	return mean;
+const cub_mean = (ga) => {
+    const mean = (11120 / (Math.pow(ga, 2))) - (2146.3 / ga) + 108.94;
+    return mean;
 }
 
-const cub_sd = (ga)  => {
-	const sd = 0.049218 * ga + 1.2021;
-	return sd;
+const cub_sd = (ga) => {
+    const sd = 0.049218 * ga + 1.2021;
+    return sd;
 }
 
-const rad_mean = (ga)  => {
-	const mean = (7983 / (Math.pow(ga,2))) - (1698.6 / ga) + 91.634;
-	return mean;
+const rad_mean = (ga) => {
+    const mean = (7983 / (Math.pow(ga, 2))) - (1698.6 / ga) + 91.634;
+    return mean;
 }
 
-const rad_sd = (ga)  => {
-	const sd = 0.046386 * ga + 1.1933;
-	return sd;
+const rad_sd = (ga) => {
+    const sd = 0.046386 * ga + 1.1933;
+    return sd;
 }
 
-const fem_mean = (ga)  => {
-	const mean = 3.4162 * ga - 0.0004791 * Math.pow(ga,3) - 32.425;
-	return mean;
+const fem_mean = (ga) => {
+    const mean = 3.4162 * ga - 0.0004791 * Math.pow(ga, 3) - 32.425;
+    return mean;
 }
 
-const fem_sd = (ga)  => {
-	const sd = 0.058328 * ga + 1.0605;
-	return sd;
+const fem_sd = (ga) => {
+    const sd = 0.058328 * ga + 1.0605;
+    return sd;
 }
 
 const fib_mean = (ga) => {
-	const mean = (13697 / (Math.pow(ga,2))) - (2458.0 / ga) + 116.51;
-	return mean;
+    const mean = (13697 / (Math.pow(ga, 2))) - (2458.0 / ga) + 116.51;
+    return mean;
 }
 
 const fib_sd = (ga) => {
-	const sd = 0.053841 * ga + 1.0451;
-	return sd;
+    const sd = 0.053841 * ga + 1.0451;
+    return sd;
 }
 const tib_mean = (ga) => {
-	const mean = (14451 / (Math.pow(ga,2))) - (2553.2 / ga) + 120.05;
-	return mean;
+    const mean = (14451 / (Math.pow(ga, 2))) - (2553.2 / ga) + 120.05;
+    return mean;
 }
 
 const tib_sd = (ga) => {
-	const sd = 0.049978 * ga + 1.1102;
-	return sd;
+    const sd = 0.049978 * ga + 1.1102;
+    return sd;
 }
 
 
 const foot_mean = (ga) => {
-	const mean = 0.36909 * Math.pow(ga,2) - 0.084175 * Math.pow(ga,2) * Math.log(ga) - 14.158;
-	return mean;
+    const mean = 0.36909 * Math.pow(ga, 2) - 0.084175 * Math.pow(ga, 2) * Math.log(ga) - 14.158;
+    return mean;
 }
 
 const foot_sd = (ga) => {
-	const sd = 0.10865 * ga + 0.27971;
-	return sd;
+    const sd = 0.10865 * ga + 0.27971;
+    return sd;
 }
 export const getHumerusZscore = (ga, humerusValue) => {
     const mean = hum_mean(ga);
-	const sd = hum_sd(ga);
-	const zscore = (humerusValue - mean) / sd;
+    const sd = hum_sd(ga);
+    const zscore = (humerusValue - mean) / sd;
     return zscore;
 }
 export const getUlnaZscore = (ga, ulnaValue) => {
     const mean = cub_mean(ga);
-	const sd = cub_sd(ga);
-	const zscore = (ulnaValue - mean) / sd;
+    const sd = cub_sd(ga);
+    const zscore = (ulnaValue - mean) / sd;
     return zscore;
 }
 export const getRadiusZscore = (ga, radiusValue) => {
     const mean = rad_mean(ga);
-	const sd = rad_sd(ga);
-	const zscore = (radiusValue - mean) / sd;
+    const sd = rad_sd(ga);
+    const zscore = (radiusValue - mean) / sd;
     return zscore;
 }
 
 export const getFemurZscore = (ga, femurValue) => {
     const mean = fem_mean(ga);
-	const sd = fem_sd(ga);
-	const zscore = (femurValue - mean) / sd;
+    const sd = fem_sd(ga);
+    const zscore = (femurValue - mean) / sd;
     return zscore;
 }
 export const getTibiaZscore = (ga, tibiaValue) => {
     const mean = tib_mean(ga);
-	const sd = tib_sd(ga);
-	const zscore = (tibiaValue - mean) / sd;
+    const sd = tib_sd(ga);
+    const zscore = (tibiaValue - mean) / sd;
     return zscore;
 }
 export const getFibulaZscore = (ga, fibulaValue) => {
     const mean = fib_mean(ga);
-	const sd = fib_sd(ga);
-	const zscore = (fibulaValue - mean) / sd;
+    const sd = fib_sd(ga);
+    const zscore = (fibulaValue - mean) / sd;
     return zscore;
 }
 export const getFootZscore = (ga, footValue) => {
     const mean = foot_mean(ga);
-	const sd = foot_sd(ga);
-	const zscore = (footValue - mean) / sd;
+    const sd = foot_sd(ga);
+    const zscore = (footValue - mean) / sd;
     return zscore;
 }
 

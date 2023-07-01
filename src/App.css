@@ -3,129 +3,146 @@
 --[2. Nav] --
 */
 
-.container{
+.container {
   max-width: 100% !important;
 }
-button:not(.react-datepicker__navigation, #dropdownMenuButton, .dropdown-item ){
+
+button:not(.react-datepicker__navigation, #dropdownMenuButton, .dropdown-item) {
   height: 40px;
   padding: 1% 5%;
   font-size: 14px;
   background-color: #01A9DB;
   box-shadow: 2px 2px 4px #666;
   border-radius: 10px;
-  width:auto;
+  width: auto;
   text-align: center;
   text-decoration: none;
   color: #fff;
   font-weight: 600;
 }
-button:not(.react-datepicker__navigation, #dropdownMenuButton , .dropdown-item ):hover{
+
+button:not(.react-datepicker__navigation, #dropdownMenuButton, .dropdown-item):hover {
   background-color: #01DFD7;
- }
- .focus{
+}
+
+.focus {
   background-color: #0187b9 !important;
- }
- .read-only-number{
-   -webkit-appearance: none;
-   margin: 0;
-   -moz-appearance: textfield;
- }
+}
+
+.read-only-number {
+  -webkit-appearance: none;
+  margin: 0;
+  -moz-appearance: textfield;
+}
+
 /* 1.- Header */
-header{
+header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   color: #039bdc;
-  font-family: "Montserrat",sans-serif;
+  font-family: "Montserrat", sans-serif;
   height: 250px;
-  overflow:hidden;
+  overflow: hidden;
 }
-#logo-with-bg{
-  background-image: url(../public/images/fachada2.png); 
+
+#logo-with-bg {
+  background-image: url(../public/images/fachada2.png);
   width: 100%;
   background-size: cover;
-  background-repeat  : no-repeat; 
+  background-repeat: no-repeat;
   background-position: 70% 65%;
 }
-#logo-container{
+
+#logo-container {
   width: 100%;
-  background-color: white;   
+  background-color: white;
   height: 160px;
   display: flex;
   flex-direction: column;
   place-items: center;
   justify-content: space-around;
 }
-#section-img-wrapper{
+
+#section-img-wrapper {
   max-height: 250px;
   min-width: 100px;
   height: 100%;
   width: 20%;
   position: relative;
 }
-#section-img{
+
+#section-img {
   margin: 0 auto auto 0;
   height: auto;
   width: 100%;
   max-width: 200px;
 }
 
-#language-wrapper{
+#language-wrapper {
   min-width: 85px;
   width: 20%;
   height: 100%;
   overflow: visible;
 }
-.dropdown{
+
+.dropdown {
   height: 38px;
   width: 63px;
   margin: 0 0 auto auto;
 }
 
 
-@media only screen and (min-width: 1280px){
+@media only screen and (min-width: 1280px) {
 
-  header h1{
+  header h1 {
     font-size: 150%;
   }
 
 }
-@media (min-width:768px) and (max-width: 1280px){
-  header h1{
+
+@media (min-width:768px) and (max-width: 1280px) {
+  header h1 {
     font-size: 130%;
     text-align: center;
-  }
-  #sub-header-container{
-    background-size: 150%; 
   }
 
-  
+  #sub-header-container {
+    background-size: 150%;
+  }
+
+
 }
-@media (min-width:500px) and (max-width: 767px){
-  #section-img{
+
+@media (min-width:500px) and (max-width: 767px) {
+  #section-img {
     margin: 50% auto auto 0;
   }
-  header h1{
+
+  header h1 {
     font-size: 130%;
     text-align: center;
   }
-  #sub-header-container{
-    background-size: 150%; 
+
+  #sub-header-container {
+    background-size: 150%;
   }
-  
+
 }
-@media only screen and (max-width: 499px){
-  header h1{
+
+@media only screen and (max-width: 499px) {
+  header h1 {
     font-size: 130%;
     text-align: center;
   }
-  #sub-header-container{
-    background-size: 150%; 
+
+  #sub-header-container {
+    background-size: 150%;
   }
 }
 
 /* 2.- Nav */
-nav{
+nav {
   display: flex;
   flex-direction: column;
   margin: 30px auto 30px auto;
@@ -133,7 +150,8 @@ nav{
   width: 100%;
   background-color: #fff;
 }
-nav .forms-container{
+
+nav .forms-container {
   display: flex;
   flex-direction: column;
   margin: auto auto 30px auto;
@@ -149,29 +167,33 @@ nav .forms-container{
 
 }
 
-nav .forms-container .FUR-form{
+nav .forms-container .FUR-form {
   display: flex;
   flex-direction: row;
   margin: auto;
   width: 90%;
   align-items: center;
   justify-content: space-between;
-  column-gap: 10px;
 }
-.react-datepicker-wrapper{
-  width: auto;
+
+.react-datepicker-wrapper,
+.expected-birth {
+  width: 23% !important;
+  min-width: 170px;
 }
-.react-datepicker-wrapper input{
+
+.react-datepicker-wrapper input {
   width: 100%;
   text-align: center;
 }
-.expected-birth{
+
+.expected-birth {
   font-size: 15px;
   height: 30px;
-  width: 50%;
   text-align: center;
 }
-nav .forms-container .weeks-form{
+
+nav .forms-container .weeks-form {
   display: flex;
   flex-direction: row;
   margin: auto;
@@ -179,13 +201,15 @@ nav .forms-container .weeks-form{
   align-items: center;
   justify-content: space-between;
 }
-.weeks-form div{
+
+.weeks-form div {
   width: auto;
   display: flex;
   column-gap: 20px;
   align-items: center;
 }
-nav #navBar{
+
+nav #navBar {
   margin: 0;
   display: none;
   flex-direction: row;
@@ -195,7 +219,8 @@ nav #navBar{
   padding: 0;
   place-items: center;
 }
-nav #navBar button{
+
+nav #navBar button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -205,57 +230,68 @@ nav #navBar button{
   width: 16.3% !important;
   margin: 0 !important;
 }
-nav #navBar button:hover{
- background-color: #01DFD7;
+
+nav #navBar button:hover {
+  background-color: #01DFD7;
 }
+
 @media screen and (max-width:900px) {
-  nav .forms-container .weeks-form div input{
+  nav .forms-container .weeks-form div input {
     width: 10%;
     min-width: 60px;
   }
-  
+
 }
-@media screen and (max-width:768px) and (min-width: 600px){
-  nav ul button{
+
+@media screen and (max-width:768px) and (min-width: 600px) {
+  nav ul button {
     font-size: 70%;
   }
 }
-@media screen and (max-width: 599px){
-  nav #navBar{
+
+@media screen and (max-width: 599px) {
+  nav #navBar {
     flex-wrap: wrap;
     width: 80%;
     margin: auto;
     column-gap: 5%;
     row-gap: 10px;
   }
-  nav #navBar button{
+
+  nav #navBar button {
     width: 47.5% !important;
   }
-  nav .forms-container{
+
+  nav .forms-container {
     row-gap: 25px;
     height: auto !important;
     padding: 25px;
   }
-  nav .forms-container form{
+
+  nav .forms-container form {
     flex-direction: column !important;
     row-gap: 10px;
-    
+
   }
-  nav .forms-container form .expected-birth, 
+
+  nav .forms-container form .expected-birth,
   nav .forms-container form button,
-  nav .forms-container .weeks-form div{
+  nav .forms-container .weeks-form div {
     width: 100% !important;
   }
-  nav .forms-container form div{
+
+  nav .forms-container form div {
     flex-direction: column;
   }
-  nav .forms-container .weeks-form div input{
+
+  nav .forms-container .weeks-form div input {
     width: 36%;
     min-width: 60px;
   }
 }
+
 /* [3. Services Container]*/
-.service-container{
+.service-container {
   display: flex;
   flex-direction: column;
   width: 97.5%;
@@ -269,7 +305,8 @@ nav #navBar button:hover{
   box-shadow: 2px 2px 4px #666;
   margin-bottom: 25px;
 }
-.title-container{
+
+.title-container {
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -277,26 +314,30 @@ nav #navBar button:hover{
   align-items: center;
   border-bottom: 2px solid #039bdc;
 }
-.weeksAndDays{
-    display: flex;
-    width: 30%;
-    flex-direction: row;
-    justify-content: space-between;
+
+.weeksAndDays {
+  display: flex;
+  width: 30%;
+  flex-direction: row;
+  justify-content: space-between;
 }
-.service-content{
+
+.service-content {
   height: auto;
   display: flex;
   flex-direction: row;
   padding-top: 5%;
 }
-.pair{
+
+.pair {
   width: 100%;
   display: flex;
   flex-direction: row;
   row-gap: 15px;
   justify-content: space-between;
 }
-.pair span{
+
+.pair span {
   background-color: #ddd;
   border: 1px solid #888;
   border-radius: 3px;
@@ -304,46 +345,55 @@ nav #navBar button:hover{
   min-width: 100px;
   width: auto;
 }
-.pair .input{
+
+.pair .input {
   width: 50%;
   display: flex;
 
 }
-.pair .input span{
+
+.pair .input span {
   width: 60%;
 }
-.pair .input input[type="number"]{
+
+.pair .input input[type="number"] {
   width: 33%;
   min-width: 60px;
 }
-.pair .scores{
+
+.pair .scores {
   display: flex;
   justify-content: flex-end;
   min-width: 170px;
 }
-.pair .scores span{
+
+.pair .scores span {
   width: auto;
   min-width: 25px;
 }
-.percentile-bar-content p{
-  color:white;
+
+.percentile-bar-content p {
+  color: white;
   text-align: center;
 }
-@media screen and (max-width:768px){
-}
-@media screen and (max-width:500px){
-  .pair{
+
+@media screen and (max-width:768px) {}
+
+@media screen and (max-width:500px) {
+  .pair {
     min-width: 200px;
     flex-direction: column;
   }
-  .pair .scores{
+
+  .pair .scores {
     display: flex;
     justify-content: center;
-  
+
   }
 }
+
 /* [4. Datation content]*/
-#datation-container{
+#datation-container {
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -353,31 +403,35 @@ nav #navBar button:hover{
   width: auto;
   margin: auto;
 }
-#datation-container .datation-input{
+
+#datation-container .datation-input {
   display: flex;
   flex-direction: row;
   place-items: center;
 }
 
-#datation-container .datation-input input{
+#datation-container .datation-input input {
   min-width: 100px;
 }
 
- #datation-container .datation-input .pair{
+#datation-container .datation-input .pair {
   display: flex;
 }
-@media screen and (max-width: 891px){
-  #datation-container{
+
+@media screen and (max-width: 891px) {
+  #datation-container {
     min-width: 200px;
     row-gap: 50px;
   }
-  .pair .input{
+
+  .pair .input {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    
+
   }
-  #datation-container .datation-input{
+
+  #datation-container .datation-input {
     flex-direction: column;
     width: 100%;
     row-gap: 25px;
@@ -386,12 +440,13 @@ nav #navBar button:hover{
 
 
 /* 5.- Biometric container*/
-#biometric-container{
+#biometric-container {
   width: 100%;
   display: flex;
   flex-direction: row;
 }
-#left-biometric{
+
+#left-biometric {
   width: 50%;
   padding-right: 5%;
   display: flex;
@@ -399,16 +454,19 @@ nav #navBar button:hover{
   row-gap: 25px;
   border-right: 1px solid #bbb;
 }
-#rigth-biometric{
+
+#rigth-biometric {
   padding-left: 5%;
   height: 100%;
   width: 50%;
 }
+
 @media screen and (max-width:891px) {
-  #biometric-container{
+  #biometric-container {
     flex-direction: column;
   }
-  #left-biometric{
+
+  #left-biometric {
     width: 100%;
     padding-bottom: 5%;
     padding-right: 0;
@@ -416,13 +474,16 @@ nav #navBar button:hover{
     border-right: unset;
     border-bottom: 1px solid #bbb;
   }
-  #rigth-biometric{
+
+  #rigth-biometric {
     width: 100%;
     padding-top: 5%;
     padding-left: 0;
   }
 }
-.percentile-bar-container,.meter{
+
+.percentile-bar-container,
+.meter {
   display: block;
   width: 96%;
   background-color: #ddd;
@@ -434,54 +495,53 @@ nav #navBar button:hover{
   border-radius: 25px;
   box-shadow: inset 0 -1px 1px rgba(255, 255, 255, 0.3);
 }
-.percentile-bar-content{
+
+.percentile-bar-content {
   animation-duration: 5s;
   animation-iteration-count: infinite;
   animation-direction: left;
   display: block;
   border-radius: 25px !important;
   height: 25px;
-  transition:500ms linear;
+  transition: 500ms linear;
 }
 
-.meter > span {
+.meter>span {
   width: 0;
   display: block;
   background-color: rgb(43, 194, 83);
-  background-image: linear-gradient(
-    center bottom,
-    rgb(43, 194, 83) 15%,
-    rgb(84, 240, 84) 40%
-  );
+  background-image: linear-gradient(center bottom,
+      rgb(43, 194, 83) 15%,
+      rgb(84, 240, 84) 40%);
   box-shadow: inset 0 2px 9px rgba(255, 255, 255, 0.3),
     inset 0 -2px 6px rgba(0, 0, 0, 0.4);
   position: relative;
   overflow: hidden;
 }
-.meter > span:after,
-.animate > span > span {
+
+.meter>span:after,
+.animate>span>span {
   content: "";
   position: absolute;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
-  background-image: linear-gradient(
-    -45deg,
-    rgba(255, 255, 255, 0.2) 25%,
-    transparent 25%,
-    transparent 50%,
-    rgba(255, 255, 255, 0.2) 50%,
-    rgba(255, 255, 255, 0.2) 75%,
-    transparent 75%,
-    transparent
-  );
+  background-image: linear-gradient(-45deg,
+      rgba(255, 255, 255, 0.2) 25%,
+      transparent 25%,
+      transparent 50%,
+      rgba(255, 255, 255, 0.2) 50%,
+      rgba(255, 255, 255, 0.2) 75%,
+      transparent 75%,
+      transparent);
   z-index: 1;
   background-size: 50px 50px;
   animation: move 2s linear infinite;
   overflow: hidden;
 }
-.animate > span:after {
+
+.animate>span:after {
   display: none;
 }
 
@@ -489,92 +549,110 @@ nav #navBar button:hover{
   0% {
     background-position: 0 0;
   }
+
   100% {
     background-position: 50px 50px;
   }
 }
 
-.biometric-single{
+.biometric-single {
   display: flex;
   flex-direction: column;
   row-gap: 15px;
 }
-#rigth-biometric table{
+
+#rigth-biometric table {
   text-align: center;
   width: 100%;
   border-bottom: solid 2px #01A9DB;
 }
-#rigth-biometric table thead{
+
+#rigth-biometric table thead {
   border-bottom: solid 2px #01A9DB;
 }
-#rigth-biometric table th{
+
+#rigth-biometric table th {
   padding: 15px 0;
 }
-#rigth-biometric table tbody th{
+
+#rigth-biometric table tbody th {
   border-bottom: solid 1px #01A9DB;
 }
-#rigth-biometric table span:not(.percentile-bar-container, .percentile-bar-content){
+
+#rigth-biometric table span:not(.percentile-bar-container, .percentile-bar-content) {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 }
-.percentile-table-container{
+
+.percentile-table-container {
   width: 100%;
   display: block;
   padding-top: 15px;
 }
-.genreSelector{
+
+.genreSelector {
   margin: 0 !important;
   border-radius: 0 !important;
   box-shadow: none !important;
   border: none;
 }
-.genreSelector:focus{
+
+.genreSelector:focus {
   background-color: #0187b9 !important;
 }
 
 /** 6.- Hemodinamic styles **/
-#hemodinamic-studio{
+#hemodinamic-studio {
   display: flex;
   flex-direction: row;
   width: 100%;
   padding: 50px 0px;
   place-items: center;
 }
-#left-hemodinamic{
+
+#left-hemodinamic {
   width: 33%;
   padding-right: 5%;
 }
-#center-hemodinamic{
+
+#center-hemodinamic {
   padding-left: 2.5%;
   padding-right: 2.5%;
   width: 33%;
 
 }
-#right-hemodinamic{
+
+#right-hemodinamic {
   padding-left: 5%;
   height: 100%;
   width: 33%;
 }
-.single-hemodinamic-displayer p{
+
+.single-hemodinamic-displayer p {
   margin-bottom: 0;
 }
-.hemodinamic-single{
+
+.hemodinamic-single {
   width: 100%;
 }
-#hemodinamic-studio .percentile-table-container{
+
+#hemodinamic-studio .percentile-table-container {
   padding-top: 0 !important;
   padding-bottom: 10px;
 }
-.input span p{
+
+.input span p {
   margin: 15% auto;
 }
-.double-input{
+
+.double-input {
   display: flex;
   flex-direction: column;
 }
-.double-input div{
+
+.double-input div {
   display: flex;
   flex-direction: row;
 }
@@ -582,26 +660,28 @@ nav #navBar button:hover{
 /**
 * BONES
 */
-#bones-studio{
+#bones-studio {
   padding-top: 5%;
   display: flex;
   flex-direction: row;
   place-items: center;
 }
-#leg-bones{
-width: 50%;
-padding-left: 5%;
-border-left: 1px solid #bbb;
+
+#leg-bones {
+  width: 50%;
+  padding-left: 5%;
+  border-left: 1px solid #bbb;
 }
-#hand-bones{
-width: 50%;
-padding-right: 5%;
+
+#hand-bones {
+  width: 50%;
+  padding-right: 5%;
 }
 
 /**
 * LANCET
 */
-.left-lancet{
+.left-lancet {
   width: 50%;
   padding-right: 5%;
   border-right: 1px solid #bbb;

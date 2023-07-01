@@ -3,18 +3,18 @@ import { useTranslation } from "react-i18next";
 import { getFemurZscore, getTibiaZscore, getFibulaZscore, getFootZscore, displayBar, getZPercent } from "../functions.js";
 export default function LegBones(props) {
     const [ga, setGa] = useState(props.ga);
-    const [femurValue,    setFemurValue] = useState("");
-    const [femurZscore,   setFemurZscore] = useState("");
-    const [femurPercent,  setFemurPercent] = useState("");
-    const [tibiaValue,   setTibiaValue] = useState("");
-    const [tibiaZscore,  setTibiaZscore] = useState("");
+    const [femurValue, setFemurValue] = useState("");
+    const [femurZscore, setFemurZscore] = useState("");
+    const [femurPercent, setFemurPercent] = useState("");
+    const [tibiaValue, setTibiaValue] = useState("");
+    const [tibiaZscore, setTibiaZscore] = useState("");
     const [tibiaPercent, setTibiaPercent] = useState("");
-    const [fibulaValue,     setFibulaValue] = useState("");
-    const [fibulaZscore,    setFibulaZscore] = useState("");
-    const [fibulaPercent,   setFibulaPercent] = useState("");
-    const [footValue,     setFootValue] = useState("");
-    const [footZscore,    setFootZscore] = useState("");
-    const [footPercent,   setFootPercent] = useState("");
+    const [fibulaValue, setFibulaValue] = useState("");
+    const [fibulaZscore, setFibulaZscore] = useState("");
+    const [fibulaPercent, setFibulaPercent] = useState("");
+    const [footValue, setFootValue] = useState("");
+    const [footZscore, setFootZscore] = useState("");
+    const [footPercent, setFootPercent] = useState("");
     const { t } = useTranslation();
 
     function handleFemurChange(event) {

@@ -31,7 +31,6 @@ export default function Lancet(props) {
         handleClinicChanges(event.target.value);
         handleGregorioLancetChanges(event.target.value);
         handleTalaveraLancetChanges(event.target.value);
-        handleAlcazarLancetChanges(event.target.value);
         handleFuenlabradaLancetChanges(event.target.value);
     }
     function handleSelectGenre(event) {
@@ -64,7 +63,7 @@ export default function Lancet(props) {
     }
     function handleGregorioLancetChanges(weight) {
         const gregorioReferenceWeight = hospitalGetWeight(ga, genre, "gregorio2");
-        const gregorioCalculatedZscore = hospitalGetZscore(weight, gregorioReferenceWeight, "gregorio2",genre);
+        const gregorioCalculatedZscore = hospitalGetZscore(weight, gregorioReferenceWeight, "gregorio2", genre);
         const gregorioPercent = getZPercent(gregorioCalculatedZscore);
         setGregorioWeight(gregorioReferenceWeight.toFixed(2));
         setGregorioZscore(gregorioCalculatedZscore.toFixed(2));
@@ -73,7 +72,7 @@ export default function Lancet(props) {
     }
     function handleTalaveraLancetChanges(weight) {
         const referenceWeight = hospitalGetWeight(ga, genre, "talavera");
-        const calculatedZscore = hospitalGetZscore(weight, referenceWeight, "talavera",genre);
+        const calculatedZscore = hospitalGetZscore(weight, referenceWeight, "talavera", genre);
         const percent = getZPercent(calculatedZscore);
         setTalaveraWeight(referenceWeight.toFixed(2));
         setTalaveraZscore(calculatedZscore.toFixed(2));
@@ -82,21 +81,12 @@ export default function Lancet(props) {
     }
     function handleFuenlabradaLancetChanges(weight) {
         const referenceWeight = hospitalGetWeight(ga, genre, "fuenlabrada");
-        const calculatedZscore = hospitalGetZscore(weight, referenceWeight, "fuenlabrada",genre);
+        const calculatedZscore = hospitalGetZscore(weight, referenceWeight, "fuenlabrada", genre);
         const percent = getZPercent(calculatedZscore);
         setFuenlabradaWeight(referenceWeight.toFixed(2));
         setFuenlabradaZscore(calculatedZscore.toFixed(2));
         setFuenlabradaPercentile(percent.toFixed(0));
         displayBar(percent.toFixed(0), 'percentile-bar-bio-fuenlabrada-lancet');
-    }
-    function handleAlcazarLancetChanges(weight) {
-        const referenceWeight = hospitalGetWeight(ga, genre, "alcazar");
-        const calculatedZscore = hospitalGetZscore(weight, referenceWeight, "alcazar",genre);
-        const percent = getZPercent(calculatedZscore);
-        setAlcazarWeight(referenceWeight.toFixed(2));
-        setAlcazarZscore(calculatedZscore.toFixed(2));
-        setAlcazarPercentile(percent.toFixed(0));
-        displayBar(percent.toFixed(0), 'percentile-bar-bio-alcazar-lancet');
     }
     useEffect(() => {
         setGa((props.weeks) + props.days / 7);
@@ -111,7 +101,6 @@ export default function Lancet(props) {
             handleClinicChanges(weight);
             handleGregorioLancetChanges(weight);
             handleTalaveraLancetChanges(weight);
-            handleAlcazarLancetChanges(weight);
             handleFuenlabradaLancetChanges(weight);
         } else {
             setWeight(props.weight);
@@ -119,7 +108,6 @@ export default function Lancet(props) {
             handleClinicChanges(props.weight);
             handleGregorioLancetChanges(props.weight);
             handleTalaveraLancetChanges(props.weight);
-            handleAlcazarLancetChanges(props.weight);
             handleFuenlabradaLancetChanges(props.weight);
         }
     });
@@ -187,15 +175,6 @@ export default function Lancet(props) {
                             </span>
                         </span>
                     </div>
-                    <div className='percentile-table-container'>
-                        <p style={{ fontStyle: 'italic', color: 'red', fontWeight: 'bold' }}>ERROR DE VALOR PESO PARA NIÑA Lancet Alcázar de San Juan (p{alcazarPercentile}) ({alcazarWeight}g) ({alcazarZscore}z)</p>
-                        <span className='meter percentile-bar-container'>
-                            <span className='percentile-bar-content' id='percentile-bar-bio-alcazar-lancet'>
-                                <p>p{alcazarPercentile}</p>
-                            </span>
-                        </span>
-                    </div>
-
                 </div>
             </div>
         </div>

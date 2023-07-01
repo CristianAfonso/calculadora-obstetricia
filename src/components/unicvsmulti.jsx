@@ -1,9 +1,9 @@
 import React from 'react';
 import { useTranslation } from "react-i18next";
 
-export default function Unicvsmulti(props){
-    const {t} = useTranslation();
-    return(
+export default function Unicvsmulti(props) {
+    const { t } = useTranslation();
+    return (
         <div className="service-container">
             <div className='title-container'>
                 <h3>{t('unicvsmulti')}</h3>

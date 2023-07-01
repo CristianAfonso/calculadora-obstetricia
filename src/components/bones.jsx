@@ -6,7 +6,7 @@ export default function Bones(props) {
     const [ga, setGa] = useState((props.weeks) + props.days / 7);
     const { t } = useTranslation();
 
-    useEffect(() =>{
+    useEffect(() => {
         setGa((props.weeks) + props.days / 7);
     })
     return (
