@@ -284,7 +284,7 @@ export const hospitalGetWeight = (ga, genre, hospital) => {
     }
     return expectedWeight;
 }
-const hospitalAuxSD = (expectedWeight, genre, hospital) => {
+export const hospitalAuxSD = (expectedWeight, genre, hospital) => {
     let genreValue = 0;
     let genreMean = 0;
     let sd = 0;
@@ -340,6 +340,41 @@ export const hospitalGetZscore = (weight, referenceWeight, hospital, genre) => {
             return zscore;
     }
 }
+// twins 
+
+export const hospitalGetTwinsWeight = (ga, genre, hospital) => {
+    if (!genre) {
+        genre = 'male';
+    }
+    let genreValue = 0;
+    let expectedWeight = 0;
+    switch (hospital) {
+        case "gregorio":
+            const eg = -0.4602458;
+            const eg2 = 0.01879654;
+            const eg3 = -0.00020637;
+            if (genre === "male") {
+                genreValue = 0.04579971;        //Estandarizar
+            }
+            const constant = 9.6297115;        //Estandarizar
+            expectedWeight = constant + (eg * ga) + (eg2 * Math.pow(ga, 2)) + (eg3 * Math.pow(ga, 3)) + (genreValue);
+            break;
+        case "clinic":
+            ga*=7;
+            if (genre === 'male') {
+                genreValue = 2953;        //Estandarizar
+            } else {
+                genreValue = 2953-120;        //Estandarizar
+            }
+            expectedWeight =  genreValue * (-0.1266838 + (Math.pow(ga, 2) * 1.06618E-5) + (Math.pow(ga, 3) * 1.3196E-8));
+            break;
+        default:
+            return 0;
+    }
+    return expectedWeight;
+}
+
+
 /*
 * 
 * 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from "react-i18next";
 import { displayBar, getZPercent, hospitalGetWeight, hospitalGetZscore } from "./functions";
+import LancetChart from './charts/lancetChart';
 export default function Lancet(props) {
     const [ga, setGa] = useState((props.weeks) + props.days / 7);
     const [weight, setWeight] = useState("");
@@ -19,9 +20,6 @@ export default function Lancet(props) {
     const [fuenlabradaPercentile, setFuenlabradaPercentile] = useState("");
     const [fuenlabradaWeight, setFuenlabradaWeight] = useState("");
     const [fuenlabradaZscore, setFuenlabradaZscore] = useState("");
-    const [alcazarPercentile, setAlcazarPercentile] = useState("");
-    const [alcazarWeight, setAlcazarWeight] = useState("");
-    const [alcazarZscore, setAlcazarZscore] = useState("");
     const [genre, setGenre] = useState("");
     const { t } = useTranslation();
 
@@ -115,10 +113,10 @@ export default function Lancet(props) {
     return (
         <div className="service-container">
             <div className='title-container'>
-                <h3>{t('lancet')}</h3>
+                <h1>{t('lancet')}</h1>
                 <div className='weeksAndDays'>
-                    <p>{t('weeks')}: {props.weeks}</p>
-                    <p>{t('days')}: {props.days}</p>
+                    <h3>{t('weeks')}: {props.weeks}</h3>
+                    <h3>{t('days')}: {props.days}</h3>
                 </div>
             </div>
             <div className='service-content'>
@@ -176,6 +174,7 @@ export default function Lancet(props) {
                         </span>
                     </div>
                 </div>
+                <LancetChart ga={ga} weight={weight} genre={genre}/>
             </div>
         </div>
     );

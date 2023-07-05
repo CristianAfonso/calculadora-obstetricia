@@ -148,27 +148,33 @@ export default function Nav(props) {
         <nav>
             <div className='forms-container'>
                 <form className='FUR-form' onSubmit={handleFURSubmit}>
-                    <DatePicker
-                        placeholderText={t('FUR')}
-                        value={estimatedDueDate && lastPeriodDate.toLocaleDateString()}
-                        id="last-period-date"
-                        onChange={handleDateChange}
-                    />
-                    <DatePicker
-                        placeholderText={t('FECO')}
-                        value={ecoDate && ecoDate.toLocaleDateString()}
-                        id="last-eco-date"
-                        onChange={handleEcoChange}
-                    />
-                    <input
-                        type='text'
-                        className='expected-birth'
-                        placeholder={t('EXPECTEDBIRTH')}
-                        value={estimatedDueDate && (
-                            `${t('EXPECTEDBIRTH')} ${estimatedDueDate.toLocaleDateString()}`
-                        )}
-                        readOnly
-                    />
+                    <div className='date-content'>
+                        <h6>{t('fur_title')}</h6>
+                        <DatePicker
+                            placeholderText={t('FUR')}
+                            value={estimatedDueDate && lastPeriodDate.toLocaleDateString()}
+                            id="last-period-date"
+                            onChange={handleDateChange}
+                        />
+                    </div>
+                    <div className='date-content'>
+                        <h6>{t('last_eco_title')}</h6>
+                        <DatePicker
+                            placeholderText={t('FECO')}
+                            value={ecoDate && ecoDate.toLocaleDateString()}
+                            id="last-eco-date"
+                            onChange={handleEcoChange}
+                        />
+                    </div>
+                    <div className='date-content'>
+                        <h6>{t('expected_birth')}</h6>
+                        <input
+                            type='text'
+                            className='expected-birth'
+                            value={estimatedDueDate && estimatedDueDate.toLocaleDateString()}
+                            readOnly
+                        />
+                    </div>
                     <button className="submitButton" onClick={handleFURSubmit}
                         type="button">{furWeeks} {t('weeks')} + {furDays} {t('days')}</button>
 
@@ -209,6 +215,7 @@ export default function Nav(props) {
                             type="number"
                             id="lcc"
                             name="lcc"
+                            placeholder={t('mm')}
                             min={0}
                             value={lcc}
                             onChange={handleLCCChange}

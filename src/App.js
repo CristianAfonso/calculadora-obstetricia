@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import { useTranslation } from "react-i18next";
 import Nav from './components/nav';
@@ -9,9 +8,11 @@ import Lancet from './components/lancet';
 import Bones from './components/bones';
 import Unicvsmulti from './components/unicvsmulti';
 import { useEffect, useState } from 'react';
-import { subDays } from 'date-fns';
+import cookies from 'js-cookie';
 
-function App() {
+function App(props) {
+  const currentLanguageCode = cookies.get('i18next') || 'en';
+  const currentLanguage = props.languages.find(l => l.code === currentLanguageCode);
   const { t } = useTranslation();
   const [actualComponent, setActualComponent] = useState("");
   const [lastPeriodDate, setLastPeriodDate] = useState(new Date());
@@ -52,9 +53,11 @@ function App() {
     setNewPeriodDate("");
   }
   useEffect(() => {
-    setWeeks(weeks);
+    document.getElementById("page_title").innerHTML=t('page_title');
+    document.body.dir = currentLanguage.dir || 'ltr';
+    setWeeks(w =>weeks);
     setDays(days);
-  })
+  }, [days, t, weeks, currentLanguage])
   return (
 
     <div className="container">
@@ -64,19 +67,20 @@ function App() {
         stopUpdateFUR={stopUpdateFUR} stopUpdateWeeksandDays={stopUpdateWeeksandDays}
         lastPeriodDateUpdated={lastPeriodDate} weeks={weeks} days={days}
         newPeriodDate={newPeriodDate} newWeeks={newWeeks} newDays={newDays}></Nav>
-      {actualComponent == "datation" && <Datation updateNewPeriod={setNewPeriodDate}
+      {actualComponent === "datation" && <Datation updateNewPeriod={setNewPeriodDate}
         GiveNewTime={GetNewTime} ecoDate={lastEcoDate} lastPeriodDate={lastPeriodDate}
         setDBP={setDBPData} setLF={setLFData} setLCC={setLCCData} weeks={weeks} days={days}
         lcc={lcc} dbp={dbp} lf={lf} />}
-      {actualComponent == "biometric" && <Biometric weeks={weeks} days={days}
+      {actualComponent === "biometric" && <Biometric weeks={weeks} days={days}
         setMCA={setMCA} setUA={setUA} ua={ua} mca={mca} weight={weight}
         genre={genre} setGenre={setGenre} setWeight={setWeight} />}
-      {actualComponent == "hemodinamic" && <Hemodinamic weeks={weeks} days={days}
+      {actualComponent === "hemodinamic" && <Hemodinamic weeks={weeks} days={days}
         setMCA={setMCA} setUA={setUA} ua={ua} mca={mca} />}
-      {actualComponent == "bones" && <Bones weeks={weeks} days={days} />}
-      {actualComponent == "lancet" && <Lancet weeks={weeks} days={days} weight={weight}
+      {actualComponent === "bones" && <Bones weeks={weeks} days={days} />}
+      {actualComponent === "lancet" && <Lancet weeks={weeks} days={days} weight={weight}
         genre={genre} setGenre={setGenre} setWeight={setWeight} />}
-      {actualComponent == "unicvsmulti" && <Unicvsmulti weeks={weeks} days={days} />}
+      {actualComponent === "unicvsmulti" && <Unicvsmulti weeks={weeks} days={days} weight={weight}
+        genre={genre} setGenre={setGenre} setWeight={setWeight} />}
     </div>
   );
 }

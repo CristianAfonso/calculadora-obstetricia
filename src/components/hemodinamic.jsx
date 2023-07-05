@@ -28,10 +28,10 @@ export default function Hemodinamic(props) {
     return (
         <div className="service-container">
             <div className='title-container'>
-                <h3>{t('hemodinamic')}</h3>
+                <h1>{t('hemodinamic')}</h1>
                 <div className='weeksAndDays'>
-                    <p>{t('weeks')}: {props.weeks}</p>
-                    <p>{t('days')}: {props.days}</p>
+                    <h3>{t('weeks')}: {props.weeks}</h3>
+                    <h3>{t('days')}: {props.days}</h3>
                 </div>
             </div>
             <div className='service-content'>

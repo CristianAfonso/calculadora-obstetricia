@@ -13,6 +13,35 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Header from './components/header.jsx';
 
+const languages = [
+  {
+      code: 'ar',
+      name: 'العربية',
+      dir: 'rtl',
+      country_code: 'sa',
+  },
+  {
+      code: 'en',
+      name: 'English',
+      country_code: 'gb'
+  },
+  {
+      code: 'es',
+      name: 'Español',
+      country_code: 'es'
+  },
+  {
+      code: 'fr',
+      name: 'Français',
+      country_code: 'fr'
+  },
+  {
+      code: 'pt',
+      name: 'Português',
+      country_code: 'pt'
+  },
+]
+
 i18n
   .use(initReactI18next)
   .use(LanguageDetector)
@@ -39,8 +68,8 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Suspense fallback={loadingMarkup}>
     <React.StrictMode>
-      <Header></Header>
-      <App />
+      <Header languages={languages}/>
+      <App languages={languages}/>
     </React.StrictMode>
   </Suspense>
 
