@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/calculadora-obstetricia/static/css/main.fe7943ca.css",
-    "main.js": "/calculadora-obstetricia/static/js/main.d6ecd14b.js",
+    "main.css": "/calculadora-obstetricia/static/css/main.d9ed5363.css",
+    "main.js": "/calculadora-obstetricia/static/js/main.d41a2482.js",
     "static/js/787.864fe9aa.chunk.js": "/calculadora-obstetricia/static/js/787.864fe9aa.chunk.js",
     "static/media/fachada2.png": "/calculadora-obstetricia/static/media/fachada2.9de7d301d96779d71e21.png",
     "static/media/do.svg": "/calculadora-obstetricia/static/media/do.3ecb625b75ec64be4376.svg",
@@ -92,7 +92,6 @@
     "static/media/gi.svg": "/calculadora-obstetricia/static/media/gi.89adf2b0737e6987f658.svg",
     "static/media/nz.svg": "/calculadora-obstetricia/static/media/nz.0dcf8cf746e1d65a4528.svg",
     "static/media/lb.svg": "/calculadora-obstetricia/static/media/lb.ede59c1723abcf425c23.svg",
-    "static/media/logo.svg": "/calculadora-obstetricia/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "static/media/mz.svg": "/calculadora-obstetricia/static/media/mz.525b13720883d5b9fdd2.svg",
     "static/media/tw.svg": "/calculadora-obstetricia/static/media/tw.39308d8769d9190bd1aa.svg",
     "static/media/cx.svg": "/calculadora-obstetricia/static/media/cx.b7e461d75f0be7e9609d.svg",
@@ -272,12 +271,12 @@
     "static/media/pl.svg": "/calculadora-obstetricia/static/media/pl.cd835d05865e496ff6b8.svg",
     "static/media/de.svg": "/calculadora-obstetricia/static/media/de.6435bf24d148ca7248e7.svg",
     "static/media/bd.svg": "/calculadora-obstetricia/static/media/bd.0ad8c443ef4d47ea0497.svg",
-    "main.fe7943ca.css.map": "/calculadora-obstetricia/static/css/main.fe7943ca.css.map",
-    "main.d6ecd14b.js.map": "/calculadora-obstetricia/static/js/main.d6ecd14b.js.map",
+    "main.d9ed5363.css.map": "/calculadora-obstetricia/static/css/main.d9ed5363.css.map",
+    "main.d41a2482.js.map": "/calculadora-obstetricia/static/js/main.d41a2482.js.map",
     "787.864fe9aa.chunk.js.map": "/calculadora-obstetricia/static/js/787.864fe9aa.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.fe7943ca.css",
-    "static/js/main.d6ecd14b.js"
+    "static/css/main.d9ed5363.css",
+    "static/js/main.d41a2482.js"
   ]
 }
