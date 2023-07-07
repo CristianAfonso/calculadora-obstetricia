@@ -58,7 +58,7 @@ export default function SystolicComponent(props) {
     }
     useEffect(() => {
         setGa(props.ga);
-    })
+    }, [props])
     return (
         <div id="center-hemodinamic">
             <div className='hemodinamic-single'>

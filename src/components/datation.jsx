@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from "react-i18next";
-import { set, subDays, subWeeks } from "date-fns";
+import { subDays } from "date-fns";
 import moment from 'moment';
+import { matchingGA } from './functions';
 
 export default function Datation(props) {
     const [weeks, setWeeks] = useState(props.weeks);
@@ -39,16 +40,16 @@ export default function Datation(props) {
         props.setLF(event.target.value);
         updateDaysLF(event.target.value);
     }
-    function updateDaysLCC(value) {
-        const calculatedDays = 40.9041 + (3.21585 * Math.pow(value, 0.5)) + (0.348956 * value);
+    const updateDaysLCC = useCallback((value) => {
+        const calculatedDays = matchingGA(value, "LCC");
         const newDate = subDays(ecoDate, calculatedDays);
         const totalDays = moment(ecoDate).diff(newDate, 'days');
         const totalWeeks = moment(ecoDate).diff(newDate, 'weeks');
         setLCCDays(totalDays % 7);
         setLCCWeeks(totalWeeks);
-    }
+    }, [ecoDate])
     function updateDaysDBP(value) {
-        const calculatedDays = 2 * value + 44.2;
+        const calculatedDays = matchingGA(value, "DBP");
         const newDate = subDays(ecoDate, calculatedDays);
         const totalDays = moment(ecoDate).diff(newDate, 'days');
         const totalWeeks = moment(ecoDate).diff(newDate, 'weeks');
@@ -56,7 +57,7 @@ export default function Datation(props) {
         setDBPWeeks(totalWeeks);
     }
     function updateDaysLF(value) {
-        const calculatedDays = 7 * (5.2876 + (0.1584 * value) - (0.0007 * Math.pow(value, 2)));
+        const calculatedDays = matchingGA(value, "LF");
         const newDate = subDays(ecoDate, calculatedDays);
         const totalDays = moment(ecoDate).diff(newDate, 'days');
         const totalWeeks = moment(ecoDate).diff(newDate, 'weeks');
@@ -70,36 +71,23 @@ export default function Datation(props) {
         setNewFur(newDate);
         setNewDays(totalDays % 7);
         setNewWeeks(totalWeeks);
-        if (lastFur != displayedNewFur) {
+        if (lastFur !== displayedNewFur) {
             setLastFur(displayedNewFur);
         }
     }
     function lccCalculate() {
         if (lccData >= 2 && lccData <= 121) {
-            calculateNewFur('LCC');
+            updateFur(matchingGA(lccData, "LCC"));
         }
     }
     function dbpCalculate() {
         if (dbpData >= 31 && dbpData <= 100) {
-            calculateNewFur('DBP');
+            updateFur(matchingGA(dbpData, "DBP"));
         }
     }
     function lfCalculate() {
         if (lfData >= 17 && lfData <= 75) {
-            calculateNewFur('LF');
-        }
-    }
-    function calculateNewFur(method) {
-        switch (method) {
-            case 'LCC':
-                updateFur(40.9041 + (3.21585 * Math.pow(lccData, 0.5)) + (0.348956 * lccData)); //CRL Ultrasound Obstet Gynecol 2014; 44: 641-648: https://obgyn.onlinelibrary.wiley.com/doi/pdf/10.1002/uog.13448
-                break;
-            case 'DBP':
-                updateFur(2 * dbpData + 44.2);
-                break;
-            case 'LF':
-                updateFur(7 * (5.2876 + (0.1584 * lfData) - (0.0007 * Math.pow(lfData, 2))));
-                break;
+            updateFur(matchingGA(lfData, "LF"));
         }
     }
 
@@ -123,7 +111,11 @@ export default function Datation(props) {
             props.GiveNewTime(newWeeks, days);
             setNewWeeks("");
         }
-    });
+        if (props.lcc !== lccData) {
+            setLCCData(props.lcc);
+            updateDaysLCC(props.lcc);
+        }
+    }, [props, newFur, newDays, newWeeks, lccData, weeks, days, updateDaysLCC]);
     return (
         <div className="service-container">
             <div className='title-container'>
@@ -149,11 +141,11 @@ export default function Datation(props) {
                         <div className="pair">
                             <div>
                                 <h6>{t('last_fur')}</h6>
-                                <span className="last-fur-span">{lastFur && lastFur.toLocaleDateString()}</span>
+                                <span className="last-fur-span">{lastFur.toLocaleDateString()}</span>
                             </div>
                             <div>
                                 <h6>{t('new_fur')}</h6>
-                                <span className="last-fur-span">{displayedNewFur && displayedNewFur.toLocaleDateString()}</span>
+                                <span className="last-fur-span">{displayedNewFur.toLocaleDateString()}</span>
                             </div>
                         </div>
                         <button onClick={lccCalculate}>{lccWeeks} {t('weeks')} + {lccDays} {t('days')}</button>
@@ -172,11 +164,11 @@ export default function Datation(props) {
                         <div className="pair">
                             <div>
                                 <h6>{t('last_fur')}</h6>
-                                <span className="last-fur-span">{lastFur && lastFur.toLocaleDateString()}</span>
+                                <span className="last-fur-span">{lastFur.toLocaleDateString()}</span>
                             </div>
                             <div>
                                 <h6>{t('new_fur')}</h6>
-                                <span className="last-fur-span">{displayedNewFur && displayedNewFur.toLocaleDateString()}</span>
+                                <span className="last-fur-span">{displayedNewFur.toLocaleDateString()}</span>
                             </div>
                         </div>
                         <button onClick={dbpCalculate}>{dbpWeeks} {t('weeks')} + {dbpDays} {t('days')}</button>
@@ -197,11 +189,11 @@ export default function Datation(props) {
                         <div className="pair">
                             <div>
                                 <h6>{t('last_fur')}</h6>
-                                <span className="last-fur-span">{lastFur && lastFur.toLocaleDateString()}</span>
+                                <span className="last-fur-span">{lastFur.toLocaleDateString()}</span>
                             </div>
                             <div>
                                 <h6>{t('new_fur')}</h6>
-                                <span className="last-fur-span">{displayedNewFur && displayedNewFur.toLocaleDateString()}</span>
+                                <span className="last-fur-span">{displayedNewFur.toLocaleDateString()}</span>
                             </div>
                         </div>
                         <button onClick={lfCalculate}>{lfWeeks} {t('weeks')} + {lfDays} {t('days')}</button>

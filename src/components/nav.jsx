@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from "react-i18next";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import moment from 'moment';
 import { subDays, subWeeks } from "date-fns";
+import { matchingGA } from './functions';
 
 export default function Nav(props) {
     const [furWeeks, setFURWeeks] = useState(0);
@@ -16,7 +17,7 @@ export default function Nav(props) {
     const [ecoDate, setEcoDate] = useState(today);
     const [estimatedDueDate, setEstimatedDueDate] = useState("");
     const [actualComponent, setActualComponent] = useState("");
-    const [lcc, setLCC] = useState("");
+    const [lcc, setLCC] = useState(props.lcc);
     const [lccDays, setLCCDays] = useState("");
     const [lccWeeks, setLCCWeeks] = useState("");
 
@@ -99,7 +100,8 @@ export default function Nav(props) {
 
     function handleLCCChange(event) {
         setLCC(event.target.value);
-        const calculatedDays = 40.9041 + (3.21585 * Math.pow(event.target.value, 0.5)) + (0.348956 * event.target.value);//CRL Ultrasound Obstet Gynecol 2014; 44: 641-648: https://obgyn.onlinelibrary.wiley.com/doi/pdf/10.1002/uog.13448
+        props.setLCC(event.target.value);
+        const calculatedDays = matchingGA(event.target.value, "LCC");
         updateFur(calculatedDays);
     }
     function handleLCCSubmit(event) {
@@ -114,11 +116,11 @@ export default function Nav(props) {
         setFURWeeks(lccWeeks);
 
     }
-    function updateFur(calculatedDays) {
+    const updateFur = useCallback((calculatedDays) => {
         const newDate = subDays(ecoDate, calculatedDays);
         setLCCDays(moment(ecoDate).diff(newDate, 'days') % 7);
         setLCCWeeks(moment(ecoDate).diff(newDate, 'weeks'));
-    }
+    },[ecoDate])
     useEffect(() => {
         if (props.newPeriodDate) {
             let newLastPeriodDate = props.newPeriodDate;
@@ -134,15 +136,20 @@ export default function Nav(props) {
             props.GiveTime(totalWeeks, totalDays % 7);
         }
         props.GetDesiredComponentValue(actualComponent);
-        if (selectedFont == "FUR") {
+        if (selectedFont === "FUR") {
             props.GiveTime(furWeeks, furDays);
         } else {
             props.GiveTime(weeks, days);
 
         }
         props.updateLastPeriod(lastPeriodDate);
+        if(props.lcc !== lcc){
+            setLCC(props.lcc);
+            const calculatedDays = matchingGA(props.lcc, "LCC");
+            updateFur(calculatedDays);
+        }
 
-    })
+    },[props, actualComponent, selectedFont, lastPeriodDate, lcc, furWeeks, furDays, weeks, days, updateFur])
     const { t } = useTranslation();
     return (
         <nav>
@@ -152,7 +159,7 @@ export default function Nav(props) {
                         <h6>{t('fur_title')}</h6>
                         <DatePicker
                             placeholderText={t('FUR')}
-                            value={estimatedDueDate && lastPeriodDate.toLocaleDateString()}
+                            value={lastPeriodDate && lastPeriodDate.toLocaleDateString()}
                             id="last-period-date"
                             onChange={handleDateChange}
                         />
@@ -161,7 +168,7 @@ export default function Nav(props) {
                         <h6>{t('last_eco_title')}</h6>
                         <DatePicker
                             placeholderText={t('FECO')}
-                            value={ecoDate && ecoDate.toLocaleDateString()}
+                            value={ecoDate.toLocaleDateString()}
                             id="last-eco-date"
                             onChange={handleEcoChange}
                         />
@@ -216,7 +223,8 @@ export default function Nav(props) {
                             id="lcc"
                             name="lcc"
                             placeholder={t('mm')}
-                            min={0}
+                            min={2}
+                            max={121}
                             value={lcc}
                             onChange={handleLCCChange}
                         />

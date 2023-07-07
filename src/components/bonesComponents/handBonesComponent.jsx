@@ -40,7 +40,7 @@ export default function HandBones(props) {
     }
     useEffect(() => {
         setGa(props.ga);
-    })
+    }, [props])
     return (
         <div id="hand-bones">
             <div className='bones-single'>

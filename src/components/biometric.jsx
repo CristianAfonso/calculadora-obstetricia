@@ -12,25 +12,8 @@ export default function Biometric(props) {
     const [days, setDays] = useState(props.days);
     const [ua, setUA] = useState(props.ua);
     const [mca, setMCA] = useState(props.mca);
-    const [arterialRatio, setArterialRatio] = useState("");
     const [customWeight, setCustomWeight] = useState("");
     const [genre, setGenre] = useState(props.genre);
-
-    /*
-    const [handler, setHandler] = useState("");
-    const [hadlock2Weight, setHL2Weight] = useState("");
-    const [hadlock2Weeks, setHL2Weeks] = useState("");
-    const [hadlock2Days, setHL2Days] = useState("");
-    const [hadlock3Weight, setHL3Weight] = useState("");
-    const [hadlock3Weeks, setHL3Weeks] = useState("");
-    const [hadlock3Days, setHL3Days] = useState("");
-    const [gregorioCustomPercentile, setGregorioCustomPercentile] = useState("");
-    const [gregorioCustomWeight, setGregorioCustomWeight] = useState("");
-    const [gregorioCustomZscore, setGregorioCustomZscore] = useState("");
-    const [clinicCustomPercentile, setClinicCustomPercentile] = useState("");
-    const [clinicCustomWeight, setClinicCustomWeight] = useState("");
-    const [clinicCustomZscore, setClinicCustomZscore] = useState("");
-    */
     const { t } = useTranslation();
 
     useEffect(() => {
@@ -50,10 +33,9 @@ export default function Biometric(props) {
             setCustomWeight(props.weight);
         }
         setGenre(props.genre);
-        setArterialRatio((props.mca / props.ua).toFixed(2))
         setWeeks(props.weeks);
         setDays(props.days);
-    });
+    }, [props, customWeight, mca, ua]);
 
     return (
         <div className="service-container">

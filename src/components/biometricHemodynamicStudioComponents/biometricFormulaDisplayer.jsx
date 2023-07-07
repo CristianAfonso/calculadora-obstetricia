@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from "react-i18next";
 import { displayBar, getZPercent, EFW_Hadlock2Weight, EFW_Hadlock2Age, EFW_Hadlock3Weight, EFW_Hadlock3Age, hospitalGetWeight, hospitalGetZscore } from "../functions";
 export default function BiometricFormulaDisplayer(props) {
@@ -39,23 +39,26 @@ export default function BiometricFormulaDisplayer(props) {
             document.getElementById("female-selector").className = 'genreSelector focus';
         }
     }
+    const handleGregorioChanges = useCallback((weight) => {
+        const gregorioReferenceWeight = hospitalGetWeight(ga, genre, "gregorio");
+        const gregorioCalculatedZscore = hospitalGetZscore(weight, gregorioReferenceWeight, "gregorio");
+        const gregorioPercent = getZPercent(gregorioCalculatedZscore);
+        setGregorioCustomWeight(Math.exp(gregorioReferenceWeight).toFixed(2));
+        setGregorioCustomZscore(gregorioCalculatedZscore.toFixed(2));
+        setGregorioCustomPercentile(gregorioPercent.toFixed(0));
+        displayBar(gregorioPercent.toFixed(0), 'percentile-bar-bio-gregorio');
+    }, [ga, genre])
+    const handleClinicChanges = useCallback((weight) => {
+        const clinicReferenceWeight = hospitalGetWeight(ga, genre, "clinic");
+        const clinicCalculatedZscore = hospitalGetZscore(weight, clinicReferenceWeight, "clinic");
+        const clinicPercent = getZPercent(clinicCalculatedZscore);
+        setClinicCustomWeight(clinicReferenceWeight.toFixed(2));
+        setClinicCustomZscore(clinicCalculatedZscore.toFixed(2));
+        setClinicCustomPercentile(clinicPercent.toFixed(0));
+        displayBar(clinicPercent.toFixed(0), 'percentile-bar-bio-clinic');
+    }, [ga, genre])
 
-    function showSelectedHandler() {
-        switch (handler) {
-            case "hadlock2":
-                handleHadlock2();
-                return;
-            case "hadlock3":
-                handleHadlock3();
-                return;
-            case "manual":
-                handleManualWeight();
-                return;
-            default:
-                return;
-        }
-    }
-    function handleHadlock2() {
+    const handleHadlock2 = useCallback(() => {
         if (cc && ca && lf) {
             setHandler("hadlock2");
             const hadlock2weight = EFW_Hadlock2Weight(ca, cc, lf);
@@ -69,8 +72,8 @@ export default function BiometricFormulaDisplayer(props) {
         } else {
             setHL2Weight(t('not_values'));
         }
-    }
-    function handleHadlock3() {
+    }, [setHandler, ca, cc, handleClinicChanges, handleGregorioChanges, lf, t])
+    const handleHadlock3 = useCallback(() => {
         if (dbp && ca && lf) {
             setHandler("hadlock3");
             const hadlock3weight = EFW_Hadlock3Weight(ca, lf, dbp);
@@ -84,30 +87,28 @@ export default function BiometricFormulaDisplayer(props) {
         } else {
             setHL3Weight(t('not_values'));
         }
-    }
-    function handleManualWeight() {
+    }, [setHandler, ca, dbp, handleClinicChanges, handleGregorioChanges, lf, t])
+    const handleManualWeight = useCallback(() => {
         setHandler("manual");
         handleGregorioChanges(customWeight);
         handleClinicChanges(customWeight);
-    }
-    function handleGregorioChanges(weight) {
-        const gregorioReferenceWeight = hospitalGetWeight(ga, genre, "gregorio");
-        const gregorioCalculatedZscore = hospitalGetZscore(weight, gregorioReferenceWeight, "gregorio");
-        const gregorioPercent = getZPercent(gregorioCalculatedZscore);
-        setGregorioCustomWeight(Math.exp(gregorioReferenceWeight).toFixed(2));
-        setGregorioCustomZscore(gregorioCalculatedZscore.toFixed(2));
-        setGregorioCustomPercentile(gregorioPercent.toFixed(0));
-        displayBar(gregorioPercent.toFixed(0), 'percentile-bar-bio-gregorio');
-    }
-    function handleClinicChanges(weight) {
-        const clinicReferenceWeight = hospitalGetWeight(ga, genre, "clinic");
-        const clinicCalculatedZscore = hospitalGetZscore(weight, clinicReferenceWeight, "clinic");
-        const clinicPercent = getZPercent(clinicCalculatedZscore);
-        setClinicCustomWeight(clinicReferenceWeight.toFixed(2));
-        setClinicCustomZscore(clinicCalculatedZscore.toFixed(2));
-        setClinicCustomPercentile(clinicPercent.toFixed(0));
-        displayBar(clinicPercent.toFixed(0), 'percentile-bar-bio-clinic');
-    }
+    }, [setHandler, customWeight, handleClinicChanges, handleGregorioChanges])
+
+    const showSelectedHandler = useCallback(() => {
+        switch (handler) {
+            case "hadlock2":
+                handleHadlock2();
+                return;
+            case "hadlock3":
+                handleHadlock3();
+                return;
+            case "manual":
+                handleManualWeight();
+                return;
+            default:
+                return;
+        }
+    }, [handleHadlock2, handleHadlock3, handleManualWeight, handler])
     useEffect(() => {
         setGa((props.weeks) + props.days / 7);
         if (customWeight) {
@@ -121,7 +122,7 @@ export default function BiometricFormulaDisplayer(props) {
         setCC(props.cc);
         setCA(props.ca);
         setLF(props.lf);
-    });
+    }, [props, customWeight, showSelectedHandler, handleManualWeight]);
     return (
         <div id='rigth-biometric'>
             <table>

@@ -30,7 +30,7 @@ export default function DuctusIsthmusComponent(props) {
 
     useEffect(() => {
         setGa(props.ga);
-    })
+    }, [props])
 
     return (
         <div id="right-hemodinamic">

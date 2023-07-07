@@ -3,14 +3,13 @@ import { useTranslation } from "react-i18next";
 import ArterialComponent from './hemodinamicComponents/arterialComponent.jsx';
 import SystolicComponent from './hemodinamicComponents/systolicComponent.jsx';
 import DuctusIsthmusComponent from './hemodinamicComponents/ductusIsthmusComponent.jsx';
+import HemodinamicChart from './charts/hemodinamicChart.jsx';
 export default function Hemodinamic(props) {
     const [ga, setGa] = useState((props.weeks) + props.days / 7);
     const [ua, setUA] = useState(props.ua);
     const [mca, setMCA] = useState(props.mca);
-    const [ratio, setRatio] = useState((mca / ga).toFixed(2));
     const { t } = useTranslation();
     useEffect(() => {
-        setGa((props.weeks) + props.days / 7);
         if (ua) {
             props.setUA(ua);
         } else {
@@ -21,10 +20,8 @@ export default function Hemodinamic(props) {
         } else {
             setMCA(props.mca);
         }
-        if (props.mca && props.ua) {
-            setRatio(props.mca / props.ua);
-        }
-    })
+        setGa((props.weeks) + props.days / 7);
+    }, [props, mca, ua])
     return (
         <div className="service-container">
             <div className='title-container'>
@@ -40,6 +37,10 @@ export default function Hemodinamic(props) {
                     <SystolicComponent ga={ga} />
                     <DuctusIsthmusComponent ga={ga} />
                 </div>
+            </div>
+            <div style={{width:'50%'}}>
+            <HemodinamicChart ></HemodinamicChart>
+                
             </div>
         </div>
     );

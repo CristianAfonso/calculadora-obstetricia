@@ -8,7 +8,7 @@ export default function Bones(props) {
 
     useEffect(() => {
         setGa((props.weeks) + props.days / 7);
-    })
+    }, [props])
     return (
         <div className="service-container">
             <div className='title-container'>

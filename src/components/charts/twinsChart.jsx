@@ -5,13 +5,12 @@ import HighchartsReact from 'highcharts-react-official';
 import { hospitalGetTwinsWeight, hospitalAuxSD, hospitalGetZscore } from '../functions';
 require("highcharts/highcharts-more")(Highcharts);
 
-
 export default function TwinsChart(props) {
     const [ga, setGa] = useState(props.ga);
     const [weight, setWeight] = useState(props.weight);
     const [genre, setGenre] = useState(props.genre);
     const { t } = useTranslation();
-    const ejeXLancet = ['20+0', '20+1', '20+2', '20+3', '20+4', '20+5', '20+6',
+    const xAxis = ['20+0', '20+1', '20+2', '20+3', '20+4', '20+5', '20+6',
         '21+0', '21+1', '21+2', '21+3', '21+4', '21+5', '21+6',
         '22+0', '22+1', '22+2', '22+3', '22+4', '22+5', '22+6',
         '23+0', '23+1', '23+2', '23+3', '23+4', '23+5', '23+6',
@@ -35,7 +34,6 @@ export default function TwinsChart(props) {
     
     
     let weightData = [];
-        
     let gregorioMaleSD;
     let gregorioMaleWeight;
     let gregorioMalep10;
@@ -61,55 +59,55 @@ export default function TwinsChart(props) {
     let clinicFemalep90;
     let rangesClinicFemale = [];
     let averagesClinicFemale = [];
+
+    
     for (let i = 140, j = 0; i <= 286; i++, j++) {
-        if(ejeXLancet[j] === ejeXLancet[(ga*7).toFixed(0)-140]){
-            console.log(j + "--");
-            console.log(ga*7-140);
-            weightData.push([ejeXLancet[j], parseInt(weight)]);
+        if(xAxis[j] === xAxis[(ga*7).toFixed(0)-140]){
+            weightData.push([xAxis[j], parseInt(weight)]);
         }else{
             weightData.push({ data:[ parseInt(weight), {marker: {
                     fillColor: '#FFF',
                     lineWidth: 0,
                     lineColor: "#FFFF",
-                    visible: false}, y: ejeXLancet[j]}]});
-            
+                    visible: false}, y: xAxis[j]}]
+                }); 
         }
         //GregorioMale
         gregorioMaleWeight = Math.exp(hospitalGetTwinsWeight(i / 7, "male", "gregorio"));
         gregorioMaleSD = hospitalAuxSD(gregorioMaleWeight, "male", "gregorio2");
         gregorioMalep10 = (-1.28 * gregorioMaleSD) + gregorioMaleWeight;
         gregorioMalep90 = (1.28 * gregorioMaleSD) + gregorioMaleWeight;
-        rangesGregorioMale.push([ejeXLancet[j], gregorioMalep10, gregorioMalep90]);
-        averagesGregorioMale.push([ejeXLancet[j], gregorioMaleWeight]);
+        rangesGregorioMale.push([xAxis[j], gregorioMalep10, gregorioMalep90]);
+        averagesGregorioMale.push([xAxis[j], gregorioMaleWeight]);
         //GregorioFemale
         gregorioFemaleWeight = Math.exp(hospitalGetTwinsWeight(i / 7, "female", "gregorio"));
         gregorioFemaleSD = hospitalAuxSD(gregorioFemaleWeight, "female", "gregorio2");
         gregorioFemalep10 = (-1.28 * gregorioFemaleSD) + gregorioFemaleWeight;
         gregorioFemalep90 = (1.28 * gregorioFemaleSD) + gregorioFemaleWeight;
-        rangesGregorioFemale.push([ejeXLancet[j], gregorioFemalep10, gregorioFemalep90]);
-        averagesGregorioFemale.push([ejeXLancet[j], gregorioFemaleWeight]);
+        rangesGregorioFemale.push([xAxis[j], gregorioFemalep10, gregorioFemalep90]);
+        averagesGregorioFemale.push([xAxis[j], gregorioFemaleWeight]);
         //clinicMale
         clinicMaleWeight = (hospitalGetTwinsWeight(i / 7, "male", "clinic"));
         clinicMalep10 = (0.86) * clinicMaleWeight;
         clinicMalep90 = clinicMaleWeight + clinicMaleWeight - clinicMalep10;
-        rangesClinicMale.push([ejeXLancet[j], clinicMalep10, clinicMalep90]);
-        averagesClinicMale.push([ejeXLancet[j], clinicMaleWeight]);
+        rangesClinicMale.push([xAxis[j], clinicMalep10, clinicMalep90]);
+        averagesClinicMale.push([xAxis[j], clinicMaleWeight]);
         //clinicFemale
         clinicFemaleWeight = (hospitalGetTwinsWeight(i / 7, "female", "clinic"));
         clinicFemalep10 = (0.86) * clinicFemaleWeight;
         clinicFemalep90 = clinicFemaleWeight + clinicFemaleWeight - clinicFemalep10;
-        rangesClinicFemale.push([ejeXLancet[j], clinicFemalep10, clinicFemalep90]);
-        averagesClinicFemale.push([ejeXLancet[j], clinicFemaleWeight]);
+        rangesClinicFemale.push([xAxis[j], clinicFemalep10, clinicFemalep90]);
+        averagesClinicFemale.push([xAxis[j], clinicFemaleWeight]);
     }
     const options = {
         chart: {
             zoomType: 'x'
         },
         title: {
-            text: t('percent')
+            text: t('percent') + ': '  + t('twins')
         },
         xAxis: {
-            categories: ejeXLancet,
+            categories: xAxis,
             events: {
                 setExtremes: function(event) {
                     let enabled = event.min === undefined ? false : true;
@@ -135,7 +133,6 @@ export default function TwinsChart(props) {
             valueDecimals: 0
         },
         series: [
-            
             {
                 name: 'p50 HUGH ' + t('twins') + " " + t('male'),
                 data: averagesGregorioMale,

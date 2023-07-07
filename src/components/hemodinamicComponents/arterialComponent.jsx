@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from "react-i18next";
 import { getUAZscore, getMCAZscore, getCPRZscore, displayBar, getZPercent } from "../functions.js";
 export default function ArterialComponent(props) {
@@ -35,15 +35,14 @@ export default function ArterialComponent(props) {
         setMCAPercent(mcaPercentChange.toFixed(0));
         displayBar(mcaPercentChange, 'percentile-bar-hemo-clinic-mca');
     }
-    function handleRatio(ua, mca) {
-
+    const handleRatio = useCallback((ua, mca) => {
         const ratioZscoreChange = getCPRZscore(mca, ua, ga);
         const ratioPercentChange = getZPercent(ratioZscoreChange);
         setRatio((mca / ua).toFixed(2));
         setRatioZscore(ratioZscoreChange.toFixed(2));
         setRatioPercent(ratioPercentChange.toFixed(0));
         displayBar(ratioPercentChange, 'percentile-bar-hemo-clinic-ratio');
-    }
+    }, [ga])
     useEffect(() => {
         setGa(props.ga);
         if (ua) {
@@ -62,7 +61,7 @@ export default function ArterialComponent(props) {
         displayBar(uaPercent, 'percentile-bar-hemo-clinic-ua');
         displayBar(mcaPercent, 'percentile-bar-hemo-clinic-mca');
 
-    })
+    }, [props, handleRatio,mca, mcaPercent, ua, uaPercent])
     return (
         <div id="left-hemodinamic">
             <div className='hemodinamic-single'>

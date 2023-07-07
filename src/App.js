@@ -53,9 +53,9 @@ function App(props) {
     setNewPeriodDate("");
   }
   useEffect(() => {
-    document.getElementById("page_title").innerHTML=t('page_title');
+    document.getElementById("page_title").innerHTML = t('page_title');
     document.body.dir = currentLanguage.dir || 'ltr';
-    setWeeks(w =>weeks);
+    setWeeks(weeks);
     setDays(days);
   }, [days, t, weeks, currentLanguage])
   return (
@@ -66,7 +66,8 @@ function App(props) {
         GetDesiredComponentValue={GetDesiredComponent} GiveTime={GetTime}
         stopUpdateFUR={stopUpdateFUR} stopUpdateWeeksandDays={stopUpdateWeeksandDays}
         lastPeriodDateUpdated={lastPeriodDate} weeks={weeks} days={days}
-        newPeriodDate={newPeriodDate} newWeeks={newWeeks} newDays={newDays}></Nav>
+        newPeriodDate={newPeriodDate} newWeeks={newWeeks} newDays={newDays} lcc={lcc}
+        setLCC={setLCCData}></Nav>
       {actualComponent === "datation" && <Datation updateNewPeriod={setNewPeriodDate}
         GiveNewTime={GetNewTime} ecoDate={lastEcoDate} lastPeriodDate={lastPeriodDate}
         setDBP={setDBPData} setLF={setLFData} setLCC={setLCCData} weeks={weeks} days={days}

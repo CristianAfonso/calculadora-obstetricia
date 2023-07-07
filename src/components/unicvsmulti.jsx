@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from "react-i18next";
-import { displayBar, getZPercent, hospitalGetWeight,hospitalGetTwinsWeight, hospitalGetZscore } from "./functions";
+import { displayBar, getZPercent, hospitalGetWeight,hospitalGetTwinsWeight,hospitalGetTriplets,hospitalGetZscore } from "./functions";
 import SingleChart from './charts/singleChart';
 import TwinsChart from './charts/twinsChart';
-import TripletsChart from './charts/tripletsChart';
+import SingleVsTwins from './charts/singleVsTwins';
 export default function Unicvsmulti(props) {
     const [ga, setGa] = useState((props.weeks) + props.days / 7);
     const [weight, setWeight] = useState("");
@@ -20,7 +20,9 @@ export default function Unicvsmulti(props) {
     function handleweightChange(event) {
         setWeight(event.target.value);
         handleGregorioChanges(event.target.value);
-        handleClinicChanges(event.target.value);
+        if(amountSelector !== 'triplets'){
+            handleClinicChanges(event.target.value);
+        }
     }
     function handleSelection(event) {
         setAmountSelector(event.target.value);
@@ -45,7 +47,7 @@ export default function Unicvsmulti(props) {
                 gregorioReferenceWeight = hospitalGetTwinsWeight(ga, genre, "gregorio");
                 break;
             case 'triplets':
-                gregorioReferenceWeight = hospitalGetWeight(ga, genre, "gregorio");
+                gregorioReferenceWeight = hospitalGetTriplets(ga, genre, "gregorio");
                 break;
             default:
                 gregorioReferenceWeight = hospitalGetWeight(ga, genre, "gregorio");
@@ -91,13 +93,17 @@ export default function Unicvsmulti(props) {
         if (weight) {
             props.setWeight(weight);
             handleGregorioChanges(weight);
-            handleClinicChanges(weight);
+            if(amountSelector !== 'triplets'){
+                handleClinicChanges(weight);
+            }
         } else {
             setWeight(props.weight);
-            handleGregorioChanges(props.weight);
-            handleClinicChanges(props.weight);
+            handleGregorioChanges(props.weight);            
+            if(amountSelector !== 'triplets'){
+                handleClinicChanges(props.weight);
+            }
         }
-    }, [props, genre, weight, handleGregorioChanges, handleClinicChanges]);
+    }, [props, genre, weight, handleGregorioChanges, handleClinicChanges, amountSelector]);
 
     return (
         <div className="service-container">
@@ -139,6 +145,7 @@ export default function Unicvsmulti(props) {
                             </span>
                         </span>
                     </div>
+                    {amountSelector !== 'triplets'  &&
                     <div className='percentile-table-container'>
                         <p style={{ fontStyle: 'italic' }}>{t('own_formula_clinic')} (p{clinicCustomPercentile}) ({clinicWeight}g) ({clinicCustomZscore}z)</p>
                         <span className='meter percentile-bar-container'>
@@ -146,12 +153,12 @@ export default function Unicvsmulti(props) {
                                 <p>p{clinicCustomPercentile}</p>
                             </span>
                         </span>
-                    </div>
+                    </div>}
                 </div>
                 <div className='bottom-unic'>
-                    {amountSelector === "single" && <SingleChart ga={ga} weight={weight} />}
-                    {amountSelector === 'twins' && <TwinsChart ga={ga} weight={weight} />}
-                    {amountSelector === 'triplets' &&  <TripletsChart ga={ga} weight={weight} />}
+                    {amountSelector === "single" && <SingleChart ga={ga} weight={weight} genre={genre}/>}
+                    {amountSelector === 'twins' && <TwinsChart ga={ga} weight={weight} genre={genre}/>}
+                    {(amountSelector === 'single' || amountSelector === 'twins') && <SingleVsTwins ga={ga} weight={weight} genre={genre} number={amountSelector}/>}
                 </div>
             </div>
         </div>

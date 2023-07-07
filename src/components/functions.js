@@ -31,43 +31,38 @@ export const displayMoMBar = (mom, elementId) => {
 }
 export const matchingGA = (data, from) => {
     let iterator;
-    switch (from) {
-        case 'DBP':
-            iterator = 800;
-            break;
-        case 'CC':
-            iterator = 800;
-            break;
-        case 'CA':
-            iterator = 450;
-            break;
-        case 'LF':
-            iterator = 450;
-            break;
-        default:
-            return;
-    }
     let media_anterior;
+    let ga;
     switch (from) {
+        case 'LCC':
+            iterator = 388;
+            media_anterior = crl_mean(1);
+            break;
         case 'DBP':
+            iterator = 800;
             media_anterior = bpd_mean(1);
             break;
         case 'CC':
+            iterator = 800;
             media_anterior = cc_mean(1);
             break;
         case 'CA':
+            iterator = 450;
             media_anterior = ca_mean(1);
             break;
         case 'LF':
+            iterator = 450;
             media_anterior = lf_mean(1);
             break;
         default:
             return;
     }
-    let ga;
     for (let i = 7; i < iterator; i++) {
         let media;
         switch (from) {
+            case 'LCC':
+                media = crl_mean(i);
+                break;
             case 'DBP':
                 media = bpd_mean(i / 7.0);
                 break;
@@ -93,6 +88,9 @@ export const matchingGA = (data, from) => {
             }
         } else {
             switch (from) {
+                case 'LCC':
+                    media_anterior = crl_mean(i / 7.0);
+                    break;
                 case 'DBP':
                     media_anterior = bpd_mean(i / 7.0);
                     break;
@@ -133,6 +131,11 @@ export const getZPercent = (z) => {
 
     return sum * 100;
 }
+export const crl_mean = (ga) => {
+	let mean = -50.6562 + (0.815118 * ga) + (0.00535302 * Math.pow(ga,2));
+	return mean;
+}
+
 export const bpd_mean = (ga) => {
     let mean = 5.60878 + 0.158369 * Math.pow(ga, 2) - 0.00256379 * Math.pow(ga, 3);
     return mean;
@@ -178,7 +181,6 @@ const expectedHadlock = () => {
 }
 export const EFW_Hadlock2Weight = (ac, hc, fl) => {
     const efw = hadlock2_mean(ac, hc, fl);
-    //const ds = hadlock2_sd(efw);
     return efw;
 }
 export const EFW_Hadlock2Age = (ac, hc, fl) => {
@@ -198,25 +200,7 @@ const hadlock2_mean = (ac, hc, fl) => {
     const efw = Math.pow(10, 1.326 - (0.00326 * ac / 10 * fl / 10) + (0.0107 * hc / 10) + (0.0438 * ac / 10) + (0.158 * fl / 10));
     return efw;
 }
-/*
-const hadlock2_sd = (efw) => {
-    if (efw < 1500) {
-        return 109.0;
-    } else if ((efw >= 1500) && (efw < 2000)) {
-        return 173.0;
-    } else if ((efw >= 2000) && (efw < 2500)) {
-        return 221.0;
-    } else if ((efw >= 2500) && (efw < 3000)) {
-        return 258.0;
-    } else if ((efw >= 3000) && (efw < 3500)) {
-        return 290.0;
-    } else if ((efw >= 3500) && (efw < 4000)) {
-        return 333.0;
-    } else if (efw >= 4000) {
-        return 382.0;
-    }
-}
-*/
+
 export const hadlock3 = (ac, fl, bpd) => {
     const efw = Math.pow(10, 1.335 - (0.0034 * ac / 10 * fl / 10) + (0.0316 * bpd / 10) + (0.0457 * ac / 10) + (0.1623 * fl / 10));
     return efw;
@@ -360,13 +344,13 @@ export const hospitalGetTwinsWeight = (ga, genre, hospital) => {
             expectedWeight = constant + (eg * ga) + (eg2 * Math.pow(ga, 2)) + (eg3 * Math.pow(ga, 3)) + (genreValue);
             break;
         case "clinic":
-            ga*=7;
+            ga *= 7;
             if (genre === 'male') {
                 genreValue = 2953;        //Estandarizar
             } else {
-                genreValue = 2953-120;        //Estandarizar
+                genreValue = 2953 - 120;        //Estandarizar
             }
-            expectedWeight =  genreValue * (-0.1266838 + (Math.pow(ga, 2) * 1.06618E-5) + (Math.pow(ga, 3) * 1.3196E-8));
+            expectedWeight = genreValue * (-0.1266838 + (Math.pow(ga, 2) * 1.06618E-5) + (Math.pow(ga, 3) * 1.3196E-8));
             break;
         default:
             return 0;
@@ -374,6 +358,19 @@ export const hospitalGetTwinsWeight = (ga, genre, hospital) => {
     return expectedWeight;
 }
 
+//triplets
+export const hospitalGetTriplets = (ga, genre, hospital) => {
+    const eg = 2.0200247;
+    const eg2 = -0.05827472;
+    const eg3 = 0.00058056;
+    const constant = -16.676953;
+    let genreValue = 0;
+    if (genre === "male") {
+        genreValue = 0.11269155;
+    }
+    const expectedWeight = constant + (eg * ga) + (eg2 * Math.pow(ga, 2)) + (eg3 * Math.pow(ga, 3)) + (genreValue);
+    return expectedWeight;
+}
 
 /*
 * 
@@ -408,59 +405,59 @@ export const hospitalGetTwinsWeight = (ga, genre, hospital) => {
 /*
     Hemodinamic
     */
-const ua_mean = (ga) => {
+export const ua_mean = (ga) => {
     const mean = (3.55219 - (0.13558 * ga)) + (0.00174 * Math.pow(ga, 2));
     return mean;
 }
 
-const ua_sd = (ga) => {
+export const ua_sd = (ga) => {
     const sd = 0.299; //????????????
     return sd;
 }
 
-const mca_mean = (ga) => {
+export const mca_mean = (ga) => {
     const mean = -2.7317 + (0.3335 * ga) - (0.0058 * Math.pow(ga, 2));
     return mean;
 }
 
-const mca_sd = (ga) => {
+export const mca_sd = (ga) => {
     const sd = -0.88005 + (0.08182 * ga) - (0.00133 * Math.pow(ga, 2));
     return sd;
 }
-const cpr_mean = (ga) => {
+export const cpr_mean = (ga) => {
     const mean = -4.0636 + (0.383 * ga) - (0.0059 * Math.pow(ga, 2));
     return mean;
 }
 
-const cpr_sd = (ga) => {
+export const cpr_sd = (ga) => {
     const sd = -0.9664 + (0.09027 * ga) - (0.0014 * Math.pow(ga, 2));
     return sd;
 }
-const avpi_mean = (ga) => {
+export const avpi_mean = (ga) => {
     const mean = 1.39 - (0.012 * ga) + (0.0000198 * Math.pow(ga, 2));
     return mean;
 }
-const avpi_sd = (ga) => {
+export const avpi_sd = (ga) => {
     const sd = 0.272 - (0.000259 * ga);
     return sd;
 }
 
-const vdpi_mean = (ga) => {
+export const vdpi_mean = (ga) => {
     const mean = 0.903 + (-0.0116 * ga);
     return mean;
 }
 
-const vdpi_sd = (ga) => {
+export const vdpi_sd = (ga) => {
     const sd = 0.1483;
     return sd;
 }
 
-const aipi_mean = (ga) => {
+export const aipi_mean = (ga) => {
     const mean = 2.2562 + (0.0154 * ga);
     return mean;
 }
 
-const aipi_sd = (ga) => {
+export const aipi_sd = (ga) => {
     const sd = 0.014199 + (0.011635 * ga);
     return sd;
 }

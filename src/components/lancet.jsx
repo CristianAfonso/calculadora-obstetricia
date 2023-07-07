@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from "react-i18next";
 import { displayBar, getZPercent, hospitalGetWeight, hospitalGetZscore } from "./functions";
 import LancetChart from './charts/lancetChart';
@@ -41,7 +41,7 @@ export default function Lancet(props) {
             document.getElementById("female-selector").className = 'genreSelector focus';
         }
     }
-    function handleGregorioChanges(weight) {
+    const handleGregorioChanges = useCallback((weight) => {
         const gregorioReferenceWeight = hospitalGetWeight(ga, genre, "gregorio");
         const gregorioCalculatedZscore = hospitalGetZscore(weight, gregorioReferenceWeight, "gregorio");
         const gregorioPercent = getZPercent(gregorioCalculatedZscore);
@@ -49,8 +49,8 @@ export default function Lancet(props) {
         setGregorioCustomZscore(gregorioCalculatedZscore.toFixed(2));
         setGregorioCustomPercentile(gregorioPercent.toFixed(0));
         displayBar(gregorioPercent.toFixed(0), 'percentile-bar-bio-gregorio');
-    }
-    function handleClinicChanges(weight) {
+    }, [ga, genre])
+    const handleClinicChanges = useCallback((weight) => {
         const clinicReferenceWeight = hospitalGetWeight(ga, genre, "clinic");
         const clinicCalculatedZscore = hospitalGetZscore(weight, clinicReferenceWeight, "clinic");
         const clinicPercent = getZPercent(clinicCalculatedZscore);
@@ -58,8 +58,8 @@ export default function Lancet(props) {
         setClinicCustomZscore(clinicCalculatedZscore.toFixed(2));
         setClinicCustomPercentile(clinicPercent.toFixed(0));
         displayBar(clinicPercent.toFixed(0), 'percentile-bar-bio-clinic');
-    }
-    function handleGregorioLancetChanges(weight) {
+    }, [ga, genre])
+    const handleGregorioLancetChanges = useCallback((weight) => {
         const gregorioReferenceWeight = hospitalGetWeight(ga, genre, "gregorio2");
         const gregorioCalculatedZscore = hospitalGetZscore(weight, gregorioReferenceWeight, "gregorio2", genre);
         const gregorioPercent = getZPercent(gregorioCalculatedZscore);
@@ -67,8 +67,8 @@ export default function Lancet(props) {
         setGregorioZscore(gregorioCalculatedZscore.toFixed(2));
         setGregorioPercentile(gregorioPercent.toFixed(0));
         displayBar(gregorioPercent.toFixed(0), 'percentile-bar-bio-gregorio-lancet');
-    }
-    function handleTalaveraLancetChanges(weight) {
+    }, [ga, genre])
+    const handleTalaveraLancetChanges = useCallback((weight) => {
         const referenceWeight = hospitalGetWeight(ga, genre, "talavera");
         const calculatedZscore = hospitalGetZscore(weight, referenceWeight, "talavera", genre);
         const percent = getZPercent(calculatedZscore);
@@ -76,8 +76,8 @@ export default function Lancet(props) {
         setTalaveraZscore(calculatedZscore.toFixed(2));
         setTalaveraPercentile(percent.toFixed(0));
         displayBar(percent.toFixed(0), 'percentile-bar-bio-talavera-lancet');
-    }
-    function handleFuenlabradaLancetChanges(weight) {
+    }, [ga, genre])
+    const handleFuenlabradaLancetChanges = useCallback((weight) => {
         const referenceWeight = hospitalGetWeight(ga, genre, "fuenlabrada");
         const calculatedZscore = hospitalGetZscore(weight, referenceWeight, "fuenlabrada", genre);
         const percent = getZPercent(calculatedZscore);
@@ -85,7 +85,7 @@ export default function Lancet(props) {
         setFuenlabradaZscore(calculatedZscore.toFixed(2));
         setFuenlabradaPercentile(percent.toFixed(0));
         displayBar(percent.toFixed(0), 'percentile-bar-bio-fuenlabrada-lancet');
-    }
+    }, [ga, genre])
     useEffect(() => {
         setGa((props.weeks) + props.days / 7);
         if (!genre) {
@@ -108,7 +108,7 @@ export default function Lancet(props) {
             handleTalaveraLancetChanges(props.weight);
             handleFuenlabradaLancetChanges(props.weight);
         }
-    });
+    }, [props, genre, weight, handleGregorioChanges, handleClinicChanges, handleGregorioLancetChanges, handleTalaveraLancetChanges, handleFuenlabradaLancetChanges]);
 
     return (
         <div className="service-container">

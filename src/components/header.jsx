@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { useTranslation } from "react-i18next";
 import i18next from 'i18next';
 function Header(props) {
@@ -20,11 +19,11 @@ function Header(props) {
     return (
         <header>
             <div id="section-img-wrapper">
-                <img id="section-img" className="img-fluid" src="./images/seccion.jpg" />
+                <img id="section-img" className="img-fluid" src="./images/seccion.jpg" alt="section"/>
             </div>
             <div id="logo-with-bg">
                 <div id="logo-container">
-                    <img id="logo-gregorio" className="img-fluid" src="./images/HGUGM.png" />
+                    <img id="logo-gregorio" className="img-fluid" src="./images/HGUGM.png" alt="HUGM" />
                     <h1>{t('service')}</h1>
                 </div>
             </div>

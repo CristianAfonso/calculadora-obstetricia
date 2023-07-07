@@ -92,7 +92,7 @@ export default function BiometricDataInput(props) {
         props.ca(ca);
         props.lf(lf);
         props.dbp(dbp);
-    })
+    }, [props, ca, cc, lf, dbp])
     return (
         <div id='left-biometric'>
             <div className='biometric-single'>
