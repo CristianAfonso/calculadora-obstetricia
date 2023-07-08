@@ -2,6 +2,7 @@
 --[1. Header]--
 --[2. Nav] --
 */
+
 .container {
   max-width: 100% !important;
 }
@@ -13,10 +14,12 @@ button:not(.react-datepicker__navigation, #dropdownMenuButton, .dropdown-item) {
   box-shadow: 2px 2px 4px #666;
   border-radius: 10px;
   width: auto;
+  max-width: 200px;
   text-align: center;
   text-decoration: none;
   color: #fff;
   font-weight: 600;
+  margin-right: 0;
 }
 
 button:not(.react-datepicker__navigation, #dropdownMenuButton, .dropdown-item):hover {
@@ -129,11 +132,24 @@ header {
 }
 
 @media only screen and (max-width: 499px) {
+  header{
+    flex-direction: column-reverse;
+  }
   header h1 {
     font-size: 130%;
     text-align: center;
   }
-
+  #section-img-wrapper{
+    display: none;
+  }
+  #language-wrapper{
+    margin: auto 0 auto auto;
+  }
+  #logo-with-bg{
+    width: 80%;
+    margin: auto;
+    background-image: none;
+  }
   #sub-header-container {
     background-size: 150%;
   }
@@ -152,7 +168,7 @@ nav {
 nav .forms-container {
   display: flex;
   flex-direction: column;
-  padding: 50px auto 50px auto;
+  padding: 120px 0;
   margin: auto auto 30px auto;
   width: 80%;
   height: 200px;
@@ -178,7 +194,8 @@ nav .forms-container .FUR-form {
   text-align: center;
 }
 .react-datepicker-wrapper,
-.expected-birth {
+.expected-birth,
+.weeks-form div input {
   width: 23% !important;
   min-width: 170px;
 }
@@ -206,6 +223,7 @@ nav .forms-container .weeks-form {
 .weeks-form div {
   width: auto;
   display: flex;
+  flex-direction: column;
   column-gap: 20px;
   align-items: center;
 }
@@ -236,6 +254,35 @@ nav #navBar button:hover {
   background-color: #01DFD7;
 }
 
+@media screen and (max-width: 1079px){
+  nav .forms-container{
+    padding: 200px 0;
+    row-gap: 10px;
+  }
+  nav .forms-container .FUR-form{
+    display: grid;
+    row-gap: 25px;
+    grid-template-columns: repeat(2,50%);
+  }
+  nav .forms-container .weeks-form{
+    border-top: #0187b9 solid 1px;
+    padding: 10px 0;
+    display: flex;
+    row-gap: 10px;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  nav .forms-container .weeks-form div{
+    display: flex;
+    place-content: center;
+    width: 50%;
+  }
+  nav button{
+    margin: auto !important;
+  }
+}
+
 @media screen and (max-width:900px) {
   nav .forms-container .weeks-form div input {
     width: 10%;
@@ -258,9 +305,12 @@ nav #navBar button:hover {
     column-gap: 5%;
     row-gap: 10px;
   }
-
+  nav .forms-container{
+    width: 95%;
+  }
   nav #navBar button {
-    width: 47.5% !important;
+    width: 100% !important;
+    margin: auto !important;
   }
 
   nav .forms-container {
@@ -270,6 +320,7 @@ nav #navBar button:hover {
   }
 
   nav .forms-container form {
+    display: flex !important;
     flex-direction: column !important;
     row-gap: 10px;
 
@@ -315,7 +366,6 @@ nav #navBar button:hover {
   align-items: center;
   border-bottom: 2px solid #039bdc;
 }
-
 .weeksAndDays {
   display: flex;
   width: 30%;
@@ -328,13 +378,13 @@ nav #navBar button:hover {
   display: flex;
   flex-direction: row;
   padding-top: 5%;
+  margin-bottom: 5%;
 }
 
 .pair {
-  width: 275px;
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-between;
   row-gap: 15px;
   align-items: center;
 }
@@ -351,7 +401,7 @@ nav #navBar button:hover {
 }
 
 .pair .input {
-  width: 50%;
+  width: 100%;
   display: flex;
 
 }
@@ -366,9 +416,9 @@ nav #navBar button:hover {
 }
 
 .pair .scores {
+  width: 50%;
   display: flex;
   justify-content: flex-end;
-  min-width: 170px;
 }
 
 .pair .scores span {
@@ -381,7 +431,18 @@ nav #navBar button:hover {
   text-align: center;
 }
 
-@media screen and (max-width:768px) {}
+@media screen and (max-width:850px) {
+  
+.title-container h1{
+  font-size: 28px;
+ }
+ .title-container .weeksAndDays{
+   width: 50%;
+ }
+ .title-container h3{
+   font-size: 15px;
+  }
+}
 
 @media screen and (max-width:500px) {
   .pair {
@@ -460,7 +521,7 @@ nav #navBar button:hover {
   border-right: 1px solid #bbb;
 }
 
-#rigth-biometric {
+#right-biometric {
   padding-left: 5%;
   height: 100%;
   width: 50%;
@@ -480,7 +541,7 @@ nav #navBar button:hover {
     border-bottom: 1px solid #bbb;
   }
 
-  #rigth-biometric {
+  #right-biometric {
     width: 100%;
     padding-top: 5%;
     padding-left: 0;
@@ -566,25 +627,25 @@ nav #navBar button:hover {
   row-gap: 15px;
 }
 
-#rigth-biometric table {
+#right-biometric table {
   text-align: center;
   width: 100%;
   border-bottom: solid 2px #01A9DB;
 }
 
-#rigth-biometric table thead {
+#right-biometric table thead {
   border-bottom: solid 2px #01A9DB;
 }
 
-#rigth-biometric table th {
+#right-biometric table th {
   padding: 15px 0;
 }
 
-#rigth-biometric table tbody th {
+#right-biometric table tbody th {
   border-bottom: solid 1px #01A9DB;
 }
 
-#rigth-biometric table span:not(.percentile-bar-container, .percentile-bar-content) {
+#right-biometric table span:not(.percentile-bar-container, .percentile-bar-content) {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -594,7 +655,7 @@ nav #navBar button:hover {
 .percentile-table-container {
   width: 100%;
   display: block;
-  padding-top: 15px;
+  padding-top: 0;
 }
 
 .genreSelector {
@@ -607,33 +668,92 @@ nav #navBar button:hover {
 .genreSelector:focus {
   background-color: #0187b9 !important;
 }
-
+#hemodinamic-studio{
+  display: flex;
+  flex-direction: row;
+}
+#hemodinamic-studio #left-hemodinamic{  
+  width: 50%;
+  padding-right: 5%;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  row-gap: 25px;
+}
+#hemodinamic-studio #left-hemodinamic .pair .scores{
+  justify-content: end;
+}
+#hemodinamic-studio #right-hemodinamic{  
+  border-left: 1px solid #bbb;
+  padding-left: 5%;
+  height: 100%;
+  width: 50%;
+}
+#hemodinamic-studio #right-hemodinamic .single-hemodinamic-displayer{
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+@media screen and (max-width:1020px) {
+  #hemodinamic-studio{
+    flex-direction: column !important;
+    row-gap: 25px;
+  }
+  #hemodinamic-studio #left-hemodinamic{
+    width: 100%;
+    padding-right: 0;
+  }
+  #hemodinamic-studio #right-hemodinamic{
+    width: 100%;
+    border-left: none;
+    padding-left: 0;
+  }
+}
+@media screen and (max-width: 430px){
+  #right-biometric table{
+    text-align: unset;
+  }
+  #right-biometric .genreSelector{
+    font-size: 13px;
+  }
+  #right-biometric table th, #right-biometric table td{
+    max-width: 0.8vw;
+  }
+  #right-biometric table th button{
+    margin: auto auto auto 0 !important;
+  }
+  #right-biometric table th:nth-child(2n){
+    display: none;
+  }
+}
 /** 6.- Hemodinamic styles **/
-#hemodinamic-studio {
+#hemodinamic {
   display: flex;
   flex-direction: row;
   width: 100%;
   padding: 50px 0px;
   place-items: center;
+  column-gap: 30px;
+  row-gap: 25px;
 }
 
-#left-hemodinamic {
-  width: 33%;
-  padding-right: 5%;
+@media screen and (max-width: 1020px) {
+  #hemodinamic{
+    flex-direction: column;
+  }
 }
 
-#center-hemodinamic {
-  padding-left: 2.5%;
-  padding-right: 2.5%;
-  width: 33%;
-
+#hemodinamic #left-hemodinamic,
+#hemodinamic #center-hemodinamic,
+#hemodinamic #right-hemodinamic{
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 100%;
+  row-gap: 25px;
 }
 
-#right-hemodinamic {
-  padding-left: 5%;
-  height: 100%;
-  width: 33%;
-}
+
 
 .single-hemodinamic-displayer p {
   margin-bottom: 0;
@@ -641,15 +761,9 @@ nav #navBar button:hover {
 
 .hemodinamic-single {
   width: 100%;
-}
-
-#hemodinamic-studio .percentile-table-container {
-  padding-top: 0 !important;
-  padding-bottom: 10px;
-}
-
-.input span p {
-  margin: 15% auto;
+  display: flex;
+  flex-direction: column;
+  row-gap: 25px;
 }
 
 .double-input {
@@ -673,26 +787,81 @@ nav #navBar button:hover {
 }
 
 #leg-bones {
+  display: flex;
+  flex-direction: column;
   width: 50%;
   padding-left: 5%;
   border-left: 1px solid #bbb;
+  row-gap: 25px;
 }
 
 #hand-bones {
+  display: flex;
+  flex-direction: column;
   width: 50%;
   padding-right: 5%;
+  row-gap: 25px;
+}
+
+@media screen and (max-width: 764px) {
+  #bones-studio{
+    flex-direction: column;
+  }
+  #leg-bones {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-left: 0%;
+    padding-top: 5%;
+    border-left: none;
+    row-gap: 25px;
+  }
+  
+  #hand-bones {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-right: 0%;
+    border-bottom: 1px solid #bbb;
+    padding-bottom: 5%;
+    row-gap: 25px;
+  }
 }
 
 /**
 * LANCET
 */
+#lancet{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
 .left-lancet {
   width: 50%;
   padding-right: 5%;
   border-right: 1px solid #bbb;
 }
+#right-lancet{
+  width: 50%;
+  padding-left: 5%;
+}
 .highcharts-credits{
   display: none;
+}
+@media screen and (max-width: 1020px) {
+  #lancet{
+    flex-direction: column;
+  }
+  .left-lancet {
+    width: 100%;
+    padding-right: 0;
+    border-right: none;
+  }
+  #right-lancet{
+    padding-top: 25px;
+    width: 100%;
+    padding-left: 0;
+  }
 }
 /**
 Unic vs mult
@@ -705,7 +874,21 @@ Unic vs mult
   width: 50%;
   margin: auto;
   padding-bottom: 25px;
+  padding-top: 25px;
+}
+.top-unic .genreSelector{
+  
+  min-width: 58px;
 }
 .bottom-unic{
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 25px;
+}
+
+@media screen and (max-width: 1020px) {
+  .top-unic{
+    width: 100% !important;
+  }
 }

@@ -18,8 +18,8 @@ export default function Nav(props) {
     const [estimatedDueDate, setEstimatedDueDate] = useState("");
     const [actualComponent, setActualComponent] = useState("");
     const [lcc, setLCC] = useState(props.lcc);
-    const [lccDays, setLCCDays] = useState("");
-    const [lccWeeks, setLCCWeeks] = useState("");
+    const [lccDays, setLCCDays] = useState(0);
+    const [lccWeeks, setLCCWeeks] = useState(0);
 
     const handleDateChange = (date) => {
         setLastPeriodDate(date);
@@ -188,7 +188,7 @@ export default function Nav(props) {
                 </form>
                 <form className='weeks-form' onSubmit={handleWeeksSubmit}>
                     <div>
-                        <label htmlFor="weeks">{t('weeks')}:</label>
+                        <label htmlFor="weeks">{t('weeks')}</label>
                         <input
                             type="number"
                             id="weeks"
@@ -200,7 +200,7 @@ export default function Nav(props) {
                         />
                     </div>
                     <div>
-                        <label htmlFor="days">{t('days')}:</label>
+                        <label htmlFor="days">{t('days')}</label>
                         <input
                             type="number"
                             id="days"
@@ -217,7 +217,7 @@ export default function Nav(props) {
                 </form>
                 <form className='weeks-form' onSubmit={handleLCCSubmit}>
                     <div>
-                        <label htmlFor="weeks">{t('lcc_title')}:</label>
+                        <label htmlFor="weeks">{t('lcc_title')}</label>
                         <input
                             type="number"
                             id="lcc"

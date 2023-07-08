@@ -111,12 +111,7 @@ export default function BiometricFormulaDisplayer(props) {
     }, [handleHadlock2, handleHadlock3, handleManualWeight, handler])
     useEffect(() => {
         setGa((props.weeks) + props.days / 7);
-        if (customWeight) {
-            props.setCustomWeight(customWeight);
-        } else {
-            setCustomWeight(props.customWeight);
-            handleManualWeight();
-        }
+        props.setCustomWeight(customWeight);
         showSelectedHandler();
         setDBP(props.dbp);
         setCC(props.cc);
@@ -124,7 +119,7 @@ export default function BiometricFormulaDisplayer(props) {
         setLF(props.lf);
     }, [props, customWeight, showSelectedHandler, handleManualWeight]);
     return (
-        <div id='rigth-biometric'>
+        <div id='right-biometric'>
             <table>
                 <thead>
                     <th>
@@ -173,9 +168,9 @@ export default function BiometricFormulaDisplayer(props) {
                         <th>
                             <button onClick={handleManualWeight}>{t('manual_weight')}</button>
                         </th>
+                        <th></th>
                         <th colSpan={3}>
                             <span>
-                                {t('weight')}
                                 <input
                                     style={{ marginLeft: 5 + "px", maxWidth: 70 + 'px', height: 39 + 'px' }}
                                     type='number'

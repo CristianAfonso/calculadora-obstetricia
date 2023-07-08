@@ -120,61 +120,65 @@ export default function Lancet(props) {
                 </div>
             </div>
             <div className='service-content'>
-                <div className='left-lancet'>
-                    <span>
-                        {t('weight')}
-                        <input
-                            style={{ marginLeft: 5 + "px", maxWidth: 70 + 'px', height: 39 + 'px' }}
-                            type='number'
-                            placeholder='g'
-                            min={0}
-                            value={weight}
-                            onChange={handleweightChange} />
-                        <button className="genreSelector" id="male-selector" onClick={handleSelectGenre} value="male">{t('male')}</button>
-                        <button className="genreSelector" id="female-selector" onClick={handleSelectGenre} value="female">{t('female')}</button>
-                    </span>
-                    <div className='percentile-table-container'>
-                        <p style={{ fontStyle: 'italic' }}>{t('own_formula_gregorio')} (p{gregorioCustomPercentile}) ({gregorioWeight}g) ({gregorioCustomZscore}z)</p>
-                        <span className='meter percentile-bar-container'>
-                            <span className='percentile-bar-content' id='percentile-bar-bio-gregorio'>
-                                <p>p{gregorioCustomPercentile}</p>
-                            </span>
+                <div id='lancet'>
+                    <div className='left-lancet'>
+                        <span>
+                            {t('weight')}
+                            <input
+                                style={{ marginLeft: 5 + "px", maxWidth: 70 + 'px', height: 39 + 'px' }}
+                                type='number'
+                                placeholder='g'
+                                min={0}
+                                value={weight}
+                                onChange={handleweightChange} />
+                            <button className="genreSelector" id="male-selector" onClick={handleSelectGenre} value="male">{t('male')}</button>
+                            <button className="genreSelector" id="female-selector" onClick={handleSelectGenre} value="female">{t('female')}</button>
                         </span>
+                        <div className='percentile-table-container'>
+                            <p style={{ fontStyle: 'italic' }}>{t('own_formula_gregorio')} (p{gregorioCustomPercentile}) ({gregorioWeight}g) ({gregorioCustomZscore}z)</p>
+                            <span className='meter percentile-bar-container'>
+                                <span className='percentile-bar-content' id='percentile-bar-bio-gregorio'>
+                                    <p>p{gregorioCustomPercentile}</p>
+                                </span>
+                            </span>
+                        </div>
+                        <div className='percentile-table-container'>
+                            <p style={{ fontStyle: 'italic' }}>{t('own_formula_clinic')} (p{clinicCustomPercentile}) ({clinicWeight}g) ({clinicCustomZscore}z)</p>
+                            <span className='meter percentile-bar-container'>
+                                <span className='percentile-bar-content' id='percentile-bar-bio-clinic'>
+                                    <p>p{clinicCustomPercentile}</p>
+                                </span>
+                            </span>
+                        </div>
+                        <div className='percentile-table-container'>
+                            <p style={{ fontStyle: 'italic', fontWeight: 'bold' }}>Lancet Gregorio Marañón (p{lancetGregorioPercentile}) ({lancetGregorioWeight}g) ({lancetGregorioZscore}z)</p>
+                            <span className='meter percentile-bar-container'>
+                                <span className='percentile-bar-content' id='percentile-bar-bio-gregorio-lancet'>
+                                    <p>p{lancetGregorioPercentile}</p>
+                                </span>
+                            </span>
+                        </div>
+                        <div className='percentile-table-container'>
+                            <p style={{ fontStyle: 'italic', fontWeight: 'bold' }}>Lancet Talavera (p{talaveraPercentile}) ({talaveraWeight}g) ({talaveraZscore}z)</p>
+                            <span className='meter percentile-bar-container'>
+                                <span className='percentile-bar-content' id='percentile-bar-bio-talavera-lancet'>
+                                    <p>p{talaveraPercentile}</p>
+                                </span>
+                            </span>
+                        </div>
+                        <div className='percentile-table-container'>
+                            <p style={{ fontStyle: 'italic', fontWeight: 'bold' }}>Lancet Fuenlabrada (p{fuenlabradaPercentile}) ({fuenlabradaWeight}g) ({fuenlabradaZscore}z)</p>
+                            <span className='meter percentile-bar-container'>
+                                <span className='percentile-bar-content' id='percentile-bar-bio-fuenlabrada-lancet'>
+                                    <p>p{fuenlabradaPercentile}</p>
+                                </span>
+                            </span>
+                        </div>
                     </div>
-                    <div className='percentile-table-container'>
-                        <p style={{ fontStyle: 'italic' }}>{t('own_formula_clinic')} (p{clinicCustomPercentile}) ({clinicWeight}g) ({clinicCustomZscore}z)</p>
-                        <span className='meter percentile-bar-container'>
-                            <span className='percentile-bar-content' id='percentile-bar-bio-clinic'>
-                                <p>p{clinicCustomPercentile}</p>
-                            </span>
-                        </span>
-                    </div>
-                    <div className='percentile-table-container'>
-                        <p style={{ fontStyle: 'italic', fontWeight: 'bold' }}>Lancet Gregorio Marañón (p{lancetGregorioPercentile}) ({lancetGregorioWeight}g) ({lancetGregorioZscore}z)</p>
-                        <span className='meter percentile-bar-container'>
-                            <span className='percentile-bar-content' id='percentile-bar-bio-gregorio-lancet'>
-                                <p>p{lancetGregorioPercentile}</p>
-                            </span>
-                        </span>
-                    </div>
-                    <div className='percentile-table-container'>
-                        <p style={{ fontStyle: 'italic', fontWeight: 'bold' }}>Lancet Talavera (p{talaveraPercentile}) ({talaveraWeight}g) ({talaveraZscore}z)</p>
-                        <span className='meter percentile-bar-container'>
-                            <span className='percentile-bar-content' id='percentile-bar-bio-talavera-lancet'>
-                                <p>p{talaveraPercentile}</p>
-                            </span>
-                        </span>
-                    </div>
-                    <div className='percentile-table-container'>
-                        <p style={{ fontStyle: 'italic', fontWeight: 'bold' }}>Lancet Fuenlabrada (p{fuenlabradaPercentile}) ({fuenlabradaWeight}g) ({fuenlabradaZscore}z)</p>
-                        <span className='meter percentile-bar-container'>
-                            <span className='percentile-bar-content' id='percentile-bar-bio-fuenlabrada-lancet'>
-                                <p>p{fuenlabradaPercentile}</p>
-                            </span>
-                        </span>
+                    <div id="right-lancet">
+                        <LancetChart ga={ga} weight={weight} genre={genre} />
                     </div>
                 </div>
-                <LancetChart ga={ga} weight={weight} genre={genre}/>
             </div>
         </div>
     );

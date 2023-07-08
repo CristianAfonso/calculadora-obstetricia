@@ -61,7 +61,7 @@ export default function ArterialComponent(props) {
         displayBar(uaPercent, 'percentile-bar-hemo-clinic-ua');
         displayBar(mcaPercent, 'percentile-bar-hemo-clinic-mca');
 
-    }, [props, handleRatio,mca, mcaPercent, ua, uaPercent])
+    }, [props, handleRatio, mca, mcaPercent, ua, uaPercent])
     return (
         <div id="left-hemodinamic">
             <div className='hemodinamic-single'>
@@ -81,13 +81,13 @@ export default function ArterialComponent(props) {
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className='hemodinamic-bar percentile-table-container'>
-                <span className='meter percentile-bar-container'>
-                    <span className='percentile-bar-content' id='percentile-bar-hemo-clinic-ua'>
-                        <p>p{uaPercent}</p>
+                <div className='hemodinamic-bar percentile-table-container'>
+                    <span className='meter percentile-bar-container'>
+                        <span className='percentile-bar-content' id='percentile-bar-hemo-clinic-ua'>
+                            <p>p{uaPercent}</p>
+                        </span>
                     </span>
-                </span>
+                </div>
             </div>
             <div className='hemodinamic-single'>
                 <div className="pair">
@@ -106,13 +106,13 @@ export default function ArterialComponent(props) {
                         </div>
                     </div>
                 </div>
-            </div>
             <div className='hemodinamic-bar percentile-table-container'>
                 <span className='meter percentile-bar-container'>
                     <span className='percentile-bar-content' id='percentile-bar-hemo-clinic-mca'>
                         <p>p{mcaPercent}</p>
                     </span>
                 </span>
+            </div>
             </div>
             <div className='hemodinamic-single'>
                 <div className="pair">
@@ -129,13 +129,13 @@ export default function ArterialComponent(props) {
                         </div>
                     </div>
                 </div>
-            </div>
             <div className='hemodinamic-bar percentile-table-container'>
                 <span className='meter percentile-bar-container'>
                     <span className='percentile-bar-content' id='percentile-bar-hemo-clinic-ratio'>
                         <p>p{ratioPercent}</p>
                     </span>
                 </span>
+            </div>
             </div>
         </div>
     )

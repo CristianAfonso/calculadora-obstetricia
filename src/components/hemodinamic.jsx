@@ -32,16 +32,13 @@ export default function Hemodinamic(props) {
                 </div>
             </div>
             <div className='service-content'>
-                <div id="hemodinamic-studio">
+                <div id="hemodinamic">
                     <ArterialComponent setMCA={setMCA} setUA={setUA} ga={ga} ua={ua} mca={mca} />
                     <SystolicComponent ga={ga} />
                     <DuctusIsthmusComponent ga={ga} />
                 </div>
             </div>
-            <div style={{width:'50%'}}>
             <HemodinamicChart ></HemodinamicChart>
-                
-            </div>
         </div>
     );
 }

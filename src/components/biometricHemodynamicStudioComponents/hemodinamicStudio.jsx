@@ -113,8 +113,8 @@ export default function HemodinamicStudio(props) {
                                 value={ua}
                                 onChange={handleUAChange} />
                             <div className="scores">
-                                <span id="ua-zscore">{uaZscore}z</span>
-                                <span id="ua-p">{uaPercent}p</span>
+                                <span id="ua-zscore">{uaZscore ? null : uaZscore} z</span>
+                                <span id="ua-p">{uaPercent ? null : uaPercent} p</span>
                             </div>
                         </div>
                     </div>
@@ -131,8 +131,8 @@ export default function HemodinamicStudio(props) {
                                 value={mca}
                                 onChange={handleMCAChange} />
                             <div className="scores">
-                                <span id="mca-zscore">{mcaZscore} z</span>
-                                <span id="mca-p">{mcaPercent} p</span>
+                                <span id="mca-zscore">{mcaZscore ? null : mcaZscore} z</span>
+                                <span id="mca-p">{mcaPercent ? null : mcaPercent} p</span>
                             </div>
                         </div>
                     </div>
@@ -145,10 +145,10 @@ export default function HemodinamicStudio(props) {
                                 className='read-only-number'
                                 type='number'
                                 readOnly
-                                value={ratio === 0 ? null : ratio} />
+                                value={ratio ? null : ratio} />
                             <div className="scores">
-                                <span id="ca-zscore">{ratio === 0 ? null : ratioZscore} z</span>
-                                <span id="ca-p">{ratio === 0 ? null : ratioPercent} p</span>
+                                <span id="ca-zscore">{ratio ? null : ratioZscore} z</span>
+                                <span id="ca-p">{ratio ? null : ratioPercent} p</span>
                             </div>
                         </div>
                     </div>

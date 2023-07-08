@@ -51,13 +51,13 @@ export default function DuctusIsthmusComponent(props) {
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className='hemodinamic-bar percentile-table-container'>
-                <span className='meter percentile-bar-container'>
-                    <span className='percentile-bar-content' id='percentile-bar-hemo-dv'>
-                        <p>p{ductusVenosusPercent}</p>
+                <div className='hemodinamic-bar percentile-table-container'>
+                    <span className='meter percentile-bar-container'>
+                        <span className='percentile-bar-content' id='percentile-bar-hemo-dv'>
+                            <p>p{ductusVenosusPercent}</p>
+                        </span>
                     </span>
-                </span>
+                </div>
             </div>
             <div className='hemodinamic-single'>
                 <div className="pair">
@@ -76,13 +76,13 @@ export default function DuctusIsthmusComponent(props) {
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className='hemodinamic-bar percentile-table-container'>
-                <span className='meter percentile-bar-container'>
-                    <span className='percentile-bar-content' id='percentile-bar-hemo-ai'>
-                        <p>p{aorticIsthmusPercent}</p>
+                <div className='hemodinamic-bar percentile-table-container'>
+                    <span className='meter percentile-bar-container'>
+                        <span className='percentile-bar-content' id='percentile-bar-hemo-ai'>
+                            <p>p{aorticIsthmusPercent}</p>
+                        </span>
                     </span>
-                </span>
+                </div>
             </div>
         </div>
     )

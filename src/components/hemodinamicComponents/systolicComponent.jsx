@@ -134,13 +134,13 @@ export default function SystolicComponent(props) {
                         </div>
                     </div>
                 </div>
-            </div>
             <div className='hemodinamic-bar percentile-table-container'>
                 <span className='meter percentile-bar-container'>
                     <span className='percentile-bar-content' id='percentile-bar-hemo-clinic-uterine_media'>
                         <p>p{uterine_meanPercent}</p>
                     </span>
                 </span>
+            </div>
             </div>
         </div>
     )
