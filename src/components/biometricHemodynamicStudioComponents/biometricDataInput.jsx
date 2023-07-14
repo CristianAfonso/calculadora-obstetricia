@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from "react-i18next";
+import Bar from '../singleComponent/percentileBar';
+import Scores from '../singleComponent/scores';
+import Pair from '../singleComponent/pair';
 import { displayBar, matchingGA, getZPercent, bpd_mean, cc_mean, ca_mean, lf_mean, bpd_sd, cc_sd, ca_sd, lf_sd } from "../functions";
 export default function BiometricDataInput(props) {
     const [ga, setGa] = useState((props.weeks) + props.days / 7);
@@ -97,95 +100,31 @@ export default function BiometricDataInput(props) {
         <div id='left-biometric'>
             <div className='biometric-single'>
                 <div className="pair">
-                    <div className="input">
-                        <span title={t('DBP_biometric_help')}>{t('DBP_biometric_title')}:</span>
-                        <input
-                            type='number'
-                            placeholder='mm'
-                            min={0}
-                            value={dbp}
-                            onChange={handleDBPBiometricChange} />
-                    </div>
-                    <div className="scores">
-                        <span id="dbp-zscore">{DBPzscore}z</span>
-                        <span id="dbp-p">{DBPpercentil}p</span>
-                        <span id="dbp-time">{DBPweeks || 0} {t('w')} {DBPdays || 0} {t('d')}</span>
-                    </div>
+                    <Pair help={t('DBP_biometric_help')} title={t('DBP_biometric_title')} measure={t('mm')} min={0} max={999} value={dbp} onChange={handleDBPBiometricChange} />
+                    <Scores zscore={DBPzscore} percent={DBPpercentil} weeks={DBPweeks} days={DBPdays} />
                 </div>
-                <span className='meter percentile-bar-container'>
-                    <span className='percentile-bar-content' id='percentile-bar-dbp'>
-                        <p>p{DBPpercentil}</p>
-                    </span>
-                </span>
+                <Bar percent={DBPpercentil} id="percentile-bar-dbp" />
             </div>
             <div className='biometric-single'>
                 <div className="pair">
-                    <div className="input">
-                        <span title={t('CC_biometric_help')}>{t('CC_biometric_title')}:</span>
-                        <input
-                            type='number'
-                            placeholder='mm'
-                            min={0}
-                            value={cc}
-                            onChange={handleCCBiometricChange} />
-                    </div>
-                    <div className="scores">
-                        <span id="cc-zscore">{CCzscore} z</span>
-                        <span id="cc-p">{CCpercentil} p</span>
-                        <span id="cc-time">{CCweeks || 0} {t('w')} {CCdays || 0} {t('d')}</span>
-                    </div>
+                    <Pair help={t('CC_biometric_help')} title={t('CC_biometric_title')} measure={t('mm')} min={0} max={999} value={cc} onChange={handleCCBiometricChange} />
+                    <Scores zscore={CCzscore} percent={CCpercentil} weeks={CCweeks} days={CCdays} />
                 </div>
-                <span className='meter percentile-bar-container'>
-                    <span className='percentile-bar-content' id='percentile-bar-cc'>
-                        <p>p{CCpercentil}</p>
-                    </span>
-                </span>
+                <Bar percent={CCpercentil} id="percentile-bar-cc" />
             </div>
             <div className='biometric-single'>
                 <div className="pair">
-                    <div className="input">
-                        <span title={t('CA_biometric_help')}>{t('CA_biometric_title')}:</span>
-                        <input
-                            type='number'
-                            placeholder='mm'
-                            min={0}
-                            value={ca}
-                            onChange={handleCABiometricChange} />
-                    </div>
-                    <div className="scores">
-                        <span id="ca-zscore">{CAzscore} z</span>
-                        <span id="ca-p">{CApercentil} p</span>
-                        <span id="ca-time">{CAweeks || 0} {t('w')} {CAdays || 0} {t('d')}</span>
-                    </div>
+                    <Pair help={t('CA_biometric_help')} title={t('CA_biometric_title')} measure={t('mm')} min={0} max={999} value={ca} onChange={handleCABiometricChange} />
+                    <Scores zscore={CAzscore} percent={CApercentil} weeks={CAweeks} days={CAdays} />
                 </div>
-                <span className='meter percentile-bar-container'>
-                    <span className='percentile-bar-content' id='percentile-bar-ca'>
-                        <p>p{CApercentil}</p>
-                    </span>
-                </span>
+                <Bar percent={CApercentil} id="percentile-bar-ca" />
             </div>
             <div className='biometric-single'>
                 <div className="pair">
-                    <div className="input">
-                        <span title={t('LF_biometric_help')}>{t('LF_biometric_title')}:</span>
-                        <input
-                            type='number'
-                            placeholder='mm'
-                            min={0}
-                            value={lf}
-                            onChange={handleLFBiometricChange} />
-                    </div>
-                    <div className="scores">
-                        <span id="lf-zscore">{LFzscore} z</span>
-                        <span id="lf-p">{LFpercentil} p</span>
-                        <span id="lf-time">{LFweeks || 0} {t('w')} {LFdays || 0} {t('d')}</span>
-                    </div>
+                    <Pair help={t('LF_biometric_help')} title={t('DBP_biometric_title')} measure={t('mm')} min={0} max={999} value={lf} onChange={handleLFBiometricChange} />
+                    <Scores zscore={LFzscore} percent={LFpercentil} weeks={LFweeks} days={LFdays} />
                 </div>
-                <span className='meter percentile-bar-container'>
-                    <span className='percentile-bar-content' id='percentile-bar-lf'>
-                        <p>p{LFpercentil}</p>
-                    </span>
-                </span>
+                <Bar percent={LFpercentil} id="percentile-bar-lf" />
             </div>
         </div>
     )

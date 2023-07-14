@@ -3,7 +3,8 @@ import { useTranslation } from "react-i18next";
 import { subDays } from "date-fns";
 import moment from 'moment';
 import { matchingGA } from './functions';
-
+import Pair from './singleComponent/pair';
+import DatationDates from './singleComponent/datationDates';
 export default function Datation(props) {
     const [weeks, setWeeks] = useState(props.weeks);
     const [days, setDays] = useState(props.days);
@@ -128,77 +129,19 @@ export default function Datation(props) {
             <div className='service-content'>
                 <div id='datation-container'>
                     <div className="datation-input">
-                        <div className="pair">
-                            <span title={t('lcc_help')}>{t('lcc_title')}:</span>
-                            <input
-                                type='number'
-                                placeholder={t('mm')}
-                                min={2}
-                                max={121}
-                                value={lccData}
-                                onChange={handleLCCChange} />
-                        </div>
-                        <div className="pair">
-                            <div>
-                                <h6>{t('last_fur')}</h6>
-                                <span className="last-fur-span">{lastFur.toLocaleDateString()}</span>
-                            </div>
-                            <div>
-                                <h6>{t('new_fur')}</h6>
-                                <span className="last-fur-span">{displayedNewFur.toLocaleDateString()}</span>
-                            </div>
-                        </div>
+                        <Pair help={t('lcc_help')} title={t('lcc_title')} measure={t('mm')} min={2} max={121} value={lccData} onChange={handleLCCChange}/>
                         <button onClick={lccCalculate}>{lccWeeks} {t('weeks')} + {lccDays} {t('days')}</button>
                     </div>
                     <div className="datation-input">
-                        <div className="pair">
-                            <span title={t('dbp_help')}>{t('dbp_title')}:</span>
-                            <input
-                                type='number'
-                                placeholder={t('mm')}
-                                min={31}
-                                max={100}
-                                value={dbpData}
-                                onChange={handleDBPChange} />
-                        </div>
-                        <div className="pair">
-                            <div>
-                                <h6>{t('last_fur')}</h6>
-                                <span className="last-fur-span">{lastFur.toLocaleDateString()}</span>
-                            </div>
-                            <div>
-                                <h6>{t('new_fur')}</h6>
-                                <span className="last-fur-span">{displayedNewFur.toLocaleDateString()}</span>
-                            </div>
-                        </div>
+                        <Pair help={t('dbp_help')} title={t('dbp_title')} measure={t('mm')} min={31} max={100} value={dbpData} onChange={handleDBPChange}/>
                         <button onClick={dbpCalculate}>{dbpWeeks} {t('weeks')} + {dbpDays} {t('days')}</button>
-
                     </div>
                     <div className="datation-input">
-                        <div className="pair">
-                            <span title={t('lf_help')}>{t('lf_title')}:</span>
-                            <input
-                                type='number'
-                                placeholder={t('mm')}
-                                min={17}
-                                max={75}
-                                value={lfData}
-                                onChange={handleLFChange} />
-
-                        </div>
-                        <div className="pair">
-                            <div>
-                                <h6>{t('last_fur')}</h6>
-                                <span className="last-fur-span">{lastFur.toLocaleDateString()}</span>
-                            </div>
-                            <div>
-                                <h6>{t('new_fur')}</h6>
-                                <span className="last-fur-span">{displayedNewFur.toLocaleDateString()}</span>
-                            </div>
-                        </div>
+                        <Pair help={t('lf_help')} title={t('lf_title')} measure={t('mm')} min={17} max={75} value={lfData} onChange={handleLFChange}/>
                         <button onClick={lfCalculate}>{lfWeeks} {t('weeks')} + {lfDays} {t('days')}</button>
-
                     </div>
+                    
+                    <DatationDates lastFur={lastFur} displayedNewFur={displayedNewFur}/>
                 </div>
             </div>
         </div>

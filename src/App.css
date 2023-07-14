@@ -79,7 +79,9 @@ header {
   width: 100%;
   max-width: 200px;
 }
-
+#section-img:dir(rtl){
+  transform: scaleX(-1);
+}
 #language-wrapper {
   min-width: 85px;
   width: 20%;
@@ -210,7 +212,18 @@ nav .forms-container .FUR-form {
   height: 30px;
   text-align: center;
 }
-
+@media screen and (max-width: 450px) {
+  .react-datepicker__navigation{
+    top: 10px !important;
+  }
+  .react-datepicker__navigation--next{
+    right: -40% !important;
+  }
+  .react-datepicker__navigation--previous{
+    left: -40% !important;
+  }
+  
+}
 nav .forms-container .weeks-form {
   display: flex;
   flex-direction: row;
@@ -465,7 +478,7 @@ nav #navBar button:hover {
   justify-content: space-between;
   height: 100%;
   row-gap: 20px;
-  width: 100%;
+  width: 50%;
   margin: auto;
 }
 
@@ -840,6 +853,13 @@ nav #navBar button:hover {
   width: 50%;
   padding-right: 5%;
   border-right: 1px solid #bbb;
+}
+.flex-row{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
 }
 #right-lancet{
   width: 50%;

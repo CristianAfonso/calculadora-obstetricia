@@ -373,36 +373,6 @@ export const hospitalGetTriplets = (ga, genre, hospital) => {
 }
 
 /*
-* 
-* 
-* UNICOS
-* eg = 0.00920217;
-* eg2 = 0.00645354;
-* eg3 = -0.00010245;
-* sexo = 0.03942451;
-* constante = 3.9486685;
-* mse = 0.12801644;
-* 
-* 
-* GEMELOS
-* eg = -0.4602458;
-* eg2 = 0.01879654;
-* eg3 = -0.00020637;
-* sexo = 0.04579971;
-* constante = 9.6297115;
-* mse = 0.1391164;
-* 
-* TRIPLES
-* eg = 2.0200247;
-* eg2 = -0.05827472;
-* eg3 = 0.00058056;
-* sexo = 0.11269155;
-* constante = -16.676953;
-* mse = 0.16071315;
-* 
-* */
-
-/*
     Hemodinamic
     */
 export const ua_mean = (ga) => {
@@ -636,6 +606,3 @@ export const getFootZscore = (ga, footValue) => {
     const zscore = (footValue - mean) / sd;
     return zscore;
 }
-
-// Lancet
-

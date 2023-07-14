@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from "react-i18next";
+import Bar from '../singleComponent/percentileBar.jsx';
+import Scores from '../singleComponent/scores.jsx';
+import Pair from '../singleComponent/pair.jsx';
 import { getUAZscore, getMCAZscore, getCPRZscore, getUAZscore_GregorioFormula, getMCAZscore_GregorioFormula, displayBar, getZPercent } from "../functions.js";
 export default function HemodinamicStudio(props) {
     const [ga, setGa] = useState(props.ga);
@@ -96,60 +99,31 @@ export default function HemodinamicStudio(props) {
             handleRatio(props.ua, props.mca);
         }
         handleBars();
-    }, [handleBars, handleRatio, mca, props,ua])
-
+    }, [handleBars, handleRatio, mca, props, ua])
     return (
         <div id="hemodinamic-studio">
             <div id="left-hemodinamic">
                 <div className='biometric-single'>
                     <div className="pair">
                         <div className="input">
-                            <span title={t('UA_help')}>{t('UA_title')}:</span>
-                            <input
-                                type='number'
-                                placeholder='IP'
-                                min={0.4}
-                                step={0.1}
-                                value={ua}
-                                onChange={handleUAChange} />
-                            <div className="scores">
-                                <span id="ua-zscore">{uaZscore ? null : uaZscore} z</span>
-                                <span id="ua-p">{uaPercent ? null : uaPercent} p</span>
-                            </div>
+                            <Pair help={t('UA_help')} title={t('UA_title')} measure={t('mm')} min={0.4} step={0.1} max={999} value={ua} onChange={handleUAChange} />
+                            <Scores zscore={uaZscore} percent={uaPercent} />
                         </div>
                     </div>
                 </div>
                 <div className='biometric-single'>
                     <div className="pair">
                         <div className="input">
-                            <span title={t('MCA_help')}>{t('MCA_title')}:</span>
-                            <input
-                                type='number'
-                                placeholder='mm'
-                                min={0.5}
-                                step={0.1}
-                                value={mca}
-                                onChange={handleMCAChange} />
-                            <div className="scores">
-                                <span id="mca-zscore">{mcaZscore ? null : mcaZscore} z</span>
-                                <span id="mca-p">{mcaPercent ? null : mcaPercent} p</span>
-                            </div>
+                            <Pair help={t('MCA_help')} title={t('MCA_title')} measure={t('mm')} min={0.5} step={0.1} max={999} value={mca} onChange={handleMCAChange} />
+                            <Scores zscore={mcaZscore} percent={mcaPercent} />
                         </div>
                     </div>
                 </div>
                 <div className='biometric-single'>
                     <div className="pair">
                         <div className="input">
-                            <span title={t('ratio_help')}>{t('ratio_title')}:</span>
-                            <input
-                                className='read-only-number'
-                                type='number'
-                                readOnly
-                                value={ratio ? null : ratio} />
-                            <div className="scores">
-                                <span id="ca-zscore">{ratio ? null : ratioZscore} z</span>
-                                <span id="ca-p">{ratio ? null : ratioPercent} p</span>
-                            </div>
+                            <Pair help={t('ratio_help')} title={t('ratio_title')} measure={t('mm')} min={0} max={999} value={ratio} readOnly={true} />
+                            <Scores zscore={ratioZscore} percent={ratioPercent} />
                         </div>
                     </div>
                 </div>
@@ -157,53 +131,23 @@ export default function HemodinamicStudio(props) {
             <div id="right-hemodinamic">
                 <div class="single-hemodinamic-displayer">
                     <p style={{ fontStyle: 'italic', display: 'block', textAlign: 'left' }}>{t('own_formula_clinic_ua')}: (p{uaPercent}) ({uaZscore}z)</p>
-                    <div className='percentile-table-container'>
-                        <span className='meter percentile-bar-container'>
-                            <span className='percentile-bar-content' id='percentile-bar-hemo-clinic-ua'>
-                                <p>p{uaPercent}</p>
-                            </span>
-                        </span>
-                    </div>
+                    <Bar percent={uaPercent} id="percentile-bar-hemo-clinic-ua" />
                 </div>
                 <div class="single-hemodinamic-displayer">
                     <p style={{ fontStyle: 'italic', display: 'block', textAlign: 'left' }}>{t('own_formula_gregorio_ua')}: (p{gregorioUAPercent}) ({gregorioUAZscore}z)</p>
-                    <div className='percentile-table-container'>
-                        <span className='meter percentile-bar-container'>
-                            <span className='percentile-bar-content' id='percentile-bar-hemo-gregorio-ua'>
-                                <p>p{gregorioUAPercent}</p>
-                            </span>
-                        </span>
-                    </div>
+                    <Bar percent={gregorioUAPercent} id="percentile-bar-hemo-gregorio-ua" />
                 </div>
                 <div class="single-hemodinamic-displayer">
                     <p style={{ fontStyle: 'italic', display: 'block', textAlign: 'left' }}>{t('own_formula_clinic_mca')}: (p{mcaPercent}) ({mcaZscore}z)</p>
-                    <div className='percentile-table-container'>
-                        <span className='meter percentile-bar-container'>
-                            <span className='percentile-bar-content' id='percentile-bar-hemo-clinic-mca'>
-                                <p>p{mcaPercent}</p>
-                            </span>
-                        </span>
-                    </div>
+                    <Bar percent={mcaPercent} id="percentile-bar-hemo-clinic-mca" />
                 </div>
                 <div class="single-hemodinamic-displayer">
                     <p style={{ fontStyle: 'italic', display: 'block', textAlign: 'left' }}>{t('own_formula_gregorio_mca')}: (p{gregorioMCAPercent}) ({gregorioMCAZscore}z)</p>
-                    <div className='percentile-table-container'>
-                        <span className='meter percentile-bar-container'>
-                            <span className='percentile-bar-content' id='percentile-bar-hemo-gregorio-mca'>
-                                <p>p{gregorioMCAPercent}</p>
-                            </span>
-                        </span>
-                    </div>
+                    <Bar percent={gregorioMCAPercent} id="percentile-bar-hemo-gregorio-mca" />
                 </div>
                 <div class="single-hemodinamic-displayer">
                     <p style={{ fontStyle: 'italic', display: 'block', textAlign: 'left' }}>{t('own_formula_gregorio_ratio')}: (p{gregorioRatioPercent}) ({gregorioRatioZscore}z)</p>
-                    <div className='percentile-table-container'>
-                        <span className='meter percentile-bar-container'>
-                            <span className='percentile-bar-content' id='percentile-bar-hemo-clinic-ratio'>
-                                <p>p{ratioPercent}</p>
-                            </span>
-                        </span>
-                    </div>
+                    <Bar percent={ratioPercent} id="percentile-bar-hemo-clinic-ratio" />
                 </div>
             </div>
 

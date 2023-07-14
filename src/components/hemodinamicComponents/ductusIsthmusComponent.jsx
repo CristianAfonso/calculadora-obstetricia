@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from "react-i18next";
+import Bar from '../singleComponent/percentileBar.jsx';
+import Scores from '../singleComponent/scores.jsx';
+import Pair from '../singleComponent/pair.jsx';
 import { getZPercent, getDVZscore, getAIZscore, displayBar } from "../functions.js";
 export default function DuctusIsthmusComponent(props) {
     const [ga, setGa] = useState(props.ga);
@@ -37,52 +40,22 @@ export default function DuctusIsthmusComponent(props) {
             <div className='hemodinamic-single'>
                 <div className="pair">
                     <div className="input">
-                        <span title={t('DV_help')}>{t('DV_title')}:</span>
-                        <input
-                            type='number'
-                            placeholder='IP'
-                            min={0.4}
-                            step={0.1}
-                            value={ductusVenosus}
-                            onChange={handleDuctusVenosus} />
-                        <div className="scores">
-                            <span id="ua-zscore">{ductusVenosusZscore}z</span>
-                            <span id="ua-p">{ductusVenosusPercent}p</span>
-                        </div>
+                        <Pair help={t('DV_help')} title={t('DV_title')} measure={t('mm')} min={0.4} step={0.1} max={999} value={ductusVenosus} onChange={handleDuctusVenosus} />
+                        <Scores zscore={ductusVenosusZscore} percent={ductusVenosusPercent} />
                     </div>
                 </div>
                 <div className='hemodinamic-bar percentile-table-container'>
-                    <span className='meter percentile-bar-container'>
-                        <span className='percentile-bar-content' id='percentile-bar-hemo-dv'>
-                            <p>p{ductusVenosusPercent}</p>
-                        </span>
-                    </span>
+                    <Bar percent={ductusVenosusPercent} id="percentile-bar-hemo-dv" />
                 </div>
             </div>
             <div className='hemodinamic-single'>
                 <div className="pair">
                     <div className="input">
-                        <span title={t('AI_help')}>{t('AI_title')}:</span>
-                        <input
-                            type='number'
-                            placeholder='mm'
-                            min={0.5}
-                            step={0.1}
-                            value={aorticIsthmus}
-                            onChange={handleAorticIsthmus} />
-                        <div className="scores">
-                            <span id="mca-zscore">{aorticIsthmusZscore} z</span>
-                            <span id="mca-p">{aorticIsthmusPercent} p</span>
-                        </div>
+                        <Pair help={t('AI_help')} title={t('AI_title')} measure={t('mm')} min={0.5} step={0.1} max={999} value={aorticIsthmus} onChange={handleAorticIsthmus} />
+                        <Scores zscore={aorticIsthmusZscore} percent={aorticIsthmusPercent} />
                     </div>
                 </div>
-                <div className='hemodinamic-bar percentile-table-container'>
-                    <span className='meter percentile-bar-container'>
-                        <span className='percentile-bar-content' id='percentile-bar-hemo-ai'>
-                            <p>p{aorticIsthmusPercent}</p>
-                        </span>
-                    </span>
-                </div>
+                <Bar percent={aorticIsthmusPercent} id="percentile-bar-hemo-ai" />
             </div>
         </div>
     )

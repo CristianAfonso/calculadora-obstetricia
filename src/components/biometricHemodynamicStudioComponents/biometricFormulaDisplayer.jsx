@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from "react-i18next";
+import Bar from '../singleComponent/percentileBar';
+import GenreSelector from '../singleComponent/genreSelector';
 import { displayBar, getZPercent, EFW_Hadlock2Weight, EFW_Hadlock2Age, EFW_Hadlock3Weight, EFW_Hadlock3Age, hospitalGetWeight, hospitalGetZscore } from "../functions";
 export default function BiometricFormulaDisplayer(props) {
     const [dbp, setDBP] = useState(props.dbp);
@@ -178,8 +180,7 @@ export default function BiometricFormulaDisplayer(props) {
                                     min={0}
                                     value={customWeight}
                                     onChange={handleCustomWeightChange} />
-                                <button className="genreSelector" id="male-selector" onClick={handleSelectGenre} value="male">{t('male')}</button>
-                                <button className="genreSelector" id="female-selector" onClick={handleSelectGenre} value="female">{t('female')}</button>
+                                <GenreSelector handleSelectGenre={handleSelectGenre}/>
                             </span>
                         </th>
                     </tr>
@@ -188,11 +189,7 @@ export default function BiometricFormulaDisplayer(props) {
                             <tr style={{ display: 'block', textAlign: 'center' }}>{t('own_formula_gregorio')}:</tr>
                             <tr style={{ display: 'block', textAlign: 'center' }}>(p{gregorioCustomPercentile}) ({gregorioCustomWeight}g) ({gregorioCustomZscore}z)</tr>
                             <tr className='percentile-table-container'>
-                                <span className='meter percentile-bar-container'>
-                                    <span className='percentile-bar-content' id='percentile-bar-bio-gregorio'>
-                                        <p>p{gregorioCustomPercentile}</p>
-                                    </span>
-                                </span>
+                                <Bar percent={gregorioCustomPercentile} id="percentile-bar-bio-gregorio" />
                             </tr>
                         </th>
                     </tr>
@@ -201,11 +198,7 @@ export default function BiometricFormulaDisplayer(props) {
                             <tr style={{ display: 'block', textAlign: 'center' }}>{t('own_formula_clinic')}:</tr>
                             <tr style={{ display: 'block', textAlign: 'center' }}>(p{clinicCustomPercentile}) ({clinicCustomWeight}g) ({clinicCustomZscore}z)</tr>
                             <tr className='percentile-table-container'>
-                                <span className='meter percentile-bar-container'>
-                                    <span className='percentile-bar-content' id='percentile-bar-bio-clinic'>
-                                        <p>p{clinicCustomPercentile}</p>
-                                    </span>
-                                </span>
+                                <Bar percent={clinicCustomPercentile} id="percentile-bar-bio-clinic" />
                             </tr>
                         </th>
                     </tr>

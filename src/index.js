@@ -54,8 +54,7 @@ i18n
       caches: ['cookie'],
     },
     backend: {
-      //loadPath: '/assets/locales/{{lng}}/translation.json',
-      loadPath: '/calculadora-obstetricia/assets/locales/{{lng}}/translation.json', // For GitHub-Pages
+      loadPath: '/calculadora-obstetricia/assets/locales/{{lng}}/translation.json', 
     }
   });
 

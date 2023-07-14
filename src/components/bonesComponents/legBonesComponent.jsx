@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from "react-i18next";
+import Bar from '../singleComponent/percentileBar.jsx';
+import Scores from '../singleComponent/scores.jsx';
+import Pair from '../singleComponent/pair.jsx';
 import { getFemurZscore, getTibiaZscore, getFibulaZscore, getFootZscore, displayBar, getZPercent } from "../functions.js";
+
 export default function LegBones(props) {
     const [ga, setGa] = useState(props.ga);
     const [femurValue, setFemurValue] = useState("");
@@ -57,98 +61,38 @@ export default function LegBones(props) {
             <div className='bones-single'>
                 <div className="pair">
                     <div className="input">
-                        <span title={t('femur_help')}>{t('femur_title')}:</span>
-                        <input
-                            type='number'
-                            placeholder='mm'
-                            min={0}
-                            value={femurValue}
-                            onChange={handleFemurChange} />
-                        <div className="scores">
-                            <span id="femur-zscore">{femurZscore}z</span>
-                            <span id="femur-percent">{femurPercent}p</span>
-                        </div>
+                        <Pair help={t('femur_help')} title={t('femur_title')} measure={t('mm')} min={0} max={999} value={femurValue} onChange={handleFemurChange} />
+                        <Scores zscore={femurZscore} percent={femurPercent} />
                     </div>
                 </div>
-                <div className='bones-bar percentile-table-container'>
-                    <span className='meter percentile-bar-container'>
-                        <span className='percentile-bar-content' id='bones-femur'>
-                            <p>{femurPercent}p</p>
-                        </span>
-                    </span>
-                </div>
+                <Bar percent={femurPercent} id="bones-femur" />
             </div>
             <div className='bones-single'>
                 <div className="pair">
                     <div className="input">
-                        <span title={t('tibia_help')}>{t('tibia_title')}:</span>
-                        <input
-                            type='number'
-                            placeholder='mm'
-                            min={0}
-                            value={tibiaValue}
-                            onChange={handleTibiaChange} />
-                        <div className="scores">
-                            <span id="tibia-zscore">{tibiaZscore}z</span>
-                            <span id="tibia-percent">{tibiaPercent}p</span>
-                        </div>
+                        <Pair help={t('tibia_help')} title={t('tibia_title')} measure={t('mm')} min={0} max={999} value={tibiaValue} onChange={handleTibiaChange} />
+                        <Scores zscore={tibiaZscore} percent={tibiaPercent} />
                     </div>
                 </div>
-                <div className='bones-bar percentile-table-container'>
-                    <span className='meter percentile-bar-container'>
-                        <span className='percentile-bar-content' id='bones-tibia'>
-                            <p>{tibiaPercent}p</p>
-                        </span>
-                    </span>
-                </div>
+                <Bar percent={tibiaPercent} id="bones-tibia" />
             </div>
             <div className='bones-single'>
                 <div className="pair">
                     <div className="input">
-                        <span title={t('fibula_help')}>{t('fibula_title')}:</span>
-                        <input
-                            type='number'
-                            placeholder='mm'
-                            min={0}
-                            value={fibulaValue}
-                            onChange={handleFibulaChange} />
-                        <div className="scores">
-                            <span id="fibula-zscore">{fibulaZscore}z</span>
-                            <span id="fibula-percent">{fibulaPercent}p</span>
-                        </div>
+                        <Pair help={t('fibula_help')} title={t('fibula_title')} measure={t('mm')} min={0} max={999} value={fibulaValue} onChange={handleFibulaChange} />
+                        <Scores zscore={fibulaZscore} percent={fibulaPercent} />
                     </div>
                 </div>
-                <div className='bones-bar percentile-table-container'>
-                    <span className='meter percentile-bar-container'>
-                        <span className='percentile-bar-content' id='bones-fibula'>
-                            <p>{fibulaPercent}p</p>
-                        </span>
-                    </span>
-                </div>
+                <Bar percent={fibulaPercent} id="bones-fibula" />
             </div>
             <div className='bones-single'>
                 <div className="pair">
                     <div className="input">
-                        <span title={t('foot_help')}>{t('foot_title')}:</span>
-                        <input
-                            type='number'
-                            placeholder='mm'
-                            min={0}
-                            value={footValue}
-                            onChange={handleFootChange} />
-                        <div className="scores">
-                            <span id="foot-zscore">{footZscore}z</span>
-                            <span id="foot-percent">{footPercent}p</span>
-                        </div>
+                        <Pair help={t('foot_help')} title={t('foot_title')} measure={t('mm')} min={0} max={999} value={footValue} onChange={handleFootChange} />
+                        <Scores zscore={footZscore} percent={footPercent} />
                     </div>
                 </div>
-                <div className='bones-bar percentile-table-container'>
-                    <span className='meter percentile-bar-container'>
-                        <span className='percentile-bar-content' id='bones-foot'>
-                            <p>{footPercent}p</p>
-                        </span>
-                    </span>
-                </div>
+                <Bar percent={footPercent} id="bones-foot" />
             </div>
 
         </div>

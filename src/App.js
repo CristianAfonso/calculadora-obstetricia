@@ -33,12 +33,6 @@ function App(props) {
     setWeeks(timeWeeks);
     setDays(timeDays);
   }
-  const GetDesiredComponent = (component) => {
-    setActualComponent(component);
-  }
-  const GetLastEcoDate = (date) => {
-    setLastEcoDate(date);
-  }
   let GetNewTime = (timeWeeks, timeDays) => {
     setNewWeeks(timeWeeks);
     setNewDays(timeDays);
@@ -62,8 +56,8 @@ function App(props) {
 
     <div className="container">
       <Nav
-        updateLastPeriod={setLastPeriodDate} SetLastEcoDate={GetLastEcoDate}
-        GetDesiredComponentValue={GetDesiredComponent} GiveTime={GetTime}
+        updateLastPeriod={setLastPeriodDate} SetLastEcoDate={setLastEcoDate}
+        GetDesiredComponentValue={setActualComponent} GiveTime={GetTime}
         stopUpdateFUR={stopUpdateFUR} stopUpdateWeeksandDays={stopUpdateWeeksandDays}
         lastPeriodDateUpdated={lastPeriodDate} weeks={weeks} days={days}
         newPeriodDate={newPeriodDate} newWeeks={newWeeks} newDays={newDays} lcc={lcc}

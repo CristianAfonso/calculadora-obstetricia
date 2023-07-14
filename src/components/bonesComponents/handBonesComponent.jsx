@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from "react-i18next";
+import Bar from '../singleComponent/percentileBar.jsx';
+import Scores from '../singleComponent/scores.jsx';
+import Pair from '../singleComponent/pair.jsx';
 import { getHumerusZscore, getUlnaZscore, getRadiusZscore, displayBar, getZPercent } from "../functions.js";
 export default function HandBones(props) {
     const [ga, setGa] = useState(props.ga);
@@ -46,74 +49,29 @@ export default function HandBones(props) {
             <div className='bones-single'>
                 <div className="pair">
                     <div className="input">
-                        <span title={t('humerus_help')}>{t('humerus_title')}:</span>
-                        <input
-                            type='number'
-                            placeholder='mm'
-                            min={0}
-                            value={humerusValue}
-                            onChange={handleHumerusChange} />
-                        <div className="scores">
-                            <span id="humerus-zscore">{humerusZscore}z</span>
-                            <span id="humerus-percent">{humerusPercent}p</span>
-                        </div>
+                        <Pair help={t('humerus_help')} title={t('humerus_title')} measure={t('mm')} min={0} max={999} value={humerusValue} onChange={handleHumerusChange} />
+                        <Scores zscore={humerusZscore} percent={humerusPercent} />
                     </div>
                 </div>
-                <div className='bones-bar percentile-table-container'>
-                    <span className='meter percentile-bar-container'>
-                        <span className='percentile-bar-content' id='bones-humerus'>
-                            <p>{humerusPercent}p</p>
-                        </span>
-                    </span>
-                </div>
+                <Bar percent={humerusPercent} id="bones-humerus" />
             </div>
             <div className='bones-single'>
                 <div className="pair">
                     <div className="input">
-                        <span title={t('ulna_help')}>{t('ulna_title')}:</span>
-                        <input
-                            type='number'
-                            placeholder='mm'
-                            min={0}
-                            value={ulnaValue}
-                            onChange={handleUlnaChange} />
-                        <div className="scores">
-                            <span id="ulna-zscore">{ulnaZscore}z</span>
-                            <span id="ulna-percent">{ulnaPercent}p</span>
-                        </div>
+                        <Pair help={t('ulna_help')} title={t('ulna_title')} measure={t('mm')} min={0} max={999} value={ulnaValue} onChange={handleUlnaChange} />
+                        <Scores zscore={ulnaZscore} percent={ulnaPercent} />
                     </div>
                 </div>
-                <div className='bones-bar percentile-table-container'>
-                    <span className='meter percentile-bar-container'>
-                        <span className='percentile-bar-content' id='bones-ulna'>
-                            <p>{ulnaPercent}p</p>
-                        </span>
-                    </span>
-                </div>
+                <Bar percent={ulnaPercent} id="bones-ulna" />
             </div>
             <div className='bones-single'>
                 <div className="pair">
                     <div className="input">
-                        <span title={t('radius_help')}>{t('radius_title')}:</span>
-                        <input
-                            type='number'
-                            placeholder='mm'
-                            min={0}
-                            value={radiusValue}
-                            onChange={handleRadiusChange} />
-                        <div className="scores">
-                            <span id="radius-zscore">{radiusZscore}z</span>
-                            <span id="radius-percent">{radiusPercent}p</span>
-                        </div>
+                        <Pair help={t('radius_help')} title={t('radius_title')} measure={t('mm')} min={0} max={999} value={radiusValue} onChange={handleRadiusChange} />
+                        <Scores zscore={radiusZscore} percent={radiusPercent} />
                     </div>
                 </div>
-                <div className='bones-bar percentile-table-container'>
-                    <span className='meter percentile-bar-container'>
-                        <span className='percentile-bar-content' id='bones-radius'>
-                            <p>{radiusPercent}p</p>
-                        </span>
-                    </span>
-                </div>
+                <Bar percent={radiusPercent} id="bones-radius" />
             </div>
 
         </div>

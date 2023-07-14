@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from "react-i18next";
-import { displayBar, getZPercent, hospitalGetWeight,hospitalGetTwinsWeight,hospitalGetTriplets,hospitalGetZscore } from "./functions";
+import { displayBar, getZPercent, hospitalGetWeight, hospitalGetTwinsWeight, hospitalGetTriplets, hospitalGetZscore } from "./functions";
 import SingleChart from './charts/singleChart';
 import TwinsChart from './charts/twinsChart';
 import SingleVsTwins from './charts/singleVsTwins';
+import Bar from './singleComponent/percentileBar';
+import GenreSelector from './singleComponent/genreSelector';
 export default function Unicvsmulti(props) {
     const [ga, setGa] = useState((props.weeks) + props.days / 7);
     const [weight, setWeight] = useState("");
@@ -20,7 +22,7 @@ export default function Unicvsmulti(props) {
     function handleweightChange(event) {
         setWeight(event.target.value);
         handleGregorioChanges(event.target.value);
-        if(amountSelector !== 'triplets'){
+        if (amountSelector !== 'triplets') {
             handleClinicChanges(event.target.value);
         }
     }
@@ -93,13 +95,13 @@ export default function Unicvsmulti(props) {
         if (weight) {
             props.setWeight(weight);
             handleGregorioChanges(weight);
-            if(amountSelector !== 'triplets'){
+            if (amountSelector !== 'triplets') {
                 handleClinicChanges(weight);
             }
         } else {
             setWeight(props.weight);
-            handleGregorioChanges(props.weight);            
-            if(amountSelector !== 'triplets'){
+            handleGregorioChanges(props.weight);
+            if (amountSelector !== 'triplets') {
                 handleClinicChanges(props.weight);
             }
         }
@@ -117,7 +119,7 @@ export default function Unicvsmulti(props) {
             <div id='unic-content'>
                 <div className='top-unic'>
                     <span>
-                        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                        <div className='flex-row'>
                             {t('weight')}
                             <input
                                 style={{ marginLeft: 5 + "px", maxWidth: 70 + 'px', height: 39 + 'px' }}
@@ -126,39 +128,29 @@ export default function Unicvsmulti(props) {
                                 min={0}
                                 value={weight}
                                 onChange={handleweightChange} />
-                            <div>
-                                <button className="genreSelector" id="male-selector" onClick={handleSelectGenre} value="male">{t('male')}</button>
-                                <button className="genreSelector" id="female-selector" onClick={handleSelectGenre} value="female">{t('female')}</button>
-                            </div>
-                            <div style={{ display: 'flex', flexDirection: 'column' }}>
-                                <p><input type='radio' value='single' name='singlevsmultiple' defaultChecked={true} onClick={handleSelection} />{t('single')}</p>
-                                <p><input type='radio' value='twins' name='singlevsmultiple' onClick={handleSelection} />{t('twins')}</p>
-                                <p><input type='radio' value='triplets' name='singlevsmultiple' onClick={handleSelection} />{t('triplets')}</p>
-                            </div>
+                            
+                            <GenreSelector handleSelectGenre={handleSelectGenre}/>
+                            <select name='singlevsmultiple'>
+                                <option value='single' onClick={handleSelection}>{t('single')}</option>
+                                <option value='twins' onClick={handleSelection}>{t('twins')}</option>
+                                <option value='triplets' onClick={handleSelection}>{t('triplets')}</option>
+                            </select>
                         </div>
                     </span>
                     <div className='percentile-table-container'>
                         <p style={{ fontStyle: 'italic' }}>{t('own_formula_gregorio')} (p{gregorioCustomPercentile}) ({gregorioWeight}g) ({gregorioCustomZscore}z)</p>
-                        <span className='meter percentile-bar-container'>
-                            <span className='percentile-bar-content' id='percentile-bar-bio-gregorio'>
-                                <p>p{gregorioCustomPercentile}</p>
-                            </span>
-                        </span>
+                        <Bar percent={gregorioCustomPercentile} id="percentile-bar-bio-gregorio" />
                     </div>
-                    {amountSelector !== 'triplets'  &&
-                    <div className='percentile-table-container'>
-                        <p style={{ fontStyle: 'italic' }}>{t('own_formula_clinic')} (p{clinicCustomPercentile}) ({clinicWeight}g) ({clinicCustomZscore}z)</p>
-                        <span className='meter percentile-bar-container'>
-                            <span className='percentile-bar-content' id='percentile-bar-bio-clinic'>
-                                <p>p{clinicCustomPercentile}</p>
-                            </span>
-                        </span>
-                    </div>}
+                    {amountSelector !== 'triplets' &&
+                        <div className='percentile-table-container'>
+                            <p style={{ fontStyle: 'italic' }}>{t('own_formula_clinic')} (p{clinicCustomPercentile}) ({clinicWeight}g) ({clinicCustomZscore}z)</p>
+                            <Bar percent={clinicCustomPercentile} id="percentile-bar-bio-clinic" />
+                        </div>}
                 </div>
                 <div className='bottom-unic'>
-                    {amountSelector === "single" && <SingleChart ga={ga} weight={weight} genre={genre}/>}
-                    {amountSelector === 'twins' && <TwinsChart ga={ga} weight={weight} genre={genre}/>}
-                    {(amountSelector === 'single' || amountSelector === 'twins') && <SingleVsTwins ga={ga} weight={weight} genre={genre} number={amountSelector}/>}
+                    {amountSelector === "single" && <SingleChart ga={ga} weight={weight} genre={genre} />}
+                    {amountSelector === 'twins' && <TwinsChart ga={ga} weight={weight} genre={genre} />}
+                    {(amountSelector === 'single' || amountSelector === 'twins') && <SingleVsTwins ga={ga} weight={weight} genre={genre} number={amountSelector} />}
                 </div>
             </div>
         </div>

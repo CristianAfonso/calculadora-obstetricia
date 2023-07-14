@@ -16,7 +16,6 @@ export default function Nav(props) {
     const [lastPeriodDate, setLastPeriodDate] = useState(props.lastPeriodDateUpdated);
     const [ecoDate, setEcoDate] = useState(today);
     const [estimatedDueDate, setEstimatedDueDate] = useState("");
-    const [actualComponent, setActualComponent] = useState("");
     const [lcc, setLCC] = useState(props.lcc);
     const [lccDays, setLCCDays] = useState(0);
     const [lccWeeks, setLCCWeeks] = useState(0);
@@ -135,7 +134,6 @@ export default function Nav(props) {
             setSelectedFont("FUR");
             props.GiveTime(totalWeeks, totalDays % 7);
         }
-        props.GetDesiredComponentValue(actualComponent);
         if (selectedFont === "FUR") {
             props.GiveTime(furWeeks, furDays);
         } else {
@@ -149,7 +147,7 @@ export default function Nav(props) {
             updateFur(calculatedDays);
         }
 
-    },[props, actualComponent, selectedFont, lastPeriodDate, lcc, furWeeks, furDays, weeks, days, updateFur])
+    },[props, selectedFont, lastPeriodDate, lcc, furWeeks, furDays, weeks, days, updateFur])
     const { t } = useTranslation();
     return (
         <nav>
@@ -235,12 +233,12 @@ export default function Nav(props) {
                 </form>
             </div>
             <ul id="navBar">
-                <button onClick={() => setActualComponent("datation")}>{t('datation')}</button>
-                <button onClick={() => setActualComponent("biometric")}>{t('biometric')}</button>
-                <button onClick={() => setActualComponent("hemodinamic")}>{t('hemodinamic')}</button>
-                <button onClick={() => setActualComponent("bones")}>{t('bones')}</button>
-                <button onClick={() => setActualComponent("lancet")}>{t('lancet')}</button>
-                <button onClick={() => setActualComponent("unicvsmulti")}>{t('unicvsmulti')}</button>
+                <button onClick={() => props.GetDesiredComponentValue("datation")}>{t('datation')}</button>
+                <button onClick={() => props.GetDesiredComponentValue("biometric")}>{t('biometric')}</button>
+                <button onClick={() => props.GetDesiredComponentValue("hemodinamic")}>{t('hemodinamic')}</button>
+                <button onClick={() => props.GetDesiredComponentValue("bones")}>{t('bones')}</button>
+                <button onClick={() => props.GetDesiredComponentValue("lancet")}>{t('lancet')}</button>
+                <button onClick={() => props.GetDesiredComponentValue("unicvsmulti")}>{t('unicvsmulti')}</button>
             </ul>
         </nav>
     );
