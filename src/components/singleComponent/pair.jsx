@@ -18,6 +18,7 @@ export default function Pair(props) {
             <div className="pair">
                 <span title={props.help}>{props.title}:</span>
                 <input
+                    aria-label = "code"
                     type='number'
                     placeholder={props.measure}
                     min={props.min}

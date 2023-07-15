@@ -12,5 +12,7 @@
     "days": "Días",
     "weeks": "Semanas",
     "EXPECTEDBIRTH": "Fecha posible de parto: ",
-    "LCC_title": "LCC"
+    "LCC_title": "LCC",
+    "male": "niño",
+    "female": "niña"
 }
