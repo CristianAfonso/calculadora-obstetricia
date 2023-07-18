@@ -4,7 +4,7 @@ import HighchartsReact from 'highcharts-react-official';
 import { aipi_mean, aipi_sd, mca_mean, mca_sd, cpr_mean, cpr_sd, ua_mean, ua_sd, vdpi_mean, vdpi_sd, avpi_mean, avpi_sd } from '../functions';
 require("highcharts/highcharts-more")(Highcharts);
 
-export default function HemodinamicChart(props) {
+export default function HemodinamicChart() {
     const { t } = useTranslation();
     const xAxis = ['20+0', '20+1', '20+2', '20+3', '20+4', '20+5', '20+6',
         '21+0', '21+1', '21+2', '21+3', '21+4', '21+5', '21+6',
@@ -85,7 +85,7 @@ export default function HemodinamicChart(props) {
             zoomType: 'x'
         },
         title: {
-            text: 'Percentiles'
+            text: t('percents')
         },
 
         xAxis: {
@@ -112,7 +112,7 @@ export default function HemodinamicChart(props) {
         },
         series: [
             {
-                name: t('UA_title'),
+                name: t('UA_help'),
                 data: averagesUAPI,
                 zIndex: 1,
                 marker: {
@@ -123,7 +123,7 @@ export default function HemodinamicChart(props) {
             }
             ,
             {
-                name: 'p05-p95 ' + t('UA_title'),
+                name: 'p05-p95 ' + t('UA_help'),
                 data: rangesUAPI,
                 type: 'arearange',
                 lineWidth: 0,
@@ -137,7 +137,7 @@ export default function HemodinamicChart(props) {
             }
             ,
             {
-                name: t('MCA_title'),
+                name: t('MCA_help'),
                 data: averagesMCAPI,
                 zIndex: 1,
                 marker: {
@@ -147,7 +147,7 @@ export default function HemodinamicChart(props) {
                 }
             }
             , {
-                name: 'p05-p95 ' + t('MCA_title'),
+                name: 'p05-p95 ' + t('MCA_help'),
                 data: rangesMCAPI,
                 type: 'arearange',
                 lineWidth: 0,
@@ -161,7 +161,7 @@ export default function HemodinamicChart(props) {
             }
             ,
             {
-                name: t('ratio_title'),
+                name: t('ratio_help'),
                 data: averagesCPR,
                 zIndex: 1,
                 marker: {
@@ -171,7 +171,7 @@ export default function HemodinamicChart(props) {
                 }
             }
             , {
-                name: 'p05-p95 ' + t('ratio_title'),
+                name: 'p05-p95 ' + t('ratio_help'),
                 data: rangesCPR,
                 type: 'arearange',
                 lineWidth: 0,
@@ -185,7 +185,7 @@ export default function HemodinamicChart(props) {
             }
             ,
             {
-                name: t('uterine_artery_title'),
+                name: t('uterine_artery_help'),
                 data: averagesUAAPI,
                 zIndex: 1,
                 marker: {
@@ -195,7 +195,7 @@ export default function HemodinamicChart(props) {
                 }
             }
             , {
-                name: 'p05-p95 ' + t('uterine_artery_title'),
+                name: 'p05-p95 ' + t('uterine_artery_help'),
                 data: rangesUAAPI,
                 type: 'arearange',
                 lineWidth: 0,
@@ -209,7 +209,7 @@ export default function HemodinamicChart(props) {
             }
             ,
             {
-                name: t('DV_title'),
+                name: t('DV_help'),
                 data: averagesVDPI,
                 zIndex: 1,
                 marker: {
@@ -219,7 +219,7 @@ export default function HemodinamicChart(props) {
                 }
             }
             , {
-                name: 'p05-p95 ' + t('DV_title'),
+                name: 'p05-p95 ' + t('DV_help'),
                 data: rangesVDPI,
                 type: 'arearange',
                 lineWidth: 0,
@@ -233,7 +233,7 @@ export default function HemodinamicChart(props) {
             }
             ,
             {
-                name: t('AI_title'),
+                name: t('AI_help'),
                 data: averagesAIPI,
                 zIndex: 1,
                 marker: {
@@ -243,7 +243,7 @@ export default function HemodinamicChart(props) {
                 }
             }
             , {
-                name: 'p05-p95 ' + t('AI_title'),
+                name: 'p05-p95 ' + t('AI_help'),
                 data: rangesAIPI,
                 type: 'arearange',
                 lineWidth: 0,

@@ -6,7 +6,7 @@ import GenreSelector from './singleComponent/genreSelector';
 import LancetChart from './charts/lancetChart';
 export default function Lancet(props) {
     const [ga, setGa] = useState((props.weeks) + props.days / 7);
-    const [weight, setWeight] = useState("");
+    const [weight, setWeight] = useState(props.weight);
     const [gregorioCustomPercentile, setGregorioCustomPercentile] = useState("");
     const [gregorioWeight, setGregorioCustomWeight] = useState("");
     const [gregorioCustomZscore, setGregorioCustomZscore] = useState("");
@@ -22,11 +22,12 @@ export default function Lancet(props) {
     const [fuenlabradaPercentile, setFuenlabradaPercentile] = useState("");
     const [fuenlabradaWeight, setFuenlabradaWeight] = useState("");
     const [fuenlabradaZscore, setFuenlabradaZscore] = useState("");
-    const [genre, setGenre] = useState("");
+    const [genre, setGenre] = useState(props.genre);
     const { t } = useTranslation();
 
     function handleweightChange(event) {
         setWeight(event.target.value);
+        props.setWeight(event.target.value);
         handleGregorioChanges(event.target.value);
         handleClinicChanges(event.target.value);
         handleGregorioLancetChanges(event.target.value);
@@ -35,6 +36,7 @@ export default function Lancet(props) {
     }
     function handleSelectGenre(event) {
         setGenre(event.target.value);
+        props.setGenre(event.target.value);
         if (event.target.value === t('male')) {
             document.getElementById("female-selector").className = 'genreSelector';
             document.getElementById("male-selector").className = 'genreSelector focus';
@@ -90,25 +92,12 @@ export default function Lancet(props) {
     }, [ga, genre])
     useEffect(() => {
         setGa((props.weeks) + props.days / 7);
-        if (!genre) {
-            setGenre(props.genre);
-        } else {
-            props.setGenre(genre);
-        }
-        if (weight) {
-            props.setWeight(weight);
+        if(props.weight){
             handleGregorioChanges(weight);
             handleClinicChanges(weight);
             handleGregorioLancetChanges(weight);
             handleTalaveraLancetChanges(weight);
             handleFuenlabradaLancetChanges(weight);
-        } else {
-            setWeight(props.weight);
-            handleGregorioChanges(props.weight);
-            handleClinicChanges(props.weight);
-            handleGregorioLancetChanges(props.weight);
-            handleTalaveraLancetChanges(props.weight);
-            handleFuenlabradaLancetChanges(props.weight);
         }
     }, [props, genre, weight, handleGregorioChanges, handleClinicChanges, handleGregorioLancetChanges, handleTalaveraLancetChanges, handleFuenlabradaLancetChanges]);
 
@@ -130,7 +119,8 @@ export default function Lancet(props) {
                                 style={{ marginLeft: 5 + "px", maxWidth: 70 + 'px', height: 39 + 'px' }}
                                 type='number'
                                 placeholder='g'
-                                min={0}
+                                min={250}
+                                max={6000}
                                 value={weight}
                                 onChange={handleweightChange} />
                                 <GenreSelector handleSelectGenre={handleSelectGenre}/>
@@ -145,15 +135,15 @@ export default function Lancet(props) {
                             <Bar percent={clinicCustomPercentile} id="percentile-bar-bio-clinic" />
                         </div>
                         <div className='percentile-table-container'>
-                            <p style={{ fontStyle: 'italic', fontWeight: 'bold' }}>Lancet Gregorio Marañón (p{lancetGregorioPercentile}) ({lancetGregorioWeight}g) ({lancetGregorioZscore}z)</p>
+                            <p style={{ fontStyle: 'italic', fontWeight: 'bold' }}>{t('gregorio_lancet')} (p{lancetGregorioPercentile}) ({lancetGregorioWeight}g) ({lancetGregorioZscore}z)</p>
                             <Bar percent={lancetGregorioPercentile} id="percentile-bar-bio-gregorio-lancet" />
                         </div>
                         <div className='percentile-table-container'>
-                            <p style={{ fontStyle: 'italic', fontWeight: 'bold' }}>Lancet Talavera (p{talaveraPercentile}) ({talaveraWeight}g) ({talaveraZscore}z)</p>
+                            <p style={{ fontStyle: 'italic', fontWeight: 'bold' }}>{t('talavera_lancet')} (p{talaveraPercentile}) ({talaveraWeight}g) ({talaveraZscore}z)</p>
                             <Bar percent={talaveraPercentile} id="percentile-bar-bio-talavera-lancet" />
                         </div>
                         <div className='percentile-table-container'>
-                            <p style={{ fontStyle: 'italic', fontWeight: 'bold' }}>Lancet Fuenlabrada (p{fuenlabradaPercentile}) ({fuenlabradaWeight}g) ({fuenlabradaZscore}z)</p>
+                            <p style={{ fontStyle: 'italic', fontWeight: 'bold' }}>{t('fuenlabrada_lancet')} (p{fuenlabradaPercentile}) ({fuenlabradaWeight}g) ({fuenlabradaZscore}z)</p>
                             <Bar percent={fuenlabradaPercentile} id="percentile-bar-bio-fuenlabrada-lancet" />
                         </div>
                     </div>

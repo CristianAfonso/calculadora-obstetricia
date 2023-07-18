@@ -43,7 +43,7 @@ export default function Nav(props) {
             } else {
                 document.getElementById('navBar').style.display = "flex";
                 document.getElementById('last-period-date').style.color = "black";
-                document.getElementById('last-period-date').style.borderColor = null;
+                document.getElementById('last-period-date').style.borderColor = "";
                 setSelectedFont("FUR");
                 CalculateWeeksAndDays();
                 props.GiveTime(furWeeks, furDays);
@@ -81,9 +81,9 @@ export default function Nav(props) {
         } else {
             document.getElementById('navBar').style.display = "flex";
             document.getElementById('weeks').style.color = "black";
-            document.getElementById('weeks').style.borderColor = null;
+            document.getElementById('weeks').style.borderColor = "";
             document.getElementById('days').style.color = "black";
-            document.getElementById('days').style.borderColor = null;
+            document.getElementById('days').style.borderColor = "";
             document.getElementById('days').value = days;
             document.getElementById('weeks').value = weeks;
             setSelectedFont("Weeks");
@@ -105,14 +105,21 @@ export default function Nav(props) {
     }
     function handleLCCSubmit(event) {
         event.preventDefault();
-        calculateFURDate(lccDays, lccWeeks);
-        document.getElementById('navBar').style.display = "flex";
-        const newDate = subDays(ecoDate, 40.9041 + (3.21585 * Math.pow(lcc, 0.5)) + (0.348956 * lcc));
-        setLastPeriodDate(newDate);
-        CalculateWeeksAndDays();
-        setSelectedFont("FUR");
-        setFURDays(lccDays);
-        setFURWeeks(lccWeeks);
+        if(lcc){
+            calculateFURDate(lccDays, lccWeeks);
+            document.getElementById('navBar').style.display = "flex";
+            const newDate = subDays(ecoDate, 40.9041 + (3.21585 * Math.pow(lcc, 0.5)) + (0.348956 * lcc));
+            setLastPeriodDate(newDate);
+            CalculateWeeksAndDays();
+            setSelectedFont("FUR");
+            setFURDays(lccDays);
+            setFURWeeks(lccWeeks);
+            document.getElementById("lcc").style.borderColor = "";
+            document.getElementById('last-period-date').style.borderColor = "";
+            document.getElementById('last-period-date').style.color = "";
+        }else{
+            document.getElementById("lcc").style.borderColor = "red";
+        }
 
     }
     const updateFur = useCallback((calculatedDays) => {
@@ -235,7 +242,7 @@ export default function Nav(props) {
             <ul id="navBar">
                 <button onClick={() => props.GetDesiredComponentValue("datation")}>{t('datation')}</button>
                 <button onClick={() => props.GetDesiredComponentValue("biometric")}>{t('biometric')}</button>
-                <button onClick={() => props.GetDesiredComponentValue("hemodinamic")}>{t('hemodinamic')}</button>
+                <button onClick={() => props.GetDesiredComponentValue("hemodynamic")}>{t('hemodynamic')}</button>
                 <button onClick={() => props.GetDesiredComponentValue("bones")}>{t('bones')}</button>
                 <button onClick={() => props.GetDesiredComponentValue("lancet")}>{t('lancet')}</button>
                 <button onClick={() => props.GetDesiredComponentValue("unicvsmulti")}>{t('unicvsmulti')}</button>

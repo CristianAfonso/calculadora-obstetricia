@@ -8,14 +8,14 @@ import Bar from './singleComponent/percentileBar';
 import GenreSelector from './singleComponent/genreSelector';
 export default function Unicvsmulti(props) {
     const [ga, setGa] = useState((props.weeks) + props.days / 7);
-    const [weight, setWeight] = useState("");
+    const [weight, setWeight] = useState(props.weight);
     const [gregorioCustomPercentile, setGregorioCustomPercentile] = useState("");
     const [gregorioWeight, setGregorioCustomWeight] = useState("");
     const [gregorioCustomZscore, setGregorioCustomZscore] = useState("");
     const [clinicCustomPercentile, setClinicCustomPercentile] = useState("");
     const [clinicWeight, setClinicWeight] = useState("");
     const [clinicCustomZscore, setClinicCustomZscore] = useState("");
-    const [genre, setGenre] = useState("");
+    const [genre, setGenre] = useState(props.genre);
     const [amountSelector, setAmountSelector] = useState("single");
     const { t } = useTranslation();
 
@@ -97,12 +97,6 @@ export default function Unicvsmulti(props) {
             handleGregorioChanges(weight);
             if (amountSelector !== 'triplets') {
                 handleClinicChanges(weight);
-            }
-        } else {
-            setWeight(props.weight);
-            handleGregorioChanges(props.weight);
-            if (amountSelector !== 'triplets') {
-                handleClinicChanges(props.weight);
             }
         }
     }, [props, genre, weight, handleGregorioChanges, handleClinicChanges, amountSelector]);

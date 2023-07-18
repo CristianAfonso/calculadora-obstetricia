@@ -125,16 +125,16 @@ export default function BiometricFormulaDisplayer(props) {
             <table>
                 <thead>
                     <th>
-                        Formula
+                        {t('formula')}
                     </th>
                     <th>
-                        Medidas
+                        {t('measures')}
                     </th>
                     <th>
-                        Peso
+                        {t('weight')}
                     </th>
                     <th>
-                        Edad
+                        {t('age')}
                     </th>
                 </thead>
                 <tbody>
@@ -143,7 +143,7 @@ export default function BiometricFormulaDisplayer(props) {
                             <button onClick={handleHadlock2}>Hadlock 2</button>
                         </th>
                         <th>
-                            CC CA LF
+                        {t('CC_biometric_title')} {t('CA_biometric_title')} {t('LF_biometric_title')}
                         </th>
                         <th>
                             {hadlock2Weight}
@@ -157,7 +157,7 @@ export default function BiometricFormulaDisplayer(props) {
                             <button onClick={handleHadlock3}>Hadlock 3</button>
                         </th>
                         <th>
-                            DBP CA LF
+                         {t('DBP_biometric_title')} {t('CA_biometric_title')} {t('LF_biometric_title')}
                         </th>
                         <th>
                             {hadlock3Weight}
@@ -186,8 +186,7 @@ export default function BiometricFormulaDisplayer(props) {
                     </tr>
                     <tr>
                         <th colSpan={4}>
-                            <tr style={{ display: 'block', textAlign: 'center' }}>{t('own_formula_gregorio')}:</tr>
-                            <tr style={{ display: 'block', textAlign: 'center' }}>(p{gregorioCustomPercentile}) ({gregorioCustomWeight}g) ({gregorioCustomZscore}z)</tr>
+                            <tr style={{ display: 'block', textAlign: 'center' }}>{t('own_formula_gregorio')}: (p{gregorioCustomPercentile}) ({gregorioCustomWeight}g) ({gregorioCustomZscore}z)</tr>
                             <tr className='percentile-table-container'>
                                 <Bar percent={gregorioCustomPercentile} id="percentile-bar-bio-gregorio" />
                             </tr>
@@ -195,8 +194,7 @@ export default function BiometricFormulaDisplayer(props) {
                     </tr>
                     <tr>
                         <th colSpan={4}>
-                            <tr style={{ display: 'block', textAlign: 'center' }}>{t('own_formula_clinic')}:</tr>
-                            <tr style={{ display: 'block', textAlign: 'center' }}>(p{clinicCustomPercentile}) ({clinicCustomWeight}g) ({clinicCustomZscore}z)</tr>
+                            <tr style={{ display: 'block', textAlign: 'center' }}>{t('own_formula_clinic')}: (p{clinicCustomPercentile}) ({clinicCustomWeight}g) ({clinicCustomZscore}z)</tr>
                             <tr className='percentile-table-container'>
                                 <Bar percent={clinicCustomPercentile} id="percentile-bar-bio-clinic" />
                             </tr>

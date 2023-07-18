@@ -69,7 +69,7 @@ function App(props) {
       {actualComponent === "biometric" && <Biometric weeks={weeks} days={days}
         setMCA={setMCA} setUA={setUA} ua={ua} mca={mca} weight={weight}
         genre={genre} setGenre={setGenre} setWeight={setWeight} />}
-      {actualComponent === "hemodinamic" && <Hemodinamic weeks={weeks} days={days}
+      {actualComponent === "hemodynamic" && <Hemodinamic weeks={weeks} days={days}
         setMCA={setMCA} setUA={setUA} ua={ua} mca={mca} />}
       {actualComponent === "bones" && <Bones weeks={weeks} days={days} />}
       {actualComponent === "lancet" && <Lancet weeks={weeks} days={days} weight={weight}

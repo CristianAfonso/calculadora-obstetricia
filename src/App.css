@@ -44,7 +44,7 @@ header {
   color: #039bdc;
   font-family: "Montserrat", sans-serif;
   height: 250px;
-  overflow: hidden;
+  overflow: visible;
 }
 
 #logo-with-bg {
@@ -86,16 +86,104 @@ header {
   min-width: 85px;
   width: 20%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
   overflow: visible;
 }
 
 .dropdown {
   height: 38px;
   width: 63px;
-  margin: 0 0 auto auto;
 }
-
-
+#userGuideContainer .dropdown-menu.show{
+  display: flex !important;
+}
+#userGuideContent{
+  position: absolute;
+  top: 250px;
+  left: 5%;
+  z-index: 1;
+  width: 90%;
+  height: auto;
+  margin-top: 25px !important;
+  padding: 0;
+  background-color: #efefef;
+  flex-direction: column;
+  box-shadow: 2px 2px 3px;
+  max-width: 1300px;
+  margin-bottom: 50px;
+}
+#topBar{
+  border-radius: 5px 5px 0 0;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #888;
+  background-color: #01A9DB;
+  color: white;
+}
+#topBar span{
+  font-weight: bold;
+  padding: 15px;
+}
+#closeButton{
+  height: 55px !important;
+  width: 55px !important;
+  border: none;
+  border-radius: 0 !important;
+  border-top-right-radius: 5px !important;
+  padding: 0 15px;
+  box-shadow: none !important;
+}
+#closeButton:hover{
+  background-color: #cb1919 !important;
+}
+#userGuide{
+  padding: 25px;
+}
+#userGuide h5{
+  padding-bottom: 15px;
+  border-bottom: 1px solid #888;
+}
+#userGuide p{
+  text-align: justify;
+  text-justify: inter-word;
+}
+#userGuide button{
+  background-color: unset !important;
+  border: none;
+  border-radius: 0;
+  color: #333;
+  box-shadow: none;
+  border: 1px solid #bbb;
+  padding: 7px;
+  border-radius: 5px;
+  margin: 10px 0;
+}
+#userGuide button:hover{
+  background-color: #ddd !important;
+}
+#userGuide button:enabled{
+  background-color: #ddd !important;
+}
+#userGuide #navBarGuide{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  padding-left: 0 !important;
+}
+.guidePart{
+  width: 100%;
+  padding: 15px;
+  background-color: #fff;
+  border: #bbb 1px solid;
+  border-radius: 5px;
+}
 @media only screen and (min-width: 1280px) {
 
   header h1 {

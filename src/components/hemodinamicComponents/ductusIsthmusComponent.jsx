@@ -40,7 +40,7 @@ export default function DuctusIsthmusComponent(props) {
             <div className='hemodinamic-single'>
                 <div className="pair">
                     <div className="input">
-                        <Pair help={t('DV_help')} title={t('DV_title')} measure={t('mm')} min={0.4} step={0.1} max={999} value={ductusVenosus} onChange={handleDuctusVenosus} />
+                        <Pair help={t('DV_help')} title={t('DV_title')} measure={t('IP')} min={0.4} step={0.1} max={999} value={ductusVenosus} onChange={handleDuctusVenosus} />
                         <Scores zscore={ductusVenosusZscore} percent={ductusVenosusPercent} />
                     </div>
                 </div>
@@ -51,7 +51,7 @@ export default function DuctusIsthmusComponent(props) {
             <div className='hemodinamic-single'>
                 <div className="pair">
                     <div className="input">
-                        <Pair help={t('AI_help')} title={t('AI_title')} measure={t('mm')} min={0.5} step={0.1} max={999} value={aorticIsthmus} onChange={handleAorticIsthmus} />
+                        <Pair help={t('AI_help')} title={t('AI_title')} measure={t('IP')} min={0.5} step={0.1} max={999} value={aorticIsthmus} onChange={handleAorticIsthmus} />
                         <Scores zscore={aorticIsthmusZscore} percent={aorticIsthmusPercent} />
                     </div>
                 </div>

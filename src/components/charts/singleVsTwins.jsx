@@ -166,7 +166,7 @@ export default function SingleVsTwins(props) {
             zoomType: 'x'
         },
         title: {
-            text: t('percent')+': '+t('single')+' vs '+t('twins')
+            text: t('percents')+': '+t('single')+' vs '+t('twins')
         },
         xAxis: {
             categories: ejeXLancet,

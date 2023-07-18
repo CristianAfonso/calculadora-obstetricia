@@ -105,7 +105,7 @@ export default function SingleChart(props) {
             zoomType: 'x'
         },
         title: {
-            text: t('percent') + ': ' + t('single')
+            text: t('percents') + ': ' + t('single')
         },
         xAxis: {
             categories: xAxis,

@@ -188,7 +188,7 @@ export default function LancetChart(props) {
             zoomType: 'x'
         },
         title: {
-            text: t('percent')
+            text: t('percents')
         },
         xAxis: {
             categories: ejeXLancet,

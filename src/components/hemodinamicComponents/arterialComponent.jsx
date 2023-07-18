@@ -6,15 +6,15 @@ import Pair from '../singleComponent/pair.jsx';
 import { getUAZscore, getMCAZscore, getCPRZscore, displayBar, getZPercent } from "../functions.js";
 export default function ArterialComponent(props) {
     const [ga, setGa] = useState(props.ga);
-    const [ua, setUA] = useState(props.ua);
-    const [uaZscore, setUAZscore] = useState(getUAZscore(ga, ua).toFixed(2));
-    const [uaPercent, setUAPercent] = useState(getZPercent(uaZscore).toFixed(0));
-    const [mca, setMCA] = useState(props.mca);
-    const [mcaZscore, setMCAZscore] = useState(getMCAZscore(ga, mca).toFixed(2));
-    const [mcaPercent, setMCAPercent] = useState(getZPercent(getMCAZscore(ga, mca)).toFixed(0));
-    const [ratio, setRatio] = useState((mca / ga).toFixed(2));
-    const [ratioZscore, setRatioZscore] = useState(getCPRZscore(mca, ua, ga).toFixed(2));
-    const [ratioPercent, setRatioPercent] = useState(getZPercent(getCPRZscore(mca, ua, ga)).toFixed(0));
+    const [ua, setUA] = useState(props.ua ? props.ua : '');
+    const [uaZscore, setUAZscore] = useState(props.ua ? getUAZscore(props.ga, props.ua).toFixed(2) : '');
+    const [uaPercent, setUAPercent] = useState(props.ua ? getZPercent(uaZscore).toFixed(0) : '');
+    const [mca, setMCA] = useState(props.mca ? props.mca : '');
+    const [mcaZscore, setMCAZscore] = useState(props.mca ? getMCAZscore(props.ga, props.mca).toFixed(2)  : '' );
+    const [mcaPercent, setMCAPercent] = useState(props.mca ? getZPercent(getMCAZscore(props.ga, props.mca)).toFixed(0)  : '' );
+    const [ratio, setRatio] = useState(props.mca ? (props.mca / props.ga).toFixed(2)  : '' );
+    const [ratioZscore, setRatioZscore] = useState(props.mca && props.ua ? getCPRZscore(props.mca, props.ua, props.ga).toFixed(2) : '');
+    const [ratioPercent, setRatioPercent] = useState(props.mca && props.ua ? getZPercent(getCPRZscore(props.mca, props.ua, props.ga)).toFixed(0) : '');
     const { t } = useTranslation();
     function handleUAChange(event) {
         setUA(event.target.value);
@@ -70,7 +70,7 @@ export default function ArterialComponent(props) {
             <div className='hemodinamic-single'>
                 <div className="pair">
                     <div className="input">
-                        <Pair help={t('UA_help')} title={t('UA_title')} measure={t('mm')} min={0.4} step={0.1} max={999} value={ua} onChange={handleUAChange} />
+                        <Pair help={t('UA_help')} title={t('UA_title')} measure={t('IP')} min={0.4} step={0.1} max={999} value={ua} onChange={handleUAChange} />
                         <Scores zscore={uaZscore} percent={uaPercent} />
                     </div>
                 </div>
@@ -79,7 +79,7 @@ export default function ArterialComponent(props) {
             <div className='hemodinamic-single'>
                 <div className="pair">
                     <div className="input">
-                        <Pair help={t('MCA_help')} title={t('MCA_title')} measure={t('mm')} min={0.5} step={0.1} max={999} value={mca} onChange={handleMCAChange} />
+                        <Pair help={t('MCA_help')} title={t('MCA_title')} measure={t('IP')} min={0.5} step={0.1} max={999} value={mca} onChange={handleMCAChange} />
                         <Scores zscore={mcaZscore} percent={mcaPercent} />
                     </div>
                 </div>
@@ -88,7 +88,7 @@ export default function ArterialComponent(props) {
             <div className='hemodinamic-single'>
                 <div className="pair">
                     <div className="input">
-                        <Pair help={t('ratio_help')} title={t('ratio_title')} measure={t('mm')} min={0} max={999} value={ratio} readOnly={true} />
+                        <Pair help={t('ratio_help')} title={t('ratio_title')} measure={t('IP')} min={0} max={999} value={ratio} readOnly={true} />
                         <Scores zscore={ratioZscore} percent={ratioPercent} />
                     </div>
                 </div>

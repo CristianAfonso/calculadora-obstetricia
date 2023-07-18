@@ -25,7 +25,7 @@ export default function Hemodinamic(props) {
     return (
         <div className="service-container">
             <div className='title-container'>
-                <h1>{t('hemodinamic')}</h1>
+                <h1>{t('hemodynamic')}</h1>
                 <div className='weeksAndDays'>
                     <h3>{t('weeks')}: {props.weeks}</h3>
                     <h3>{t('days')}: {props.days}</h3>

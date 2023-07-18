@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import i18next from 'i18next';
+import Guide from './userGuide';
 function Header(props) {
     const { t } = useTranslation()
     const GlobeIcon = ({ width = 24, height = 24 }) => (
@@ -43,6 +44,7 @@ function Header(props) {
                         ))}
                     </ul>
                 </div>
+                <Guide></Guide>
             </div>
 
         </header>

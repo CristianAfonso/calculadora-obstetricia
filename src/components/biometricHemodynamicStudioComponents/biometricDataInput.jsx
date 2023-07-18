@@ -121,7 +121,7 @@ export default function BiometricDataInput(props) {
             </div>
             <div className='biometric-single'>
                 <div className="pair">
-                    <Pair help={t('LF_biometric_help')} title={t('DBP_biometric_title')} measure={t('mm')} min={0} max={999} value={lf} onChange={handleLFBiometricChange} />
+                    <Pair help={t('LF_biometric_help')} title={t('LF_biometric_title')} measure={t('mm')} min={0} max={999} value={lf} onChange={handleLFBiometricChange} />
                     <Scores zscore={LFzscore} percent={LFpercentil} weeks={LFweeks} days={LFdays} />
                 </div>
                 <Bar percent={LFpercentil} id="percentile-bar-lf" />

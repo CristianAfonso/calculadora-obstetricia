@@ -82,7 +82,7 @@ export default function SystolicComponent(props) {
             <div className='hemodinamic-single'>
                 <div className="pair">
                     <div className="input">
-                        <span title={t('uterine_artery_help')}><p>{t('uterine_artery_title')}:</p></span>
+                        <span title={t('uterine_artery_help')}><p>{t('uterine_artery_title')}</p></span>
                         <div class="double-input">
                             <div>
                                 <span>{t('right')}:</span>
@@ -115,7 +115,7 @@ export default function SystolicComponent(props) {
             <div className='hemodinamic-single'>
                 <div className="pair">
                     <div className="input">
-                            <Pair help={t('uterine_mean_help')} title={t('uterine_mean_title')} measure={t('mm')} value={uterine_mean} readOnly={true}/>
+                            <Pair help={t('uterine_mean_help')} title={t('uterine_mean_title')} measure={t('IP')} value={uterine_mean} readOnly={true}/>
                         <Scores zscore={uterine_meanZscore} percent={uterine_meanPercent} />
                     </div>
                 </div>

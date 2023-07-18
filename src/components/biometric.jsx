@@ -56,7 +56,7 @@ export default function Biometric(props) {
                         weeks={weeks} days={days} genre={genre} setGenre={props.setGenre} />
                 </div>
             </div>
-            <h2>{t('Hemodinamic_title')}</h2>
+            <h2>{t('hemodynamic')}</h2>
             <HemodinamicStudio setMCA={setMCA} setUA={setUA} weeks={weeks} days={days} ua={ua} mca={mca} />
         </div>
     );
