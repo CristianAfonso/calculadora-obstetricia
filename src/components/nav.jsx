@@ -42,6 +42,10 @@ export default function Nav(props) {
                 document.getElementById('last-period-date').value = t('valid_date');
             } else {
                 document.getElementById('navBar').style.display = "flex";
+                if(window.innerWidth <= 599){
+                    document.getElementById('dropdownMenuButtonMobile').style.display = "block";
+                    document.getElementById('dropdownMobile').style.display = "block";
+                }
                 document.getElementById('last-period-date').style.color = "black";
                 document.getElementById('last-period-date').style.borderColor = "";
                 setSelectedFont("FUR");
@@ -80,6 +84,10 @@ export default function Nav(props) {
             document.getElementById('days').style.borderColor = "red";
         } else {
             document.getElementById('navBar').style.display = "flex";
+            if(window.innerWidth <= 599){
+                document.getElementById('dropdownMenuButtonMobile').style.display = "block";
+                document.getElementById('dropdownMobile').style.display = "block";
+            }
             document.getElementById('weeks').style.color = "black";
             document.getElementById('weeks').style.borderColor = "";
             document.getElementById('days').style.color = "black";
@@ -105,9 +113,15 @@ export default function Nav(props) {
     }
     function handleLCCSubmit(event) {
         event.preventDefault();
-        if(lcc){
+        if (lcc) {
             calculateFURDate(lccDays, lccWeeks);
-            document.getElementById('navBar').style.display = "flex";
+            if(window.innerWidth <= 599){
+                document.getElementById('dropdownMenuButtonMobile').style.display = "block";
+                document.getElementById('dropdownMobile').style.display = "block";
+            }else{
+                
+                document.getElementById('navBar').style.display = "flex";
+            }
             const newDate = subDays(ecoDate, 40.9041 + (3.21585 * Math.pow(lcc, 0.5)) + (0.348956 * lcc));
             setLastPeriodDate(newDate);
             CalculateWeeksAndDays();
@@ -117,7 +131,7 @@ export default function Nav(props) {
             document.getElementById("lcc").style.borderColor = "";
             document.getElementById('last-period-date').style.borderColor = "";
             document.getElementById('last-period-date').style.color = "";
-        }else{
+        } else {
             document.getElementById("lcc").style.borderColor = "red";
         }
 
@@ -126,7 +140,7 @@ export default function Nav(props) {
         const newDate = subDays(ecoDate, calculatedDays);
         setLCCDays(moment(ecoDate).diff(newDate, 'days') % 7);
         setLCCWeeks(moment(ecoDate).diff(newDate, 'weeks'));
-    },[ecoDate])
+    }, [ecoDate])
     useEffect(() => {
         if (props.newPeriodDate) {
             let newLastPeriodDate = props.newPeriodDate;
@@ -148,13 +162,13 @@ export default function Nav(props) {
 
         }
         props.updateLastPeriod(lastPeriodDate);
-        if(props.lcc !== lcc){
+        if (props.lcc !== lcc) {
             setLCC(props.lcc);
             const calculatedDays = matchingGA(props.lcc, "LCC");
             updateFur(calculatedDays);
         }
 
-    },[props, selectedFont, lastPeriodDate, lcc, furWeeks, furDays, weeks, days, updateFur])
+    }, [props, selectedFont, lastPeriodDate, lcc, furWeeks, furDays, weeks, days, updateFur])
     const { t } = useTranslation();
     return (
         <nav>
@@ -247,6 +261,19 @@ export default function Nav(props) {
                 <button onClick={() => props.GetDesiredComponentValue("lancet")}>{t('lancet')}</button>
                 <button onClick={() => props.GetDesiredComponentValue("unicvsmulti")}>{t('unicvsmulti')}</button>
             </ul>
+            <div id="dropdownMobile" >
+                <button className="btn" type="button" id="dropdownMenuButtonMobile" data-bs-toggle="dropdown" aria-expanded="false">
+                    {t('elementSelector')}
+                </button>
+                <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton2" id="navBarMobile">
+                    <button onClick={() => props.GetDesiredComponentValue("datation")} >{t('datation')}</button>
+                    <button onClick={() => props.GetDesiredComponentValue("biometric")}>{t('biometric')}</button>
+                    <button onClick={() => props.GetDesiredComponentValue("hemodynamic")}>{t('hemodynamic')}</button>
+                    <button onClick={() => props.GetDesiredComponentValue("bones")}>{t('bones')}</button>
+                    <button onClick={() => props.GetDesiredComponentValue("lancet")}>{t('lancet')}</button>
+                    <button onClick={() => props.GetDesiredComponentValue("unicvsmulti")}>{t('unicvsmulti')}</button>
+                </ul>
+            </div>
         </nav>
     );
 }
