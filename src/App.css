@@ -172,7 +172,6 @@ header {
   color: #333;
   box-shadow: none;
   border: 1px solid #bbb;
-  padding: 7px;
   border-radius: 5px;
   margin: 10px 0;
 }
@@ -438,6 +437,21 @@ nav #dropdownMenuButtonMobile{
     transition: all .5s ease-in-out;
     flex-direction: column;
     flex-wrap: nowrap !important;
+    background-color: #0187b9;
+  }
+  nav #dropdownMobile #navBarMobile.show a{
+    padding: 10px 5px;
+    text-align: center;
+    width: 100%;
+    background-color: #01A9DB;
+    border: #0187b9 solid 1px;
+    color: white;
+    font-weight: bold;
+  }
+  nav #dropdownMobile #navBarMobile.show a:hover{
+    cursor: pointer;
+    background-color: #0187b9;
+    border: #fff solid 1px;
   }
   nav #dropdownMobile .show button{
     margin-left: 0;
@@ -553,6 +567,8 @@ nav #dropdownMenuButtonMobile{
   width: 50%;
   display: flex;
   justify-content: flex-end;
+  align-items: center;
+
 }
 
 .pair .scores span {

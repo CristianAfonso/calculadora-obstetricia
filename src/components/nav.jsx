@@ -266,12 +266,12 @@ export default function Nav(props) {
                     {t('elementSelector')}
                 </button>
                 <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton2" id="navBarMobile">
-                    <button onClick={() => props.GetDesiredComponentValue("datation")} >{t('datation')}</button>
-                    <button onClick={() => props.GetDesiredComponentValue("biometric")}>{t('biometric')}</button>
-                    <button onClick={() => props.GetDesiredComponentValue("hemodynamic")}>{t('hemodynamic')}</button>
-                    <button onClick={() => props.GetDesiredComponentValue("bones")}>{t('bones')}</button>
-                    <button onClick={() => props.GetDesiredComponentValue("lancet")}>{t('lancet')}</button>
-                    <button onClick={() => props.GetDesiredComponentValue("unicvsmulti")}>{t('unicvsmulti')}</button>
+                    <a onClick={() => props.GetDesiredComponentValue("datation")} >{t('datation')}</a>
+                    <a onClick={() => props.GetDesiredComponentValue("biometric")}>{t('biometric')}</a>
+                    <a onClick={() => props.GetDesiredComponentValue("hemodynamic")}>{t('hemodynamic')}</a>
+                    <a onClick={() => props.GetDesiredComponentValue("bones")}>{t('bones')}</a>
+                    <a onClick={() => props.GetDesiredComponentValue("lancet")}>{t('lancet')}</a>
+                    <a onClick={() => props.GetDesiredComponentValue("unicvsmulti")}>{t('unicvsmulti')}</a>
                 </ul>
             </div>
         </nav>
