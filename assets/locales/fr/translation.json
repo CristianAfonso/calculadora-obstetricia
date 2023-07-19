@@ -12,7 +12,8 @@
     "right": "Droite",
     "left": "Gauche",
     "language": "Langue",
-
+    "developedBy": "Développé par",
+    
     "//App.js SECTION": "",
     "page_title": "Calculatrice d'Obstétrique",
 
