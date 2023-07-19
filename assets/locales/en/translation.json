@@ -19,6 +19,7 @@
     "//header.jsx SECTION": "",
     "service": "OBSTETRICS AND GYNECOLOGY SERVICE",
     "guide_title": "Guide",
+    "elementSelector" : "Navigation",
     
 
     "//userGuide.jsx SECTION" : "",
