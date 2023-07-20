@@ -2,28 +2,34 @@
 --[1. Header]--
 --[2. Nav] --
 */
+body {
+  padding-top: 50px;
+}
 
 .container {
-  max-width: 100% !important;
+  width: 100% !important;
 }
 
 button:not(.react-datepicker__navigation, #dropdownMenuButton, .dropdown-item) {
   height: 40px;
   font-size: 16px;
   background-color: #01A9DB;
-  box-shadow: 2px 2px 4px #666;
-  border-radius: 10px;
+  color: #fff;
+  transition: .25s ease-in all;
   width: auto;
   max-width: 200px;
   text-align: center;
   text-decoration: none;
-  color: #fff;
   font-weight: 600;
   margin-right: 0;
+  border-radius: 10px;
+  border: #01A9DB 1px solid;
 }
 
-button:not(.react-datepicker__navigation, #dropdownMenuButton, .dropdown-item):hover {
-  background-color: #01DFD7;
+button:not(.react-datepicker__navigation, #dropdownMenuButton, .dropdown-item, #navBarGuide button):hover {
+  color: #fff;
+  background-color: #1C4D5C;
+  border: #1C4D5C 1px solid;
 }
 
 .focus {
@@ -34,6 +40,12 @@ button:not(.react-datepicker__navigation, #dropdownMenuButton, .dropdown-item):h
   -webkit-appearance: none;
   margin: 0;
   -moz-appearance: textfield;
+}
+
+@media screen and (max-width: 420px) {
+  .container {
+    padding: 0;
+  }
 }
 
 /* 1.- Header */
@@ -48,11 +60,15 @@ header {
 }
 
 #logo-with-bg {
-  background-image: url(../public/images/fachada2.png);
-  width: 100%;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: 70% 65%;
+  width: 80%;
+}
+
+#logo-with-bg:dir(ltr) {
+  margin-left: 20%;
+}
+
+#logo-with-bg:dir(rtl) {
+  margin-right: 20%;
 }
 
 #logo-container {
@@ -65,6 +81,12 @@ header {
   justify-content: space-around;
 }
 
+#logo-container .pair {
+  width: 100%;
+  justify-content: space-evenly;
+  padding-bottom: 25px;
+}
+
 #section-img-wrapper {
   max-height: 250px;
   min-width: 100px;
@@ -73,15 +95,10 @@ header {
   position: relative;
 }
 
-#section-img {
-  margin: 0 auto auto 0;
-  height: auto;
-  width: 100%;
-  max-width: 200px;
+#logo-ulpgc {
+  width: 63px !important;
 }
-#section-img:dir(rtl){
-  transform: scaleX(-1);
-}
+
 #language-wrapper {
   min-width: 85px;
   width: 20%;
@@ -92,27 +109,45 @@ header {
   align-items: center;
   overflow: visible;
 }
-#goUp{
+
+#goUp {
   position: fixed;
   z-index: 1;
   bottom: 20px;
   right: 20px;
-  background-color: #dedede;
+  background-color: #006e8f;
   border-radius: 50px;
   padding: 15px;
   border: 1px solid #999;
 }
-#goUp:hover{
-  background-color: #bebebe;
+
+#goUp:hover {
+  color: #fff;
+  background-color: #4a4a4a;
+  border: #0074a3 solid 1px;
+  box-shadow: 2px 2px 4px #666;
 }
+
+.genreSelectorContainer {
+  display: flex;
+  column-gap: 5px;
+  border-left: 1px solid #888;
+  margin-left: 7.5px;
+  margin-right: 7.5px;
+  padding-left: 7.5px;
+  flex-direction: row;
+}
+
 .dropdown {
   height: 38px;
   width: 63px;
 }
-#userGuideContainer .dropdown-menu.show{
+
+#userGuideContainer .dropdown-menu.show {
   display: flex !important;
 }
-#userGuideContent{
+
+#userGuideContent {
   position: absolute;
   top: 250px;
   left: 5%;
@@ -123,11 +158,14 @@ header {
   padding: 0;
   background-color: #efefef;
   flex-direction: column;
-  box-shadow: 2px 2px 3px;
-  max-width: 1300px;
-  margin-bottom: 50px;
+  max-width: 1320px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
 }
-#topBar{
+
+#topBar {
   border-radius: 5px 5px 0 0;
   width: 100%;
   display: flex;
@@ -138,34 +176,36 @@ header {
   background-color: #01A9DB;
   color: white;
 }
-#topBar span{
+
+#topBar span {
   font-weight: bold;
   padding: 15px;
 }
-#closeButton{
-  height: 55px !important;
-  width: 55px !important;
-  border: none;
-  border-radius: 0 !important;
-  border-top-right-radius: 5px !important;
-  padding: 0 15px;
-  box-shadow: none !important;
+
+#closeButton {
+  border: #006e8f !important;
+  padding: 10px 10px;
 }
-#closeButton:hover{
-  background-color: #cb1919 !important;
+
+#closeButton:hover {
+  background-color: #01A9DB !important;
 }
-#userGuide{
+
+#userGuide {
   padding: 25px;
 }
-#userGuide h5{
+
+#userGuide h5 {
   padding-bottom: 15px;
   border-bottom: 1px solid #888;
 }
-#userGuide p{
+
+#userGuide p {
   text-align: justify;
   text-justify: inter-word;
 }
-#userGuide button{
+
+#userGuide button {
   background-color: unset !important;
   border: none;
   border-radius: 0;
@@ -174,27 +214,34 @@ header {
   border: 1px solid #bbb;
   border-radius: 5px;
   margin: 10px 0;
+  width: 100%;
+  max-width: none;
 }
-#userGuide button:hover{
+
+#userGuide button:hover {
+  background-color: #222 !important;
+}
+
+#userGuide button:enabled {
   background-color: #ddd !important;
 }
-#userGuide button:enabled{
-  background-color: #ddd !important;
-}
-#userGuide #navBarGuide{
+
+#userGuide #navBarGuide {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   text-align: left;
   padding-left: 0 !important;
 }
-.guidePart{
+
+.guidePart {
   width: 100%;
   padding: 15px;
   background-color: #fff;
   border: #bbb 1px solid;
   border-radius: 5px;
 }
+
 @media only screen and (min-width: 1280px) {
 
   header h1 {
@@ -233,26 +280,38 @@ header {
 }
 
 @media only screen and (max-width: 499px) {
-  header{
-    flex-direction: column-reverse;
+  header {
+    flex-direction: column;
   }
+
   header h1 {
     font-size: 130%;
     text-align: center;
   }
-  #section-img-wrapper{
+
+  #section-img-wrapper {
     display: none;
   }
-  #language-wrapper{
-    margin: auto 0 auto auto;
+
+  #language-wrapper {
+    margin: 35px auto auto auto;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    width: 40%;
   }
-  #logo-with-bg{
+
+  #logo-with-bg {
     width: 80%;
     margin: auto;
     background-image: none;
   }
+
   #sub-header-container {
     background-size: 150%;
+  }
+
+  #userGuideContent {
+    width: 100%;
   }
 }
 
@@ -271,7 +330,7 @@ nav .forms-container {
   flex-direction: column;
   padding: 120px 0;
   margin: auto auto 30px auto;
-  width: 80%;
+  width: 100%;
   height: 200px;
   background-color: #efefef;
   border-radius: 10px;
@@ -280,7 +339,7 @@ nav .forms-container {
   margin-bottom: 25px;
   align-items: center;
   justify-content: space-around;
-
+  row-gap: 15px;
 }
 
 nav .forms-container .FUR-form {
@@ -291,9 +350,15 @@ nav .forms-container .FUR-form {
   align-items: center;
   justify-content: space-between;
 }
-.date-content{
+
+.submitButton {
+  width: 220px !important;
+}
+
+.date-content {
   text-align: center;
 }
+
 .react-datepicker-wrapper,
 .expected-birth,
 .weeks-form div input {
@@ -311,18 +376,22 @@ nav .forms-container .FUR-form {
   height: 30px;
   text-align: center;
 }
+
 @media screen and (max-width: 450px) {
-  .react-datepicker__navigation{
+  .react-datepicker__navigation {
     top: 10px !important;
   }
-  .react-datepicker__navigation--next{
+
+  .react-datepicker__navigation--next {
     right: -40% !important;
   }
-  .react-datepicker__navigation--previous{
+
+  .react-datepicker__navigation--previous {
     left: -40% !important;
   }
-  
+
 }
+
 nav .forms-container .weeks-form {
   display: flex;
   flex-direction: row;
@@ -346,7 +415,7 @@ nav #navBar {
   flex-direction: row;
   list-style: none;
   justify-content: space-between;
-  width: 97.5%;
+  width: 100%;
   padding: 0;
   place-items: center;
 }
@@ -362,28 +431,29 @@ nav #navBar button {
   margin: 0 !important;
 }
 
-nav #navBar button:hover {
-  background-color: #01DFD7;
-}
-nav #dropdownMobile{
+nav #dropdownMobile {
   display: none;
 }
-nav #dropdownMenuButtonMobile{
+
+nav #dropdownMenuButtonMobile {
   display: none;
   margin: auto;
   width: 100%;
 }
-@media screen and (max-width: 1079px){
-  nav .forms-container{
+
+@media screen and (max-width: 1079px) {
+  nav .forms-container {
     padding: 200px 0;
     row-gap: 10px;
   }
-  nav .forms-container .FUR-form{
+
+  nav .forms-container .FUR-form {
     display: grid;
     row-gap: 25px;
-    grid-template-columns: repeat(2,50%);
+    grid-template-columns: repeat(2, 50%);
   }
-  nav .forms-container .weeks-form{
+
+  nav .forms-container .weeks-form {
     border-top: #0187b9 solid 1px;
     padding: 10px 0;
     display: flex;
@@ -391,13 +461,14 @@ nav #dropdownMenuButtonMobile{
     flex-direction: row;
     flex-wrap: wrap;
   }
-  
-  nav .forms-container .weeks-form div{
+
+  nav .forms-container .weeks-form div {
     display: flex;
     place-content: center;
     width: 50%;
   }
-  nav button{
+
+  nav button {
     margin: auto !important;
   }
 }
@@ -420,40 +491,86 @@ nav #dropdownMenuButtonMobile{
   nav #navBar {
     display: none;
   }
-  nav .forms-container{
-    width: 95%;
+
+  nav .forms-container {
+    width: 100%;
+    border-radius: 0;
   }
+
   nav #navBar button {
     display: none;
   }
-  nav #dropdownMobile #navBarMobile.show{
+
+  nav #dropdownMobile #navBarMobile.show {
+    border-radius: 0;
+    border: none;
+    padding: 0;
     display: flex;
     position: fixed !important;
     top: 0 !important;
     left: 0 !important;
     height: 100%;
-    width: 80% !important;
-    transform: translate( 30%, 0) !important;
+    width: 77% !important;
+    transform: translate(30%, 0) !important;
     transition: all .5s ease-in-out;
     flex-direction: column;
     flex-wrap: nowrap !important;
-    background-color: #0187b9;
+    background-color: #fff;
+    box-shadow: #333 7px 0 30px;
   }
-  nav #dropdownMobile #navBarMobile.show a{
-    padding: 10px 5px;
+
+  #mobile-logo {
+    margin-top: 5%;
+    display: flex;
+    flex-direction: column;
+    place-items: center;
+  }
+
+  #mobile-logo p {
+    color: #1C4D5C;
+    margin: 10px 0 20px 0;
+    text-align: center;
+  }
+
+  #mobile-logo #logo-gregorio {
+    width: 250px !important;
+  }
+
+  #mobile-logo #logo-ulpgc {
+    width: 100px !important;
+    height: 100px !important;
+  }
+
+  #mobile-logo h1 {
+    color: #1C4D5C;
+    text-align: center;
+    font-weight: 600;
+  }
+
+  nav #dropdownMobile #navBarMobile.show button {
+    padding: 15px 15px;
     text-align: center;
     width: 100%;
-    background-color: #01A9DB;
-    border: #0187b9 solid 1px;
-    color: white;
+    max-width: none !important;
+    height: 5% !important;
+    min-height: 60px;
+    background-color: #e4e4e4;
+    border: #97bbc7 solid 1px;
+    color: #0074a3;
     font-weight: bold;
+    text-decoration: none;
+    transition: all .25s ease;
+    margin: 0 !important;
   }
-  nav #dropdownMobile #navBarMobile.show a:hover{
+
+  nav #dropdownMobile #navBarMobile.show button:hover {
     cursor: pointer;
-    background-color: #0187b9;
-    border: #fff solid 1px;
+    color: #fff;
+    background-color: #4a4a4a;
+    border: #0074a3 solid 1px;
   }
-  nav #dropdownMobile .show button{
+
+  nav #dropdownMobile .show button {
     margin-left: 0;
     border: none;
     border-radius: 0;
@@ -461,6 +578,7 @@ nav #dropdownMenuButtonMobile{
     color: #039bdc;
     box-shadow: none;
   }
+
   nav .forms-container {
     row-gap: 25px;
     height: auto !important;
@@ -494,7 +612,7 @@ nav #dropdownMenuButtonMobile{
 .service-container {
   display: flex;
   flex-direction: column;
-  width: 97.5%;
+  width: 100%;
   max-width: 1620px;
   padding: 5%;
   margin: auto;
@@ -514,6 +632,7 @@ nav #dropdownMenuButtonMobile{
   align-items: center;
   border-bottom: 2px solid #039bdc;
 }
+
 .weeksAndDays {
   display: flex;
   width: 30%;
@@ -536,9 +655,11 @@ nav #dropdownMenuButtonMobile{
   row-gap: 15px;
   align-items: center;
 }
-.pair div{
+
+.pair div {
   text-align: center;
 }
+
 .pair span {
   background-color: #ddd;
   border: 1px solid #888;
@@ -564,7 +685,7 @@ nav #dropdownMenuButtonMobile{
 }
 
 .pair .scores {
-  width: 50%;
+  width: 100%;
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -582,19 +703,26 @@ nav #dropdownMenuButtonMobile{
 }
 
 @media screen and (max-width:850px) {
-  
-.title-container h1{
-  font-size: 28px;
- }
- .title-container .weeksAndDays{
-   width: 50%;
- }
- .title-container h3{
-   font-size: 15px;
+
+  .title-container h1 {
+    font-size: 28px;
+  }
+
+  .title-container .weeksAndDays {
+    width: 50%;
+  }
+
+  .title-container h3 {
+    font-size: 15px;
   }
 }
 
 @media screen and (max-width:500px) {
+  .service-container {
+    width: 100%;
+    border-radius: 0;
+  }
+
   .pair {
     min-width: 200px;
     flex-direction: column;
@@ -664,11 +792,19 @@ nav #dropdownMenuButtonMobile{
 
 #left-biometric {
   width: 50%;
-  padding-right: 5%;
   display: flex;
   flex-direction: column;
   row-gap: 25px;
+}
+
+#left-biometric:dir(ltr) {
+  padding-right: 5%;
   border-right: 1px solid #bbb;
+}
+
+#left-biometric:dir(rtl) {
+  padding-left: 5%;
+  border-left: 1px solid #bbb;
 }
 
 #right-biometric {
@@ -685,10 +821,18 @@ nav #dropdownMenuButtonMobile{
   #left-biometric {
     width: 100%;
     padding-bottom: 5%;
-    padding-right: 0;
     flex-direction: column;
-    border-right: unset;
     border-bottom: 1px solid #bbb;
+  }
+
+  #left-biometric:dir(ltr) {
+    padding-right: 0;
+    border-right: unset;
+  }
+
+  #left-biometric:dir(rtl) {
+    padding-left: unset;
+    border-left: 0;
   }
 
   #right-biometric {
@@ -702,7 +846,7 @@ nav #dropdownMenuButtonMobile{
 .meter {
   display: block;
   width: 96%;
-  background-color: #ddd;
+  background-color: #fff;
   border: solid 1px #888;
   height: auto;
   padding: 5px 2%;
@@ -771,7 +915,7 @@ nav #dropdownMenuButtonMobile{
   }
 }
 
-.biometric-single {
+.single-display {
   display: flex;
   flex-direction: column;
   row-gap: 15px;
@@ -810,20 +954,21 @@ nav #dropdownMenuButtonMobile{
 
 .genreSelector {
   margin: 0 !important;
-  border-radius: 0 !important;
   box-shadow: none !important;
   border: none;
-  width: 90% !important;
+  width: 100% !important;
 }
 
 .genreSelector:focus {
-  background-color: #0187b9 !important;
+  background-color: #4a4a4a !important;
 }
-#hemodinamic-studio{
+
+#hemodinamic-studio {
   display: flex;
   flex-direction: row;
 }
-#hemodinamic-studio #left-hemodinamic{  
+
+#hemodinamic-studio #left-hemodinamic {
   width: 50%;
   padding-right: 5%;
   display: flex;
@@ -831,52 +976,112 @@ nav #dropdownMenuButtonMobile{
   margin: auto;
   row-gap: 25px;
 }
-#hemodinamic-studio #left-hemodinamic .pair .scores{
+
+#hemodinamic-studio #left-hemodinamic .pair .scores {
   justify-content: end;
 }
-#hemodinamic-studio #right-hemodinamic{  
-  border-left: 1px solid #bbb;
-  padding-left: 5%;
+
+#hemodinamic-studio #right-hemodinamic {
   height: 100%;
   width: 50%;
 }
-#hemodinamic-studio #right-hemodinamic .single-hemodinamic-displayer{
+
+#hemodinamic-studio #right-hemodinamic:dir(ltr) {
+  border-left: 1px solid #bbb;
+  padding-left: 5%;
+}
+
+#hemodinamic-studio #right-hemodinamic:dir(rtl) {
+  border-right: 1px solid #bbb;
+  padding-right: 5%;
+}
+
+#hemodinamic-studio #right-hemodinamic .single-hemodinamic-displayer {
   display: flex;
   flex-direction: column;
   row-gap: 10px;
 }
+
+#right-biometric table th button {
+  margin: auto auto auto 0 !important;
+  width: 125px !important;
+}
+
+#right-biometric table th .genreSelector {
+  width: 75px !important;
+}
+
+@media screen and (max-width:1200px) and (min-width:892px) {
+  .genreSelectorContainer {
+    flex-direction: column;
+  }
+}
+
 @media screen and (max-width:1020px) {
-  #hemodinamic-studio{
+  #hemodinamic-studio {
     flex-direction: column !important;
     row-gap: 25px;
   }
-  #hemodinamic-studio #left-hemodinamic{
+
+  #hemodinamic-studio #left-hemodinamic {
     width: 100%;
     padding-right: 0;
   }
-  #hemodinamic-studio #right-hemodinamic{
+
+  #hemodinamic-studio #right-hemodinamic {
     width: 100%;
+  }
+
+  #hemodinamic-studio #right-hemodinamic:dir(ltr) {
     border-left: none;
     padding-left: 0;
   }
+
+  #hemodinamic-studio #right-hemodinamic:dir(rtl) {
+    border-right: none;
+    padding-right: 0;
+  }
 }
-@media screen and (max-width: 430px){
-  #right-biometric table{
+
+@media screen and (min-width:892px) and (max-width: 999px) {
+
+  #right-biometric table th:nth-child(2n) {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 700px) {
+
+  .genreSelectorContainer {
+    flex-direction: column;
+  }
+
+}
+
+@media screen and (max-width: 455px) {
+  #right-biometric table {
     text-align: unset;
   }
-  #right-biometric .genreSelector{
+
+  #right-biometric .genreSelector {
     font-size: 13px;
   }
-  #right-biometric table th, #right-biometric table td{
+
+  #right-biometric table th,
+  #right-biometric table td {
     max-width: 0.8vw;
   }
-  #right-biometric table th button{
+
+  #right-biometric table th button {
     margin: auto auto auto 0 !important;
+    width: 150px !important;
   }
-  #right-biometric table th:nth-child(2n){
+
+  #right-biometric table th:nth-child(2n) {
     display: none;
   }
 }
+
 /** 6.- Hemodinamic styles **/
 #hemodinamic {
   display: flex;
@@ -889,14 +1094,14 @@ nav #dropdownMenuButtonMobile{
 }
 
 @media screen and (max-width: 1020px) {
-  #hemodinamic{
+  #hemodinamic {
     flex-direction: column;
   }
 }
 
 #hemodinamic #left-hemodinamic,
 #hemodinamic #center-hemodinamic,
-#hemodinamic #right-hemodinamic{
+#hemodinamic #right-hemodinamic {
   display: flex;
   flex-direction: column;
   margin: auto;
@@ -936,14 +1141,20 @@ nav #dropdownMenuButtonMobile{
   flex-direction: row;
   place-items: center;
 }
-
-#leg-bones {
+#leg-bones{
   display: flex;
   flex-direction: column;
   width: 50%;
+  row-gap: 25px;
+}
+#leg-bones:dir(ltr) {
   padding-left: 5%;
   border-left: 1px solid #bbb;
-  row-gap: 25px;
+}
+
+#leg-bones:dir(rtl) {
+  padding-right: 5%;
+  border-right: 1px solid #bbb;
 }
 
 #hand-bones {
@@ -955,19 +1166,26 @@ nav #dropdownMenuButtonMobile{
 }
 
 @media screen and (max-width: 764px) {
-  #bones-studio{
+  #bones-studio {
     flex-direction: column;
   }
+
   #leg-bones {
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding-left: 0%;
     padding-top: 5%;
-    border-left: none;
     row-gap: 25px;
   }
+  #leg-bones:dir(ltr) {
+    padding-left: 0;
+    border-left: none;
+  }
   
+  #leg-bones:dir(rtl) {
+    padding-right: none;
+    border-right: 0;
+  }
   #hand-bones {
     display: flex;
     flex-direction: column;
@@ -982,63 +1200,84 @@ nav #dropdownMenuButtonMobile{
 /**
 * LANCET
 */
-#lancet{
+#lancet {
   width: 100%;
   display: flex;
   flex-direction: row;
 }
+
 .left-lancet {
   width: 50%;
+
+}
+
+.left-lancet:dir(ltr) {
   padding-right: 5%;
   border-right: 1px solid #bbb;
 }
-.flex-row{
+
+.left-lancet:dir(rtl) {
+  padding-left: 5%;
+  border-left: 1px solid #bbb;
+
+}
+
+.flex-row {
   display: flex;
   flex-direction: row;
   width: 100%;
   align-items: center;
   justify-content: center;
 }
-#right-lancet{
+
+#right-lancet {
   width: 50%;
   padding-left: 5%;
 }
-.highcharts-credits{
+
+.highcharts-credits {
   display: none;
 }
+
 @media screen and (max-width: 1020px) {
-  #lancet{
+  #lancet {
     flex-direction: column;
   }
+
   .left-lancet {
     width: 100%;
     padding-right: 0;
     border-right: none;
   }
-  #right-lancet{
+
+  #right-lancet {
     padding-top: 25px;
     width: 100%;
     padding-left: 0;
   }
 }
+
 /**
 Unic vs mult
 */
-#unic-content{
+#unic-content {
   display: flex;
   flex-direction: column;
 }
-.top-unic{
+
+.top-unic {
   width: 50%;
   margin: auto;
   padding-bottom: 25px;
   padding-top: 25px;
 }
-.top-unic .genreSelector{
-  
+
+.top-unic .genreSelector {
+
   min-width: 58px;
 }
-.bottom-unic{
+
+.bottom-unic {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -1046,7 +1285,7 @@ Unic vs mult
 }
 
 @media screen and (max-width: 1020px) {
-  .top-unic{
+  .top-unic {
     width: 100% !important;
   }
 }

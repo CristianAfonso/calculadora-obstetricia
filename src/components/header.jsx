@@ -15,23 +15,23 @@ function Header(props) {
             13.65 0 0 1-.312 2.5zm2.802-3.5a6.959 6.959 0 0 0-.656-2.5H12.18c.174.782.282 1.623.312 2.5h2.49zM11.27 2.461c.247.464.462.98.64 1.539h1.835a7.024 
             7.024 0 0 0-3.072-2.472c.218.284.418.598.597.933zM10.855 4a7.966 7.966 0 0 0-.468-1.068C9.835 1.897 9.17 1.282 8.5 1.077V4h2.355z"/>
         </svg>
-      )
-      const Arrow = ({width = 10, height = 10})  => (
-        <svg fill="#333" height="20px" width="20px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 330 330" >
-        <path id="XMLID_224_" d="M325.606,229.393l-150.004-150C172.79,76.58,168.974,75,164.996,75c-3.979,0-7.794,1.581-10.607,4.394
+    )
+    const Arrow = ({ width = 10, height = 10 }) => (
+        <svg fill="#fff" height="20px" width="20px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 330 330" >
+            <path id="XMLID_224_" d="M325.606,229.393l-150.004-150C172.79,76.58,168.974,75,164.996,75c-3.979,0-7.794,1.581-10.607,4.394
             l-149.996,150c-5.858,5.858-5.858,15.355,0,21.213c5.857,5.857,15.355,5.858,21.213,0l139.39-139.393l139.397,139.393
             C307.322,253.536,311.161,255,315,255c3.839,0,7.678-1.464,10.607-4.394C331.464,244.748,331.464,235.251,325.606,229.393z"/>
         </svg>
-      )
+    )
 
     return (
         <header>
-            <div id="section-img-wrapper">
-                <img id="section-img" className="img-fluid" src="./images/seccion.jpg" alt="section"/>
-            </div>
             <div id="logo-with-bg">
                 <div id="logo-container">
-                    <img id="logo-gregorio" className="img-fluid" src="./images/HGUGM.png" alt="HUGM" />
+                    <div className="pair">
+                        <img id="logo-gregorio" className="img-fluid" src="./images/HGUGM.png" alt="HUGM" />
+                        <img id="logo-ulpgc" className="img-fluid" src="./images/ulpgcLogo.png" alt="ULPGC" />
+                    </div>
                     <h1>{t('service')}</h1>
                 </div>
             </div>
@@ -53,7 +53,7 @@ function Header(props) {
                 </div>
                 <Guide></Guide>
             </div>
-            <a href='#section-img-wrapper' id="goUp"><Arrow></Arrow></a>
+            <a href='#top' id="goUp"><Arrow></Arrow></a>
 
         </header>
     );

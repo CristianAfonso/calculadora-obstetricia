@@ -12,7 +12,7 @@ export default function HemodinamicStudio(props) {
     const [mca, setMCA] = useState(props.mca ? props.mca : '');
     const [mcaZscore, setMCAZscore] = useState(props.mca ? getMCAZscore(props.ga, props.mca).toFixed(2)  : '' );
     const [mcaPercent, setMCAPercent] = useState(props.mca ? getZPercent(getMCAZscore(props.ga, props.mca)).toFixed(0)  : '' );
-    const [ratio, setRatio] = useState(props.mca ? (props.mca / props.ga).toFixed(2)  : '' );
+    const [ratio, setRatio] = useState(props.mca ? (props.mca / props.ua).toFixed(2)  : '' );
     const [ratioZscore, setRatioZscore] = useState(props.mca && props.ua ? getCPRZscore(props.mca, props.ua, props.ga).toFixed(2) : '');
     const [ratioPercent, setRatioPercent] = useState(props.mca && props.ua ? getZPercent(getCPRZscore(props.mca, props.ua, props.ga)).toFixed(0) : '');
     const [gregorioUAZscore, setGregorioUAZscore] = useState("");
@@ -56,8 +56,10 @@ export default function HemodinamicStudio(props) {
             const gregorioUAP = getZPercent(gregorioUAZ).toFixed(0);
             const gregorioMCAZ = getMCAZscore_GregorioFormula(ga, mca).toFixed(2);
             const gregorioMCAP = getZPercent(gregorioMCAZ).toFixed(0);
+            props.setUA(ua);
             setGregorioUAZscore(gregorioUAZ);
             setGregorioUAPercent(gregorioUAP);
+            props.setMCA(mca)
             setGregorioMCAZscore(gregorioMCAZ);
             setGregorioMCAPercent(gregorioMCAP);
             setGregorioRatioZscore(ratioZscore);
@@ -68,6 +70,7 @@ export default function HemodinamicStudio(props) {
             displayBar(gregorioMCAP, 'percentile-bar-hemo-gregorio-mca');
             displayBar(ratioPercent, 'percentile-bar-hemo-clinic-ratio');
         } else if (mca) {
+            props.setMCA(mca)
             const gregorioMCAZ = getMCAZscore_GregorioFormula(ga, mca).toFixed(2);
             const gregorioMCAP = getZPercent(gregorioMCAZ).toFixed(0);
             setGregorioMCAZscore(gregorioMCAZ);
@@ -77,6 +80,7 @@ export default function HemodinamicStudio(props) {
         } else if (ua) {
             const gregorioUAZ = getUAZscore_GregorioFormula(ga, ua).toFixed(2);
             const gregorioUAP = getZPercent(gregorioUAZ).toFixed(0);
+            props.setUA(ua);
             setGregorioUAZscore(gregorioUAZ);
             setGregorioUAPercent(gregorioUAP);
             displayBar(uaPercent, 'percentile-bar-hemo-clinic-ua');
@@ -85,25 +89,12 @@ export default function HemodinamicStudio(props) {
     }, [ga, mca, mcaPercent, ratioPercent, ratioZscore, ua, uaPercent])
     useEffect(() => {
         setGa((props.weeks) + props.days / 7);
-        if (ua) {
-            props.setUA(ua);
-        } else {
-            setUA(props.ua);
-        }
-        if (mca) {
-            props.setMCA(mca)
-        } else {
-            setMCA(props.mca);
-        }
-        if (props.mca && props.ua) {
-            handleRatio(props.ua, props.mca);
-        }
         handleBars();
     }, [handleBars, handleRatio, mca, props, ua])
     return (
         <div id="hemodinamic-studio">
             <div id="left-hemodinamic">
-                <div className='biometric-single'>
+                <div className='single-display'>
                     <div className="pair">
                         <div className="input">
                             <Pair help={t('UA_help')} title={t('UA_title')} measure={t('IP')} min={0.4} step={0.1} max={999} value={ua} onChange={handleUAChange} />
@@ -111,7 +102,7 @@ export default function HemodinamicStudio(props) {
                         </div>
                     </div>
                 </div>
-                <div className='biometric-single'>
+                <div className='single-display'>
                     <div className="pair">
                         <div className="input">
                             <Pair help={t('MCA_help')} title={t('MCA_title')} measure={t('IP')} min={0.5} step={0.1} max={999} value={mca} onChange={handleMCAChange} />
@@ -119,7 +110,7 @@ export default function HemodinamicStudio(props) {
                         </div>
                     </div>
                 </div>
-                <div className='biometric-single'>
+                <div className='single-display'>
                     <div className="pair">
                         <div className="input">
                             <Pair help={t('ratio_help')} title={t('ratio_title')} measure={t('mm')} min={0} max={999} value={ratio} readOnly={true} />

@@ -26,21 +26,21 @@ export default function Guide() {
                     <h3>{t('welcome_message')}</h3>
                     <p>{t('guide_presentation')}</p>
                     <ul id="navBarGuide">
-                        <button onClick={() => setDisplayed('language')}>{t('language')}</button>
+                        <button onClick={() => {displayElement === 'language' ? setDisplayed("") :  setDisplayed('language')}}>{t('language')}</button>
                             {displayElement === 'language' && <LangGuide></LangGuide>}
-                        <button onClick={() => setDisplayed('navGuide')}>{t('nav')}</button>
+                        <button onClick={() => {displayElement === 'navGuide' ? setDisplayed("") : setDisplayed('navGuide')}}>{t('nav')}</button>
                             {displayElement === 'navGuide' && <NavGuide></NavGuide>}
-                        <button onClick={() => setDisplayed("datationGuide")}>{t('datation')}</button>
+                        <button onClick={() => {displayElement === 'datationGuide' ? setDisplayed("") : setDisplayed("datationGuide")}}>{t('datation')}</button>
                             {displayElement === 'datationGuide' && <DatationGuide></DatationGuide>} 
-                        <button onClick={() => setDisplayed("biometricGuide")}>{t('biometric')}</button>
+                        <button onClick={() => {displayElement === 'biometricGuide' ? setDisplayed("") : setDisplayed("biometricGuide")}}>{t('biometric')}</button>
                             {displayElement === 'biometricGuide' && <BiometricGuide></BiometricGuide>}
-                        <button onClick={() => setDisplayed("hemodinamicGuide")}>{t('hemodynamic')}</button>
+                        <button onClick={() => {displayElement === 'hemodinamicGuide' ? setDisplayed("") : setDisplayed("hemodinamicGuide")}}>{t('hemodynamic')}</button>
                             {displayElement === 'hemodinamicGuide' && <HemodynamicGuide></HemodynamicGuide>}
-                        <button onClick={() => setDisplayed("bonesGuide")}>{t('bones')}</button>
+                        <button onClick={() => {displayElement === 'bonesGuide' ? setDisplayed("") : setDisplayed("bonesGuide")}}>{t('bones')}</button>
                             {displayElement === 'bonesGuide' && <BonesGuide></BonesGuide>}
-                        <button onClick={() => setDisplayed("lancetGuide")}>{t('lancet')}</button>
+                        <button onClick={() => {displayElement === 'lancetGuide' ? setDisplayed("") : setDisplayed("lancetGuide")}}>{t('lancet')}</button>
                             {displayElement === 'lancetGuide' && <LancetGuide></LancetGuide>}
-                        <button onClick={() => setDisplayed("unicvsmultiGuide")}>{t('unicvsmulti')}</button>
+                        <button onClick={() => {displayElement === 'unicvsmultiGuide' ?setDisplayed("") : setDisplayed("unicvsmultiGuide")}}>{t('unicvsmulti')}</button>
                             {displayElement === 'unicvsmultiGuide' && <NavGuide></NavGuide>}
                     </ul>
                 </div>

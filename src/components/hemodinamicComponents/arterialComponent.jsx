@@ -12,12 +12,13 @@ export default function ArterialComponent(props) {
     const [mca, setMCA] = useState(props.mca ? props.mca : '');
     const [mcaZscore, setMCAZscore] = useState(props.mca ? getMCAZscore(props.ga, props.mca).toFixed(2)  : '' );
     const [mcaPercent, setMCAPercent] = useState(props.mca ? getZPercent(getMCAZscore(props.ga, props.mca)).toFixed(0)  : '' );
-    const [ratio, setRatio] = useState(props.mca ? (props.mca / props.ga).toFixed(2)  : '' );
+    const [ratio, setRatio] = useState(props.mca ? (props.mca / props.ua).toFixed(2)  : '' );
     const [ratioZscore, setRatioZscore] = useState(props.mca && props.ua ? getCPRZscore(props.mca, props.ua, props.ga).toFixed(2) : '');
     const [ratioPercent, setRatioPercent] = useState(props.mca && props.ua ? getZPercent(getCPRZscore(props.mca, props.ua, props.ga)).toFixed(0) : '');
     const { t } = useTranslation();
     function handleUAChange(event) {
         setUA(event.target.value);
+        props.setUA(event.target.value);
         if (mca) {
             handleRatio(event.target.value, mca);
         }
@@ -29,6 +30,7 @@ export default function ArterialComponent(props) {
     }
     function handleMCAChange(event) {
         setMCA(event.target.value);
+        props.setMCA(event.target.value);
         if (ua) {
             handleRatio(ua, event.target.value);
         }
@@ -48,22 +50,6 @@ export default function ArterialComponent(props) {
     }, [ga])
     useEffect(() => {
         setGa(props.ga);
-        if (ua) {
-            props.setUA(ua);
-            displayBar(uaPercent, 'percentile-bar-hemo-clinic-ua');
-        } else {
-            setUA(props.ua);
-        }
-        if (mca) {
-            props.setMCA(mca);
-            displayBar(mcaPercent, 'percentile-bar-hemo-clinic-mca');
-        } else {
-            setMCA(props.mca);
-        }
-        if (props.mca && props.ua) {
-            handleRatio(props.ua, props.mca);
-        }
-
     }, [props, handleRatio, mca, mcaPercent, ua, uaPercent])
     return (
         <div id="left-hemodinamic">

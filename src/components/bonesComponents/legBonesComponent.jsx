@@ -58,7 +58,7 @@ export default function LegBones(props) {
     }, [props])
     return (
         <div id="leg-bones">
-            <div className='bones-single'>
+            <div className='single-display'>
                 <div className="pair">
                     <div className="input">
                         <Pair help={t('femur_help')} title={t('femur_title')} measure={t('mm')} min={0} max={999} value={femurValue} onChange={handleFemurChange} />
@@ -67,7 +67,7 @@ export default function LegBones(props) {
                 </div>
                 <Bar percent={femurPercent} id="bones-femur" />
             </div>
-            <div className='bones-single'>
+            <div className='single-display'>
                 <div className="pair">
                     <div className="input">
                         <Pair help={t('tibia_help')} title={t('tibia_title')} measure={t('mm')} min={0} max={999} value={tibiaValue} onChange={handleTibiaChange} />
@@ -76,7 +76,7 @@ export default function LegBones(props) {
                 </div>
                 <Bar percent={tibiaPercent} id="bones-tibia" />
             </div>
-            <div className='bones-single'>
+            <div className='single-display'>
                 <div className="pair">
                     <div className="input">
                         <Pair help={t('fibula_help')} title={t('fibula_title')} measure={t('mm')} min={0} max={999} value={fibulaValue} onChange={handleFibulaChange} />
@@ -85,7 +85,7 @@ export default function LegBones(props) {
                 </div>
                 <Bar percent={fibulaPercent} id="bones-fibula" />
             </div>
-            <div className='bones-single'>
+            <div className='single-display'>
                 <div className="pair">
                     <div className="input">
                         <Pair help={t('foot_help')} title={t('foot_title')} measure={t('mm')} min={0} max={999} value={footValue} onChange={handleFootChange} />

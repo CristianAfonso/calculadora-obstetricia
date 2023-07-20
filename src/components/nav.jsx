@@ -42,7 +42,7 @@ export default function Nav(props) {
                 document.getElementById('last-period-date').value = t('valid_date');
             } else {
                 document.getElementById('navBar').style.display = "flex";
-                if(window.innerWidth <= 599){
+                if (window.innerWidth <= 599) {
                     document.getElementById('dropdownMenuButtonMobile').style.display = "block";
                     document.getElementById('dropdownMobile').style.display = "block";
                 }
@@ -84,7 +84,7 @@ export default function Nav(props) {
             document.getElementById('days').style.borderColor = "red";
         } else {
             document.getElementById('navBar').style.display = "flex";
-            if(window.innerWidth <= 599){
+            if (window.innerWidth <= 599) {
                 document.getElementById('dropdownMenuButtonMobile').style.display = "block";
                 document.getElementById('dropdownMobile').style.display = "block";
             }
@@ -115,11 +115,11 @@ export default function Nav(props) {
         event.preventDefault();
         if (lcc) {
             calculateFURDate(lccDays, lccWeeks);
-            if(window.innerWidth <= 599){
+            if (window.innerWidth <= 599) {
                 document.getElementById('dropdownMenuButtonMobile').style.display = "block";
                 document.getElementById('dropdownMobile').style.display = "block";
-            }else{
-                
+            } else {
+
                 document.getElementById('navBar').style.display = "flex";
             }
             const newDate = subDays(ecoDate, 40.9041 + (3.21585 * Math.pow(lcc, 0.5)) + (0.348956 * lcc));
@@ -266,12 +266,19 @@ export default function Nav(props) {
                     {t('elementSelector')}
                 </button>
                 <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton2" id="navBarMobile">
-                    <a onClick={() => props.GetDesiredComponentValue("datation")} >{t('datation')}</a>
-                    <a onClick={() => props.GetDesiredComponentValue("biometric")}>{t('biometric')}</a>
-                    <a onClick={() => props.GetDesiredComponentValue("hemodynamic")}>{t('hemodynamic')}</a>
-                    <a onClick={() => props.GetDesiredComponentValue("bones")}>{t('bones')}</a>
-                    <a onClick={() => props.GetDesiredComponentValue("lancet")}>{t('lancet')}</a>
-                    <a onClick={() => props.GetDesiredComponentValue("unicvsmulti")}>{t('unicvsmulti')}</a>
+                    <button onClick={() => props.GetDesiredComponentValue("datation")} >{t('datation')}</button>
+                    <button onClick={() => props.GetDesiredComponentValue("biometric")}>{t('biometric')}</button>
+                    <button onClick={() => props.GetDesiredComponentValue("hemodynamic")}>{t('hemodynamic')}</button>
+                    <button onClick={() => props.GetDesiredComponentValue("bones")}>{t('bones')}</button>
+                    <button onClick={() => props.GetDesiredComponentValue("lancet")}>{t('lancet')}</button>
+                    <button onClick={() => props.GetDesiredComponentValue("unicvsmulti")}>{t('unicvsmulti')}</button>
+
+                    <div id="mobile-logo">
+                        <h1>{t('service')}</h1>
+                        <p>{t('developedBy')}</p>
+                        <img id="logo-gregorio" className="img-fluid" src="./images/HGUGM.png" alt="HUGM" />
+                        <img id="logo-ulpgc" className="img-fluid" src="./images/ulpgcLogo.png" alt="ULPGC" />
+                    </div>
                 </ul>
             </div>
         </nav>

@@ -3,7 +3,7 @@ export default function Pair(props) {
         if (props.readOnly) {
             return(
             <div className="pair">
-                <span title={props.help}>{props.title}:</span>
+                <span title={props.help}>{props.title}</span>
                 <input
                     className='read-only-number'
                     type='number'
@@ -16,7 +16,7 @@ export default function Pair(props) {
         } else {
             return(
             <div className="pair">
-                <span title={props.help}>{props.title}:</span>
+                <span title={props.help}>{props.title}</span>
                 <input
                     aria-label = "code"
                     type='number'

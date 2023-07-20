@@ -130,15 +130,15 @@ export default function Datation(props) {
                 <div id='datation-container'>
                     <div className="datation-input">
                         <Pair help={t('lcc_help')} title={t('lcc_title')} measure={t('mm')} min={2} max={121} value={lccData} onChange={handleLCCChange}/>
-                        <button onClick={lccCalculate}>{lccWeeks} {t('weeks')} + {lccDays} {t('days')}</button>
+                        <button className="submitButton" onClick={lccCalculate}>{lccWeeks} {t('weeks')} + {lccDays} {t('days')}</button>
                     </div>
                     <div className="datation-input">
                         <Pair help={t('dbp_help')} title={t('dbp_title')} measure={t('mm')} min={31} max={100} value={dbpData} onChange={handleDBPChange}/>
-                        <button onClick={dbpCalculate}>{dbpWeeks} {t('weeks')} + {dbpDays} {t('days')}</button>
+                        <button  className="submitButton" onClick={dbpCalculate}>{dbpWeeks} {t('weeks')} + {dbpDays} {t('days')}</button>
                     </div>
                     <div className="datation-input">
                         <Pair help={t('lf_help')} title={t('lf_title')} measure={t('mm')} min={17} max={75} value={lfData} onChange={handleLFChange}/>
-                        <button onClick={lfCalculate}>{lfWeeks} {t('weeks')} + {lfDays} {t('days')}</button>
+                        <button  className="submitButton" onClick={lfCalculate}>{lfWeeks} {t('weeks')} + {lfDays} {t('days')}</button>
                     </div>
                     
                     <DatationDates lastFur={lastFur} displayedNewFur={displayedNewFur}/>

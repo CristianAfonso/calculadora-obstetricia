@@ -98,28 +98,28 @@ export default function BiometricDataInput(props) {
     }, [props, ca, cc, lf, dbp])
     return (
         <div id='left-biometric'>
-            <div className='biometric-single'>
+            <div className='single-display'>
                 <div className="pair">
                     <Pair help={t('DBP_biometric_help')} title={t('DBP_biometric_title')} measure={t('mm')} min={0} max={999} value={dbp} onChange={handleDBPBiometricChange} />
                     <Scores zscore={DBPzscore} percent={DBPpercentil} weeks={DBPweeks} days={DBPdays} />
                 </div>
                 <Bar percent={DBPpercentil} id="percentile-bar-dbp" />
             </div>
-            <div className='biometric-single'>
+            <div className='single-display'>
                 <div className="pair">
                     <Pair help={t('CC_biometric_help')} title={t('CC_biometric_title')} measure={t('mm')} min={0} max={999} value={cc} onChange={handleCCBiometricChange} />
                     <Scores zscore={CCzscore} percent={CCpercentil} weeks={CCweeks} days={CCdays} />
                 </div>
                 <Bar percent={CCpercentil} id="percentile-bar-cc" />
             </div>
-            <div className='biometric-single'>
+            <div className='single-display'>
                 <div className="pair">
                     <Pair help={t('CA_biometric_help')} title={t('CA_biometric_title')} measure={t('mm')} min={0} max={999} value={ca} onChange={handleCABiometricChange} />
                     <Scores zscore={CAzscore} percent={CApercentil} weeks={CAweeks} days={CAdays} />
                 </div>
                 <Bar percent={CApercentil} id="percentile-bar-ca" />
             </div>
-            <div className='biometric-single'>
+            <div className='single-display'>
                 <div className="pair">
                     <Pair help={t('LF_biometric_help')} title={t('LF_biometric_title')} measure={t('mm')} min={0} max={999} value={lf} onChange={handleLFBiometricChange} />
                     <Scores zscore={LFzscore} percent={LFpercentil} weeks={LFweeks} days={LFdays} />

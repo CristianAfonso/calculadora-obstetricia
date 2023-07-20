@@ -12,13 +12,15 @@
     "right": "Right",
     "left": "Left",
     "language": "Language",
-
+    "developedBy": "Developed by",
+    
     "//App.js SECTION": "",
     "page_title": "Obstetrics Calculator",
 
     "//header.jsx SECTION": "",
     "service": "OBSTETRICS AND GYNECOLOGY SERVICE",
     "guide_title": "Guide",
+    "elementSelector" : "Navigation",
     
 
     "//userGuide.jsx SECTION" : "",
@@ -31,7 +33,7 @@
     "navExp1": "1. Date of last period and ultrasound: The last menstrual period date can be manually selected from a drop-down calendar, this will provide an estimated date of birth.",
     "navExp2": "2. Days and weeks, and finally: Days and weeks can be entered manually from the corresponding input fields.",
     "navExp3": "3. Crown-rump length dating: The Crown-rump length can be entered manually in the corresponding input field, this field will overwrite the last rule date as it is a biometric dating.",
-    "navExp4": "Once you click on the button with the corresponding weeks and days, a navigation menu will be displayed, allowing you to advance to the desired section of the calculator.",
+    "navExp4": "Once you click on the button with the corresponding weeks and days, a navigation menu will be displayed (on Mobile version it will display a single button that shows a side menu), allowing you to advance to the desired section of the calculator.",
     "languageExp1": "At the top right of the application you will find a globe icon (shown on this section) with a drop-down menu containing the languages of the application. Selecting the desired language will switch the calculator to that language.",
     "datationExplanation": "In the Datation tab, you can find three methodologies for biometric dating by ultrasound:",
     "datationExp1": "1. Crown-rump Length (CRL): This test measures the distance between the skull and the coccyx, The CRL can be measured starting around six or seven weeks of pregnancy up until 14 weeks.",
@@ -160,7 +162,6 @@
     "talavera_lancet": "Talavera Lancet",
     "fuenlabrada_lancet": "Fuenlabrada Lancet",
 
-    
     "//CHARTS SECTION": "",
     "percents": "Percents",
     "single": "Single",

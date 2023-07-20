@@ -46,7 +46,7 @@ export default function HandBones(props) {
     }, [props])
     return (
         <div id="hand-bones">
-            <div className='bones-single'>
+            <div className='single-display'>
                 <div className="pair">
                     <div className="input">
                         <Pair help={t('humerus_help')} title={t('humerus_title')} measure={t('mm')} min={0} max={999} value={humerusValue} onChange={handleHumerusChange} />
@@ -55,7 +55,7 @@ export default function HandBones(props) {
                 </div>
                 <Bar percent={humerusPercent} id="bones-humerus" />
             </div>
-            <div className='bones-single'>
+            <div className='single-display'>
                 <div className="pair">
                     <div className="input">
                         <Pair help={t('ulna_help')} title={t('ulna_title')} measure={t('mm')} min={0} max={999} value={ulnaValue} onChange={handleUlnaChange} />
@@ -64,7 +64,7 @@ export default function HandBones(props) {
                 </div>
                 <Bar percent={ulnaPercent} id="bones-ulna" />
             </div>
-            <div className='bones-single'>
+            <div className='single-display'>
                 <div className="pair">
                     <div className="input">
                         <Pair help={t('radius_help')} title={t('radius_title')} measure={t('mm')} min={0} max={999} value={radiusValue} onChange={handleRadiusChange} />
