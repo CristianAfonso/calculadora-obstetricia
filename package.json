@@ -7,15 +7,15 @@
   "private": true,
   "main": "public/electron.js",
   "build":{
-    "appId": "com.my-website.my-app",
-    "productName": "MyApp",
-    "copyright": "Copyright © 2019 ${author}",
+    "appId": "fetalBiometryCalculator",
+    "productName": "Fetal Biometry Calculator HGUGM",
+    "copyright": "Copyright © 2023 HGUGM",
     "mac": {
-      "icon": "./public/images/lasumadetodos.png",     
+      "icon": "./public/images/sumadetodos.icns",     
       "category": "public.app-category.utilities"
     },
     "win": {
-      "icon": "./public/images/lasumadetodos.png"   
+      "icon": "./public/images/sumadetodos.ico"   
     },
     "files": [
       "./build/**/*",
@@ -25,7 +25,7 @@
       "*.js"
     ],
     "directories": {
-      "buildResources": "public" 
+      "buildResources": "public/images" 
     }
   },
   "dependencies": {

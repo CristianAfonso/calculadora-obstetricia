@@ -17,8 +17,8 @@ const languages = [
   {
       code: 'ar',
       name: 'العربية',
-      dir: 'rtl',
       country_code: 'sa',
+      dir: 'rtl'
   },
   {
       code: 'en',
@@ -47,8 +47,8 @@ i18n
   .use(LanguageDetector)
   .use(HttpApi)
   .init({
-    supportedLngs: ['en', 'es', 'fr', 'pt', "ar"],
-    fallbackLng: "en",
+    supportedLngs: ['en', 'es', 'fr', 'pt', 'ar'],
+    fallbackLng: 'en',
     detection: {
       order: ['cookie', 'htmlTag', 'localStorage', 'path', 'subdomain'],
       caches: ['cookie'],

@@ -48,12 +48,11 @@ function App(props) {
   }
   useEffect(() => {
     document.getElementById("page_title").innerHTML = t('page_title');
-    document.body.dir = currentLanguage.dir || 'ltr';
+    document.body.setAttribute('dir',  currentLanguage.dir || 'ltr');
     setWeeks(weeks);
     setDays(days);
   }, [days, t, weeks, currentLanguage])
   return (
-
     <div className="container">
       <Nav
         updateLastPeriod={setLastPeriodDate} SetLastEcoDate={setLastEcoDate}
