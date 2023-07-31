@@ -29,7 +29,7 @@
     "welcome_message": "Bienvenue sur la calculatrice d'obstétrique et de gynécologie",
     "guide_presentation": "Ce guide vous permettra d'utiliser l'application correctement, veuillez suivre les instructions ci-dessous.",
     "specific_instruction_title": "Ici, vous trouverez des informations sur ",
-    "navExplanation": "Dans le navigateur, vous pouvez trouver trois types de dates, qui seront utilisées dans toute la calculatrice pour effectuer différents calculs et mesures :",
+    "navExplanation": "Dans le navigateur, vous pouvez trouver trois types de données, qui seront utilisées dans toute la calculatrice pour effectuer différents calculs et mesures :",
     "navExp1": "1. Date des dernières règles et échographie : La date des dernières règles peut être sélectionnée manuellement dans un calendrier déroulant, ce qui fournira une date estimée d'accouchement.",
     "navExp2": "2. Jours et semaines : Les jours et les semaines peuvent être saisis manuellement dans les champs correspondants.",
     "navExp3": "3. Datation par la longueur crânio-caudale : La longueur crânio-caudale peut être saisie manuellement dans le champ correspondant, cette valeur écrasera la dernière date des règles car il s'agit d'une datation biométrique.",
